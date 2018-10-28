@@ -1,7 +1,7 @@
 :root {
-    --smoky-black-color:#08090A;
-    --white-color:#FFFFFF;
-    --dim-gray-color:#706C61;
-    --linen-color:#F8F4E3;
-    --mandarin-color:#EF7B45;
+    --color-0:#FFFFFF;  /* white */
+    --color-1:#08090A; /* black */
+    --color-2:#706C61; /* gray */
+    --color-3:#F8F4E3; /* linen white */
+    --color-4:#0c1653; /* saphire blue */
 }

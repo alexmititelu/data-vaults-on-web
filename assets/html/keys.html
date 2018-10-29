@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,15 +8,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/color-scheme.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/keys.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/shared.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shared.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+        crossorigin="anonymous">
     <!-- <script src="main.js"></script> -->
 </head>
 
 <body>
     <div class="generator">
         <div class="generator__button">
-        <button class="button button--slider button--border-thick button--text-upper button--size-s"><i class="fa fa-key"> </i> Generate new key</button>
+            <button class="button button--slider button--border-thick button--text-upper button--size-s"><i class="fa fa-key">
+                </i> Generate new key</button>
+        </div>
+        <div class="generator__wrapper"> 
+            <div class="generator__key-creator">
+                <form>
+                    <label class="form__field">
+                            <span class="form__field__label">Key name</span>
+                            <span class="form__field__input__wrapper">
+                                <input class="form__field__input" placeholder="e.g. my key" required>
+                            </span>
+                    </label>
+
+                    <label class="form__field">
+                            <span class="form__field__label">Description</span>
+                            <span class="form__field__input__wrapper">
+                                <input class="form__field__input" placeholder="e.g. This key is related to google's forms" required>
+                            </span>
+                    </label>
+
+                    <label class="form__field">
+                            <span class="form__field__label">White listed hosts</span>
+                            <div class="form__field__input__wrapper">
+                                <span class="form__field__hosts host__button--valid">www.google.ro<i class="fa fa-times host__button--remove"></i></span>
+                                <span class="form__field__hosts host__button--invalid">www.google.ro<i class="fa fa-times host__button--remove"></i></span>
+                                <input class="form__field__hosts__input" placeholder="e.g. www.host.adress" required>
+                            </div>
+                    </label>
+
+                    <div class="form__field form__field--centered">
+                            <label class="form__field__option">
+                            <input type="radio" class="form__option__input--radio" name="option1" checked />
+                            Save private key
+                        </label>
+                        <label class="form__field__option"> 
+                            <input type="radio" class="form__option__input--radio" name="option1"  />
+                            Don't save private key
+                        </label>
+                    </div>
+
+                    <div class="form__buttons">
+                            <input class="form__buttons--reset button--text-upper" type="reset" value="Reset">
+                            &nbsp;
+                            <input class="form__buttons--submit button--text-upper" type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+            <div class="generator__key-info">
+                <ul class="generator__key-info__about"> 
+                    <li class="generator__key-info__about__item">
+                        Key name will be the key reference through your generated keys.
+                    </li>
+
+                    <li class="generator__key-info__about__item">
+                        Description is a piece of information to help you when you want to check this form key type.
+                    </li>
+
+                    <li class="generator__key-info__about__item">
+                        White listed hosts are the hosts which are allowed to submit data.
+                    </li>
+
+                    <li class="generator__key-info__about__item">
+                        Choose "Save private key" if you want it to be saved and displayed it at your keys sectien. Otherwise, if you want to save it by yourself choose "Don't save private key".
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </div>
 </body>

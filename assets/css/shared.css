@@ -3,6 +3,16 @@
     src:url("../fonts/Roboto/Roboto-Regular.ttf")
 }
 
+@font-face {
+    font-family: blenderpro;
+    src: url("../fonts/blenderpro/blenderpro-medium-webfont.woff");
+}
+
+@font-face {
+    font-family: din;
+    src: url("../fonts/DIN/DINNextLTW04-Regular.woff");
+}
+
 body {
     margin: 0;
     font-family: regular-font;

@@ -29,8 +29,18 @@
                     <li class="main-nav__ul__right-items__li main-nav__ul__right-items__li--active">
                         <a class="main-nav__ul__right-items__li__link main-nav__ul__right-items__li__link--active" href="#"> HOME </a>
                     </li>
-                    <li class="main-nav__ul__right-items__li">
-                        <a class="main-nav__ul__right-items__li__link" href="#"> DATA <i class="fas fa-caret-down"></i> </a>
+                    <li class="main-nav__ul__right-items__li main-nav__ul__right-items__li--contains-dropdown">
+                        <button class="main-nav__ul__right-items__li__drop-down-button"> DATA <i class="fas fa-caret-down"></i> </button>
+                        <div class="main-nav__ul__right-items__li__drop-down-button-content">
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                        </div>
                     </li>
                     <li class="main-nav__ul__right-items__li">
                         <a class="main-nav__ul__right-items__li__link" href="#"> KEYS </a>
@@ -40,6 +50,13 @@
                     </li>
                     <li class="main-nav__ul__right-items__li">
                         <a class="main-nav__ul__right-items__li__link" href="#"> CONTACT </a>
+                    </li>
+                    <li class="main-nav__ul__right-items__li main-nav__ul__right-items__li--contains-dropdown main-nav__ul__right-items__li--username">
+                            <button class="main-nav__ul__right-items__li__drop-down-button"> Codrin <i class="fas fa-caret-down"></i></button>
+                            <div class="main-nav__ul__right-items__li__drop-down-button-content main-nav__ul__right-items__li__drop-down-button-content--username">
+                                    <a class="main-nav__ul__right-items__li__drop-down-button-content__link" href="#"> PROFILE <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-user-alt"></i> </a>
+                                    <a class="main-nav__ul__right-items__li__drop-down-button-content__link" href="#"> LOG OUT <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-sign-out-alt"></i> </a>
+                            </div>
                     </li>
                 </div>
             </ul>
@@ -81,30 +98,31 @@
         </button>
     </div>
 
-    <section class="faq">
-        <h1 class="faq__title">F.A.Q.</h1>
-        <ul class="faq__ul">
-            <li class="faq__ul__li">
-                <p class="faq__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
-                <p class="faq__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+    <section class="faq-grid">
+        <h1 class="faq-grid__title">F.A.Q.</h1>
+        <ul class="faq-grid__ul">
+            <li class="faq-grid__ul__li">
+                <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
             </li>
-            <li class="faq__ul__li">
-                    <p class="faq__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
-                    <p class="faq__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                    <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
             </li>
-            <li class="faq__ul__li">
-                    <p class="faq__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
-                    <p class="faq__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                    <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
             </li>
-            <li class="faq__ul__li">
-                    <p class="faq__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
-                    <p class="faq__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                    <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
             </li>
-            <li class="faq__ul__li">
-                    <p class="faq__ul__li__question"> Do you still have any other questions? </p>
-                    <p class="faq__ul__li__answer"> Don't hesitate to contact us directly! See our contact data down below. </p>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Do you still have any other questions? </p>
+                    <p class="faq-grid__ul__li__answer"> Don't hesitate to contact us directly! See our contact data down below. </p>
             </li>
-        </div>
+        </ul>
+        <img class="faq-grid__logo" src="assets/img/faq-pic.png"/>
     </section>
 
     <section class="contact">

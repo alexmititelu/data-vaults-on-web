@@ -2,6 +2,7 @@
     --color-0:#FFFFFF;  /* white */
     --color-1:#08090A; /* black */
     --color-2:#706C61; /* gray */
+    --color-2-gradient: rgb(128, 108, 54);  
     --color-3:#F8F4E3; /* linen white */
     --color-4:#0c1653; /* saphire blue */
 }

@@ -2,6 +2,14 @@ body {
     background-color: --white-color;
 }
 
+.actual-page-body {
+	position: relative;
+	top: 5em;
+	margin-left: 3em;
+	margin-right: 3em;
+	padding-bottom: 5em;
+}
+
 .generator__button {
 	text-align: center;
 }

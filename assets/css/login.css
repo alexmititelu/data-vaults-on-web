@@ -23,7 +23,7 @@
     letter-spacing: 1.3px;
     color: var(--color-1);
 }
-
+        
 .sign-in-container__form-section,
 .reset-password-container__form-section,
 .register-container__form-section {
@@ -35,6 +35,24 @@
     border-width: 2px;
     border-color: var(--color-2);
     border-radius: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+        
+    .sign-in-container__form-section,
+    .reset-password-container__form-section,
+    .register-container__form-section { 
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+        
+    .sign-in-container__form-section,
+    .reset-password-container__form-section,
+    .register-container__form-section { 
+        width: 70%;
+    }
 }
 
 .sign-in-container__form-section__form-field,
@@ -84,6 +102,7 @@
     float: right;
     margin-right: 1em;
     margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .sign-in-container__form-section__form-field__forgot-password-text {
@@ -125,6 +144,12 @@ a {
     cursor: pointer;
 }
 
+@media only screen and (max-width: 334) {
+    .reset-password-container__form-section__reset-password-button__button{
+        height: 5em;
+    }
+}
+
 .sign-in-container__form-section__sign-in-button__button:hover,
 .sign-in-container__form-section__sign-in-button__button:focus,
 .reset-password-container__form-section__reset-password-button__button:hover,
@@ -146,6 +171,32 @@ a {
     border-radius: 5px;
     height: 3em;
     text-align: center;
+}
+
+@media only screen and (max-width: 950px) {
+    .sign-in-container__become-a-member-section {
+        width: 50%;
+    }
+}
+
+
+@media only screen and (max-width: 526px) {
+    .sign-in-container__become-a-member-section {
+        height: 4em;
+    }
+}
+
+@media only screen and (max-width: 406) {
+    .sign-in-container__become-a-member-section {
+        height: 4.5em;
+    }
+}
+
+@media only screen and (max-width: 374) {
+    .sign-in-container__become-a-member-section {
+        height: 5em;
+        width: 75%;
+    }
 }
 
 .sign-in-container__become-a-member-section__text-wrapper {

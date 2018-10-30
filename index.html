@@ -13,35 +13,154 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="main-nav">
-        <ul class="main-nav__ul">
-            <div class="main-nav__ul__left-items">
-                <li class="main-nav__ul__left-items__li">
-                    <a class="main-nav__ul__left-items__li__link main-nav__ul__left-items__li__link--logo fa fa-unlock-alt fa-2x" href="#"></a>
-                </li>
-                <li class="main-nav__ul__left-items__li">
-                    <a class="main-nav__ul__left-items__li__link" href="#"> DAVE </a>
-                </li>
-            </div>
-            
-            <div class="main-nav__ul__right-items">
-                <li class="main-nav__ul__right-items__li main-nav__ul__right-items__li--active">
-                    <a class="main-nav__ul__right-items__li__link main-nav__ul__right-items__li__link--active" href="#"> HOME </a>
-                </li>
-                <li class="main-nav__ul__right-items__li">
-                    <a class="main-nav__ul__right-items__li__link" href="#"> DATA <i class="fas fa-caret-down"></i> </a>
-                </li>
-                <li class="main-nav__ul__right-items__li">
-                    <a class="main-nav__ul__right-items__li__link" href="#"> KEYS </a>
-                </li>
-                <li class="main-nav__ul__right-items__li">
-                    <a class="main-nav__ul__right-items__li__link" href="#"> F.A.Q. </a>
-                </li>
-                <li class="main-nav__ul__right-items__li">
-                    <a class="main-nav__ul__right-items__li__link" href="#"> CONTACT </a>
-                </li>
-            </div>
+    <header class="header">
+        <nav class="main-nav">
+            <ul class="main-nav__ul">
+                <div class="main-nav__ul__left-items">
+                    <li class="main-nav__ul__left-items__li">
+                        <a class="main-nav__ul__left-items__li__link main-nav__ul__left-items__li__link--logo fa fa-unlock-alt fa-2x" href="#"></a>
+                    </li>
+                    <li class="main-nav__ul__left-items__li">
+                        <a class="main-nav__ul__left-items__li__link" href="#"> DAVE </a>
+                    </li>
+                </div>
+                
+                <div class="main-nav__ul__right-items">
+                    <li class="main-nav__ul__right-items__li main-nav__ul__right-items__li--active">
+                        <a class="main-nav__ul__right-items__li__link main-nav__ul__right-items__li__link--active" href="#"> HOME </a>
+                    </li>
+                    <li class="main-nav__ul__right-items__li main-nav__ul__right-items__li--contains-dropdown">
+                        <button class="main-nav__ul__right-items__li__drop-down-button"> DATA <i class="fas fa-caret-down"></i> </button>
+                        <div class="main-nav__ul__right-items__li__drop-down-button-content">
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item" href="#"> SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock-open"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                            <a class="main-nav__ul__right-items__li__drop-down-button-content__link main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item" href="#"> NOT SAVED KEY <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-lock"></i> </a>
+                        </div>
+                    </li>
+                    <li class="main-nav__ul__right-items__li">
+                        <a class="main-nav__ul__right-items__li__link" href="#"> KEYS </a>
+                    </li>
+                    <li class="main-nav__ul__right-items__li">
+                        <a class="main-nav__ul__right-items__li__link" href="#"> F.A.Q. </a>
+                    </li>
+                    <li class="main-nav__ul__right-items__li">
+                        <a class="main-nav__ul__right-items__li__link" href="#"> CONTACT </a>
+                    </li>
+                    <li class="main-nav__ul__right-items__li main-nav__ul__right-items__li--contains-dropdown main-nav__ul__right-items__li--username">
+                        <button class="main-nav__ul__right-items__li__drop-down-button"> Codrin <i class="fas fa-caret-down"></i></button>
+                        <div class="main-nav__ul__right-items__li__drop-down-button-content main-nav__ul__right-items__li__drop-down-button-content--username">
+                                <a class="main-nav__ul__right-items__li__drop-down-button-content__link" href="#"> PROFILE <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-user-alt"></i> </a>
+                                <a class="main-nav__ul__right-items__li__drop-down-button-content__link" href="#"> LOG OUT <i class="main-nav__ul__right-items__li__drop-down-button-content__link__icon fas fa-sign-out-alt"></i> </a>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="service-description-grid">
+        <img class="service-description-grid__logo" src="assets/img/logo.svg"/>
+        <div class="service-description-grid__text-grid">
+            <h1 class="service-description-grid__text-grid__title"> DATA VAULTS ON WEB <i class="fas fa-shield-alt"></i> </h1>
+            <p class="service-description-grid__text-grid__description"> 
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean accumsan lacus sit amet purus vestibulum, eget 
+                    finibus dui efficitur. Mauris urna odio, condimentum ut venenatis sed, placerat nec ligula. 
+                    Nam nec ornare arcu. Duis eleifend eros ut ultricies varius. Integer id ex non orci ultricies gravida. 
+                    Sed ultrices ipsum fermentum, iaculis augue vitae, venenatis lectus. Sed molestie rhoncus ex vel maximus. 
+                    Nulla porttitor pretium felis. Integer scelerisque placerat lectus, vehicula pulvinar leo elementum quis. 
+                    Integer ut lobortis nibh. Nam quis tellus leo. Ut pharetra erat vitae nisi volutpat, vitae imperdiet tellus molestie.
+
+                    <br/> <br/>
+
+                    Mauris molestie venenatis nunc eu tincidunt. Maecenas auctor vestibulum enim, at interdum dui rutrum a. 
+                    Suspendisse potenti. Nulla auctor lorem sit amet magna lobortis, id ultricies neque dapibus. Etiam 
+                    non tincidunt tortor. Quisque id ipsum non turpis blandit venenatis sed eu nulla. Proin efficitur libero 
+                    venenatis lacinia fermentum. Suspendisse potenti. Ut et nisi nec risus consequat sollicitudin a a mi. Proin
+                    tempor lobortis quam, eget posuere orci facilisis in. Suspendisse condimentum gravida nisl nec viverra. Suspendisse 
+                    convallis eros vel risus dignissim posuere. Pellentesque nec nunc at dui faucibus rutrum vitae ac urna. Duis in suscipit 
+                    augue, at dapibus erat. Sed ut blandit sapien, nec pulvinar nulla. Fusce tristique nulla ut libero placerat,
+                    nec varius nulla malesuada.
+            </p>
+        </div>
+    </div>
+
+    <div class="main-buttons-grid">
+        <button class="main-buttons-grid__button main-buttons-grid__button--data">
+            GO TO MY DATA &nbsp;<i class="fas fa-database"></i>
+        </button>
+        <button class="main-buttons-grid__button main-buttons-grid__button--keys">
+            GO TO MY KEYS &nbsp;<i class="fas fa-key"></i>
+        </button>
+    </div>
+
+    <section class="faq-grid">
+        <h1 class="faq-grid__title">F.A.Q.</h1>
+        <ul class="faq-grid__ul">
+            <li class="faq-grid__ul__li">
+                <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+            </li>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                    <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+            </li>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                    <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+            </li>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Lorem ipsum dolor sit amet, consectetur adipiscing elit? </p>
+                    <p class="faq-grid__ul__li__answer"> Praesent non sapien elementum, tempus nisl eget, eleifend nunc. Nulla aliquam augue urna, id varius metus convallis sit amet. </p>
+            </li>
+            <li class="faq-grid__ul__li">
+                    <p class="faq-grid__ul__li__question"> Do you still have any other questions? </p>
+                    <p class="faq-grid__ul__li__answer"> Don't hesitate to contact us directly! See our contact data down below. </p>
+            </li>
         </ul>
-    </nav>
+        <img class="faq-grid__logo" src="assets/img/faq-pic.png"/>
+    </section>
+
+    <section class="contact">
+        <article class="contact__article">
+            <h2 class="contact__article__title"> Gabriel-Codrin Cojocaru </h2>
+            <div class="contact__article__social-media">
+                <a class="contact__article__social-media__link" href="https://www.facebook.com/codrin.cojocaru.7">
+                    <img class="contact__article__social-media__link__img" src="assets/img/facebook.png" height="32px" width="32px"> </a>
+                <a class="contact__article__social-media__link" href="https://twitter.com/gabrielxxzzz">
+                    <img class="contact__article__social-media__link__img" src="assets/img/twitter.png" height="32px" width="32px"> </a>
+                <a class="contact__article__social-media__link" href="https://github.com/gabrielxzc">
+                    <img class="contact__article__social-media__link__img" src="assets/img/github.svg" height="32px" width="32px">
+                </a>
+            </div>
+    
+            <p class="contact__article__description contact__article__description--codrin contact__article__description--left">
+                Light blue, curly hair is pulled back to reveal a long, sad face. Shuttered sapphire eyes, set appealingly within their sockets, watch thoughtfully over the river they've shown mercy on for so long. Fair skin gracefully compliments his nose and leaves an intriguing memory of his past. This is the face of Almer Dawnwhisper, a true opportunist among high elves. He stands towering above others, despite his tough frame. There's something alluring about him, perhaps it's his odd friends or perhaps it's simply his good will. But nonetheless, people tend to try to get him to marry their off-spring, while trying to please him.
+            </p>
+        </article>
+
+        <article class="contact__article">
+                <h2 class="contact__article__title"> Ioan-Alexandru Mititelu </h2>
+                <div class="contact__article__social-media">
+                    <a class="contact__article__social-media__link" href="https://www.facebook.com/alex.alex53">
+                        <img class="contact__article__social-media__link__img" src="assets/img/facebook.png" height="32px" width="32px"> </a>
+                    <a class="contact__article__social-media__link" href="https://github.com/alexmititelu">
+                        <img class="contact__article__social-media__link__img" src="assets/img/github.svg" height="32px" width="32px">
+                    </a>
+                </div>
+        
+                <p class="contact__article__description contact__article__description--alex contact__article__description--right">
+                        Silver, perfectly groomed hair slightly covers a thin, worried face. Bulging amber eyes, set narrowly within their sockets, watch anxiously over the woods they've sworn to protect for so long. Freckles are spread charmingly around his nose and cheekbones and leaves a gracious memory of his reckless luck. This is the face of Alred Lunadancer, a true sentinel among night elves. He stands seductively among others, despite his muscled frame. There's something intriguing about him, perhaps it's his decency or perhaps it's simply his bravery. But nonetheless, people tend to share local gossip with him, while secretly dispising him.
+                </p>
+            </article>
+    </section>
+
+    <footer class="footer">
+        <p class="footer__text"> Copyright © 2018 by Gabriel-Codrin Cojocaru and Ioan-Alexandru Mititelu. All rights reserved. </p>
+    </footer>
 </body>
 </html>

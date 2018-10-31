@@ -156,15 +156,15 @@ body {
     background-image: linear-gradient(to right, var(--color-2-gradient), var(--color-2));
     margin-bottom: 0;
     margin-top: 3em;
-    height: 2.5em;
     z-index: 1000;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .footer__text {
     text-align: center;
     margin: 0;
     position: relative;
-    top: 0.7em;
     color: var(--color-3);
 }
 

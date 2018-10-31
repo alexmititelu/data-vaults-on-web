@@ -1,6 +1,7 @@
 @font-face {
     font-family: regular-font;
-    src:url("../fonts/Roboto/Roboto-Regular.ttf")
+    /* src:url("../fonts/Roboto/Roboto-Regular.ttf") */
+    src: url("../fonts/blenderpro/blenderpro-medium-webfont.woff");
 }
 
 @font-face {
@@ -25,7 +26,7 @@ body {
 }
 
 .header__main-nav {
-    background-image: linear-gradient(to right, var(--color-2), var(--color-2-gradient));
+    background-image: linear-gradient(to right, #706C61, #806c36);
 }
 
 .header__main-nav__ul {
@@ -154,7 +155,7 @@ body {
 }
 
 .footer {
-    background-image: linear-gradient(to right, var(--color-2-gradient), var(--color-2));
+    background-image: linear-gradient(to right, #806c36, #706C61);
     margin-bottom: 0;
     margin-top: 3em;
     z-index: 1000;
@@ -206,4 +207,34 @@ body {
     .header__main-nav__ul__right-items__li__drop-down-button-content--username {
         left: -160px;
     }
+}
+
+.header__main-nav__ul__right-items__li:hover,
+.header__main-nav__ul__right-items__li:focus {
+    background-color: var(--color-3);
+}
+
+.header__main-nav__ul__right-items__li:hover .header__main-nav__ul__right-items__li__drop-down-button,
+.header__main-nav__ul__right-items__li:focus .header__main-nav__ul__right-items__li__drop-down-button,
+.header__main-nav__ul__right-items__li:hover .header__main-nav__ul__right-items__li__link,
+.header__main-nav__ul__right-items__li:focus .header__main-nav__ul__right-items__li__link {
+    color: var(--color-1);
+}
+
+.header__main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item:hover,
+.header__main-nav__ul__right-items__li__drop-down-button-content__link--saved-key-item:focus {
+    background-color: var(--color-2-gradient);
+    color: var(--color-1)
+}
+
+.header__main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item:hover,
+.header__main-nav__ul__right-items__li__drop-down-button-content__link--not-saved-key-item:focus {
+    background-color: var(--color-2-gradient);
+    color: var(--color-1);
+}
+
+.header__main-nav__ul__right-items__li__drop-down-button-content__link:hover,
+.header__main-nav__ul__right-items__li__drop-down-button-content__link:focus {
+    background-color: var(--color-2-gradient);
+    color: var(--color-1);
 }

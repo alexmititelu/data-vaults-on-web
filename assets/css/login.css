@@ -1,0 +1,240 @@
+/* body {
+    /* background-color: #f9f9f9; */
+/* } */ 
+.sign-in-container,
+.register-container {
+    text-align: center;
+    margin-bottom: 10em;
+}
+
+.sign-in-container__banner-section__logo,
+.register-container__banner-section__logo {
+    margin-top: 1.5em;
+    width: 10%;
+    height: auto;
+}
+
+.sign-in-container__banner-section__title,
+.register-container__banner-section__title {
+    display: block;
+    margin-top: 0.5em;
+    font-size: 1.3em;
+    /* font-weight: bold; */
+    letter-spacing: 1.3px;
+    color: var(--color-1);
+}
+        
+.sign-in-container__form-section,
+.reset-password-container__form-section,
+.register-container__form-section {
+    margin: 0 auto;
+    margin-top: 1.5em;
+    background-color: var(--color-3);
+    width: 30%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--color-2);
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+        
+    .sign-in-container__form-section,
+    .reset-password-container__form-section,
+    .register-container__form-section { 
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+        
+    .sign-in-container__form-section,
+    .reset-password-container__form-section,
+    .register-container__form-section { 
+        width: 70%;
+    }
+}
+
+.sign-in-container__form-section__form-field,
+.reset-password-container__form-section__form-field,
+.register-container__form-section__form-field {
+    display: inline-block;
+	width: 100%;
+}
+
+.sign-in-container__form-section__form-field__label,
+.reset-password-container__form-section__form-field__label,
+.register-container__form-section__form-field__label {
+    display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-top: 1.2em;
+	cursor: text;
+	text-align: center;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	cursor: default;
+}
+
+.sign-in-container__form-section__form-field__input-wrapper,
+.reset-password-container__form-section__form-field__input-wrapper,
+.register-container__form-section__form-field__input-wrapper {
+    margin-top: 1em;
+    display: inline-block;
+	width: 80%;
+    border-bottom: 2px solid var(--color-1);
+}
+
+.sign-in-container__form-section__form-field__input,
+.reset-password-container__form-section__form-field__input,
+.register-container__form-section__form-field__input {
+    display: block;
+	outline: none;
+	background-color: transparent;
+	border:none;    
+	width: 100%;
+	height: 1.7em;
+    font-size: 1em;
+    text-align: center;
+}
+
+.sign-in-container__form-section__forgot-password {
+    float: right;
+    margin-right: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.sign-in-container__form-section__form-field__forgot-password-text {
+    color: var(--color-2-gradient);
+}
+
+.sign-in-container__form-section__form-field__forgot-password-text:hover,
+.sign-in-container__form-section__form-field__forgot-password-text:focus {
+    font-weight: bold;
+
+}
+
+a { 
+    text-decoration: none;
+}
+
+
+.sign-in-container__form-section__sign-in-button,
+.reset-password-container__form-section__reset-password-button,
+.register-container__form-section__register-button {
+    width: 100%;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+}
+
+.sign-in-container__form-section__sign-in-button__button,
+.reset-password-container__form-section__reset-password-button__button,
+.register-container__form-section__register-button__button  {
+    color: var(--color-0);
+    background-color: #28a745;
+    background-image: linear-gradient(-180deg,#34d058,#28a745 90%);
+    width: 80%;
+    height: 3em;
+    outline: none;
+    font-size: 0.8em;
+    border-style: solid;
+    border-color: var(--color-2);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 334) {
+    .reset-password-container__form-section__reset-password-button__button{
+        height: 5em;
+    }
+}
+
+.sign-in-container__form-section__sign-in-button__button:hover,
+.sign-in-container__form-section__sign-in-button__button:focus,
+.reset-password-container__form-section__reset-password-button__button:hover,
+.reset-password-container__form-section__reset-password-button__button:focus,
+.register-container__form-section__register-button__button:hover,
+.register-container__form-section__register-button__button:focus  {
+    background-image: linear-gradient(-180deg,#25a142,#198131 90%);
+    /* font-weight: bold; */
+}
+
+.sign-in-container__become-a-member-section {
+    margin: 0 auto;
+    margin-top: 1.5em;
+    background-color: rgba(128, 108, 54,0.08);
+    width: 30%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--color-2);
+    border-radius: 5px;
+    height: 3em;
+    text-align: center;
+}
+
+@media only screen and (max-width: 950px) {
+    .sign-in-container__become-a-member-section {
+        width: 50%;
+    }
+}
+
+
+@media only screen and (max-width: 526px) {
+    .sign-in-container__become-a-member-section {
+        height: 4em;
+    }
+}
+
+@media only screen and (max-width: 406) {
+    .sign-in-container__become-a-member-section {
+        height: 4.5em;
+    }
+}
+
+@media only screen and (max-width: 374) {
+    .sign-in-container__become-a-member-section {
+        height: 5em;
+        width: 75%;
+    }
+}
+
+.sign-in-container__become-a-member-section__text-wrapper {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.sign-in-container__form-section__become-a-member-section__text {
+    color: var(--color-1);
+    padding-top: 1em;
+    cursor: default;
+}
+
+.sign-in-container__form-section__become-a-member-section__link-text {
+    color: var(--color-2-gradient);
+    cursor: pointer;
+}
+
+.sign-in-container__form-section__become-a-member-section__link-text:focus,
+.sign-in-container__form-section__become-a-member-section__link-text:hover {
+    font-weight: bold;
+}
+
+.register-container__banner-section__subtitle {
+    font-style: oblique;
+}
+
+.register-container__form-section__form-field__field-info-text {
+    display: block;
+    font-size: 0.7em;
+    padding-top: 1em;
+    text-align: justify;
+    margin-left: 2.5em;
+    margin-right: 2.5em;
+}
+
+.register-container__form-section__agreement {
+    margin: 1.5em 1em;
+    
+}

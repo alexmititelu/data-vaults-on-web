@@ -124,3 +124,39 @@
 .forms-grid__forms-column__form__block--last {
     border-style: none;
 }
+
+@media only screen and (max-width: 1025px) {
+    .filters__button--add-filter {
+        font-size: 2em;
+    }
+
+    .filters__title {
+        font-size: 2em;
+    }
+
+    .forms-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .forms-grid__forms-column--right {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .intro__title {
+        font-size: 2.5em;
+    }
+
+    .intro__sub-title {
+        font-size: 1.3em;
+    }
+
+    .forms-grid {
+      grid-template-columns: 1fr;  
+    }
+
+    .forms-grid__forms-column--middle {
+        display: none;
+    }
+}

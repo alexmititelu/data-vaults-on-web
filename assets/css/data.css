@@ -94,11 +94,16 @@
 .forms-grid__page-controls__text {
     display: inline;
     color: var(--color-1);
-    font-size: 25px;
+    font-size: 20px;
     font-family: blenderpro;
     position: relative;
-    top: -9px;
+    top: -5px;
     left: 1.8px;
+}
+
+.forms-grid__page-controls__text--bottom {
+    font-size: 25px;
+    top: -10px;
 }
 
 .forms-grid__forms-column__form {

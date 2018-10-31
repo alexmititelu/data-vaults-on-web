@@ -6,30 +6,26 @@
 
 .service-description-grid__logo {
     grid-row-start: 1;
+    grid-row-end: 3;
     grid-column-start: 1;
     max-width: 100%;
+    margin: auto;
 }
 
-.service-description-grid__text-grid {
+.service-description-grid__title {
     grid-row-start: 1;
     grid-column-start: 2;
-    display: grid;
-    grid-template-rows: 1fr 4fr;
-}
-
-.service-description-grid__text-grid__title {
-    grid-row-start: 1;
-    grid-column-start: 1;
     font-family: blenderpro;
     font-size: 3em;
-    margin: 0;
     padding: 0.5em 1.1em;
     color: grey;
+    text-align: center;
+    margin: auto;
 }
 
-.service-description-grid__text-grid__description { 
+.service-description-grid__description { 
     grid-row-start: 2;
-    grid-column-start: 1;
+    grid-column-start: 2;
     font-family: blenderpro;
     padding: 0.5em 3em;
     font-size: 1.1em;
@@ -38,10 +34,11 @@
 .main-buttons-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding-top: 2em;
 }
 
 .main-buttons-grid__button {
-    margin: 0em 2em;
+    margin: 0em 1em;
     height: 100px;
     font-size: 1.6em;
     border-color: var(--color-1);
@@ -72,6 +69,7 @@
     grid-column-start: 2;
     grid-row-start: 2;
     width: 100%;
+    margin: auto;
 }
 
 .faq-grid__ul {
@@ -79,6 +77,7 @@
     list-style: inside;
     grid-column-start: 1;
     grid-row-start: 2;
+    margin: auto;
 }
 
 .faq-grid__ul__li__question {
@@ -139,4 +138,52 @@
 
 .contact__article__description--alex {
     background-image: url("../img/alex.png");
+}
+
+@media only screen and (max-width: 1200px) {
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-grid__title {
+        grid-row-start: 1;
+        grid-column-start: 1;
+    }
+
+    .faq-grid__logo {
+        grid-row-start: 2;
+        grid-column-start: 1;
+        width: 30%;
+        height: auto;
+        margin-bottom: 3em;
+    }
+
+    .faq-grid__ul {
+        grid-row-start: 3;
+        grid-column-start: 1;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .service-description-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .service-description-grid__logo {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+    }
+
+    .service-description-grid__title {
+        grid-row-start: 1;
+        grid-column-start: 2;
+    }
+
+    .service-description-grid__description {
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
 }

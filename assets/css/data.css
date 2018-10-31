@@ -153,7 +153,7 @@
     }
 
     .forms-grid {
-      grid-template-columns: 1fr;  
+        grid-template-columns: 1fr;
     }
 
     .forms-grid__forms-column--middle {

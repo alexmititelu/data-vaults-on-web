@@ -23,7 +23,7 @@
     margin: auto;
 }
 
-.service-description-grid__description { 
+.service-description-grid__description {
     grid-row-start: 2;
     grid-column-start: 2;
     font-family: blenderpro;

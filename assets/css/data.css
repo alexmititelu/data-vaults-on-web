@@ -1,7 +1,121 @@
-.starting-element {
+.intro {
     padding-top: 50px;
 }
 
+.intro__title {
+    font-family: blenderpro;
+    font-size: 3em;
+    color: grey;
+    text-align: center;
+    margin: 0.5em 0 0 0;
+}
+
+.intro__sub-title {
+    font-family: blenderpro;
+    font-size: 1.5em;
+    color: var(--color-1);
+    text-align: center;
+    margin: 0.1em 0 0.5em 0;
+}
+
+.filters {
+    margin: 2em 0;
+    text-align: center;
+}
+
+.filters__title {
+    font-family: blenderpro;
+    display: inline;
+}
+
+.filters__current-filters {
+    max-width: 70%;
+    margin: auto;
+}
+
+.filters__button--add-filter {
+    color: green;
+    font-size: 1.3em;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+    margin-bottom: 0.5em;
+}
+
+.filters__current-filters__text {
+    color: grey;
+    display: none;
+}
+
+.filters__current-filters__filter-box {
+    display: inline-block;
+    background-color: lightgreen;
+    padding: 0.4em;
+    margin: 0.2em;
+    border-radius: 10px;
+}
+
+.filters__current-filters__filter-box__text {
+    display: inline;
+}
+
+.filters__current-filters__filter-box__text--filter {
+    font-weight: bold;
+}
+
+.filters__current-filters__filter-box__button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: red;
+}
+
 .forms-grid {
-    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.forms-grid__page-controls {
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.forms-grid__page-controls__arrow {
+    text-decoration: none;
+    color: var(--color-1);
+    padding: 0 0.5em;
+}
+
+.forms-grid__page-controls__text {
+    display: inline;
+    color: var(--color-1);
+    font-size: 25px;
+    font-family: blenderpro;
+    position: relative;
+    top: -9px;
+    left: 1.8px;
+}
+
+.forms-grid__forms-column__form {
+    text-align: center;
+    margin: 1em;
+    padding: 2em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.forms-grid__forms-column__form__block {
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    border-radius: 1.5px;
+}
+
+.forms-grid__forms-column__form__block--last {
+    border-style: none;
 }

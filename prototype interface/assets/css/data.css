@@ -125,6 +125,11 @@
     border-style: none;
 }
 
+.filters_button--sort-by-options {
+    outline: none;
+    background-color: var(--color-0);
+}
+
 @media only screen and (max-width: 1025px) {
     .filters__button--add-filter {
         font-size: 2em;

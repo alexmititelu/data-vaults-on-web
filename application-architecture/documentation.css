@@ -81,3 +81,16 @@ li {
     padding-top: 7px;
     padding-bottom: 7px;
 }
+
+.header-menu {
+    float: right;
+}
+
+header {
+    text-align: center;
+}
+
+.nav-element {
+    padding-left: 10px;
+    padding-right: 10px;
+}

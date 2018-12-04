@@ -1,6 +1,5 @@
 # Dave - data vaults on web
 
 ## Proiect CLIW - Cojocaru Gabriel-Codrin, Mititelu Ioan-Alexandru
-=======
 
 Se doreşte îmbunătăţirea securităţii datelor transferate şi stocate în mediul on-line. Astfel, proprietarul unui sit Web intenţionează ca toate datele completate de utilizatori prin intermediul formularelor din situl său să fie stocate într-o manieră securizată. Recurgând la Web Cryptography API, se va implementa un instrument Web care va permite crearea unui cont (proprietar de sit) şi o pereche de chei RSA. Proprietarului i se va oferi un cod JavaScript pe care îl va putea insera în pagina ce conţine un formular Web de securizat. La trimiterea datelor (i.e. evenimentul submit), se va genera o cheie AES şi un vector de iniţializare, datele fiind criptate cu această cheie, iar cheia AES va fi criptată cu cheia publică RSA. Toate datele vor fi salvate/gestionate via un API extern de stocare. Proprietarul unui sit Web va avea la dispoziţie o interfaţă prin care va putea consulta datele pe baza cheii private RSA. Bonus: proprietarul unui sit va putea adăuga un nivel suplimentar de autentificare prin recunoaştere facială (de exemplu, folosind Amazon Rekognition) sau recurgând la Web Authentication API.

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="documentation.css" />
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+
+    <div id="technologies-container">
+        <p class="title">Tehnologii folosite</p>
+
+        <div class="technologies-container-element">
+            <p class="subtitle">Frontend:</p>
+            <img src="./assets/html.png" class="logo-technology" alt="HTML" />
+            <img src="./assets/css.png" class="logo-technology" alt="CSS" />
+            <img src="./assets/es6.svg" class="logo-technology" alt="JavaScript" />
+            <p class="subtitle">Additional Frontend Libraries:</p>
+
+            <img src="./assets/d3.svg" class="logo-additional-technology" alt="D3: Data-Driven Documents (Data Visualization Library)" />
+        </div>
+
+        <div class="technologies-container-element">
+            <p class="subtitle">Backend:</p>
+            <img src="./assets/nodejs.png" class="logo-technology" alt="Node.js" />
+        </div>
+
+    </div>
+
+
+    <div id="external-services-container">
+
+        <p class="title">Servicii externe folosite</p>
+
+        <div class="external-services-container-element">
+            <!-- <p class="subtitle">DynamoDB</p> -->
+            <div>
+                <img class="logo-service" src="./assets/dynamo-db.png" alt="DynamoDB" />
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Este un serviciu de baze de date NoSQL rapid si flexibil</p>
+            </div>
+
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Performanta serviciului va scala automat odata cu cresterea aplicatiei</p>
+            </div>
+
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Nu vom mai lua in considerare managementul serverului bazei de date sau a
+                    software-ului necesar </p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Nu trebuie sa ne facem griji cu privire la consistenta si durabilitatea datelor
+                    datorita stabilitatii deja confirmate a serviciului</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Este un serviciu gratuit pentru inceput</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Este un serviciu usor de integrat</p>
+            </div>
+        </div>
+
+        <div class="external-services-container-element">
+            <!-- <p class="subtitle">S3</p> -->
+            <div>
+                <img class="logo-service" src="./assets/s3.png" alt="S3" />
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">AWS S3 este un serviciu sigur de stocare a datelor in Cloud</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Este un serviciu gratuit pentru inceput</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Este un serviciu usor de integrat</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Prin natura sa mediul de stocare poate scala la infinit</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Datele vor fi pastrate in mod consistent pe o durata nelimitata de timp, fiind
+                    in primul rand un serviciu stabil</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Durabilitatea datelor este foarte crescuta, 99.(9)%, astfel ca datele vor fi
+                    available chiar si cand doua data center-uri vor fi picate</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Manipularea (adaugarea, interogarea, stergerea) datelor se va face intr-o
+                    maniera rapida si usoara</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-times-circle red-color"></i>
+                <p class="description">Dupa perioada de gratie, vor aparea costuri</p>
+            </div>
+
+
+
+        </div>
+
+        <div class="external-services-container-element">
+            <!-- <p class="subtitle">Amazon Rekognition</p> -->
+            <img class="logo-service" src="./assets/rekognition.png" alt="Amazon Rekognition" />
+            <div class="description-wrapper">
+                <p class="description">
+                    Amazon Rekognition este un serviciu de analiza si procesare de imagini ce foloseste deep-learning.
+                    Acest serviciu poate fi folosit cu usurinta drept "secondary authentication system", pentru a
+                    imbunatati accesul la aplicatie din punct de vedere al securitatii.
+
+                    Modul de identificare a unui utilizator, daca acesta este sau nu proprietarul de cont, va fi deci
+                    foarte simplu, si poate fi descris prin urmatorii pasi:
+                    <ul>
+                        <li>In momentul autentificarii se face o poza utilizatorului care doreste sa se conecteze,
+                            folosind camera WEB</li>
+                        <li>Poza va fi comparata cu pozele asociate respectivului utilizator, iar drept <a href="assets/rekognition_response.png">raspuns</a>
+                            va fi primit un obiect de tip JSON cu diferite metrici de interes precum "Similaritaty",
+                            "Confidence", acestea doua fiind suficiente pentru a confirma identitatea utilizatorului</li>
+                        <li>In cazul unei recunoasteri cu succes a utilizatorului, noua poza pe care a fost testata
+                            identitatea va fi incarcata in folderul utilizatorului ca algoritmul sa invete in
+                            continuare (sa-si creasca gradul de precizie, confidenta)</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Imbunatatirea securitatii la nivel de autentificare</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Continuos face detection learning process</p>
+            </div>
+
+
+        </div>
+
+        <div class="external-services-container-element">
+            <p class="subtitle" id="web-crypto" style="color:rgb(55, 55, 252);font-weight:bold;font-size: 1.5em;">Web
+                Cryptography API</p>
+            <p class="subtitle">Web Cryptography API este o interfata ce permite folosirea primitivelor criptografice
+                pentru a construi sisteme sigure.</p>
+
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Foloseste "Cryptography pseudo number generator", deci aduce un plus de
+                    securitate</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Pune la dispozitie metode generice pentru criptare / decriptare a datelor etc.</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Pune la dispozitie diferiti algoritmi de criptare: AES, RSA, SHA etc.</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Foloseste Uint8Array (UTF-8)</p>
+                <!-- <p>! priveste informatia sub forma de biti si pentru fiecare 32 de biti consecutivi, ii grupeaza cate 8 si ii transforma in decimal, obtinand astfel un vector de 4 elemente cuprinse intre 0 si 255</p> -->
+            </div>
+        </div>
+
+
+        <div class="references-container">
+            <p class="title">References</p>
+            <ul class="list">
+                <li>
+                    <a href="https://github.com/d3/d3" class="reference">
+                        D3: Data-Driven Documents
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://docs.aws.amazon.com/dynamodb/index.html#lang/en_us" class="reference">Amazon
+                        DynamoDB
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.slideshare.net/saniyakhalsa/dynamo-db-pros-and-cons" class="reference">DynamoDB
+                        pros and cons
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://docs.aws.amazon.com/s3/index.html#lang/en_us" class="reference">S3 documentation</a>
+                </li>
+                <li>
+                    <a href="https://docs.aws.amazon.com/rekognition/index.html#lang/en_us" class="reference">Amazon
+                        Rekognition
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.w3.org/TR/WebCryptoAPI/" class="reference">Web Cryptography API documentation</a>
+                </li>
+
+
+                <li>
+                    <a href="https://github.com/w3c/webcrypto" class="reference">Web Cryptography API GitHub</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

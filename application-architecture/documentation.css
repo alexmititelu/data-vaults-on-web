@@ -1,0 +1,83 @@
+@font-face {
+    font-family: blenderpro;
+    src: url("../interface-prototype/assets/fonts/blenderpro/blenderpro-medium-webfont.woff");
+}
+
+body {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: blenderpro;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.subtitle {
+    font-weight: bold;
+}
+
+.green-color {
+    color: rgb(0, 185, 0);
+    
+}
+
+.red-color {
+    color: red;
+}
+
+.description {
+    display: inline;
+}
+
+.description-wrapper {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+
+
+.logo-service {
+    height: 100px;
+    /* width: auto; */
+    width: auto;
+}
+
+
+.logo-technology {
+    height: 100px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.logo-additional-technology {
+    height: 75px;
+    width: auto;
+    margin-left: 10px;
+}
+
+.service-description {
+    font-size: 1.3em;
+}
+
+.list {
+    list-style-type:disc;
+}
+
+.references-container {
+    margin-top:60px;
+
+    margin-bottom:100px;
+}
+
+.external-services-container-element {
+    margin-top: 40px;
+}
+
+
+li {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}

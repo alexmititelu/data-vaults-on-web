@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ro-RO" vocab="http://schema.org/" typeof="schema:ScholarlyArticle" property="https://github.com/alexmititelu/data-vaults-on-web">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DAVE Scholarly Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+</head>
+
+<body prefix="schema: http://schema.org">
+    <header>
+        <h1 property="http://purl.org/dc/terms/title">DAVE - Data Vaults On Web</h1>
+    </header>
+    <div role="contentinfo">
+        <h3>Cuprins:</h3>
+        <ol role="directory">
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#abstract">
+                    Abstract
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#introduction">
+                    Introduction
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#summary">
+                    Summary
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#intermediate-stages">
+                    Intermediate stages
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#dataDealing">
+                    Data
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#clientSide">
+                    Client-side workflow
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#techAndServices">
+                    Technologies and services used
+                </a>
+            </li>
+
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#conclusion">
+                    Conclusion
+                </a>
+            </li>
+        </ol>
+        <dl>
+            <dt>Authors:</dt>
+            <dd property="http://purl.org/dc/terms/creator">
+                <a typeof="sa:ContributorRole" property="url" href="https://github.com/alexmititelu">
+                    <span property="familyName">Mititelu</span> <span property="givenName">Ioan-Alexandru</span>
+                </a> &nbsp; & &nbsp;
+                <a typeof="sa:ContributorRole" property="url" href="https://github.com/gabrielxzc">
+                    <span property="familyName">Cojocaru</span> <span property="givenName">Gabriel-Codrin</span>
+                </a>
+
+            </dd>
+            <br>
+            <dt>Project source code:</dt>
+            <dd>
+                <a property="url" href="https://github.com/alexmititelu/data-vaults-on-web">GitHub</a>
+            </dd>
+            <br>
+            <dt>Tags:</dt>
+            <dd>
+                <span>info, project, infoiasi, cliw, web, dave, security, data, forms, data management</span>
+            </dd>
+        </dl>
+    </div>
+    <section id="abstract" typeof="sa:Results" role="doc-introduction" property="about">
+        <h2>
+            <span>1. </span>Abstract
+        </h2>
+        <blockquote>
+            <p>
+                DAVE is a web application developed by students. The purpose of this project is to improve the security
+                of data transferred and stored in on-line environment.
+            </p>
+            <p>
+                This report will present the details behind the development of this project and its progress.
+            </p>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../../interface-prototype/assets/img/logo.svg" style="height: 100px; width: auto;">
+            </figure><br>
+
+        </blockquote>
+    </section>
+    <section id="introduction" role="doc-introduction" property="about">
+        <h2>
+            <span>2. </span>Introduction
+        </h2>
+        <blockquote>
+            <p>
+                Nowadays every web-site process its user's data, no matter if it's about transfering or storing it and
+                inevitable the security of this data is one of the current issues that people are dealing with.
+                DAVE is projected for every website owner who wants his users data to be stored in a secured way.
+                Also, he will be able to visualize this data both in a raw format and also in a processed one
+                (displaying different relevant statistics).
+            </p>
+        </blockquote>
+    </section>
+    <section id="summary" role="doc-introduction" property="about">
+        <h2>
+            <span>3. </span>Summary
+        </h2>
+        <blockquote>
+            <p>
+                We want to design and develop a web platform and a web service to improve the data transfer security.
+                The application is related to all data submitted through forms, at a general level, and to all
+                owners of websites where forms are involved. We want to help them by storing their data in an encrypted
+                way (the data will be encrypted from the moment of form submisson and decrypted only when the
+                client wants to acces it).
+                So the platform will offer the possibility to manage the keys, the white-listed sites, to visualize
+                data from the submitted forms and to get relevant statistics about these forms.
+            </p>
+
+        </blockquote>
+    </section>
+    <section id="intermediate-stages" role="doc-chapter" property="about">
+        <h2>
+            <span>4. </span>Intermediate stages
+        </h2>
+        <blockquote>
+            <p>
+                <link property="itemListUnorder" href="https://schema.org/ItemListUnordered" />
+                <ul role="directory">
+                    <li property="itemListElement" typeof="ListItem">
+                        Established what external services the platform requires (S3, DynamoDB, Amazon Rekognition, Web
+                        Criptography API), etc.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Implementation of login functionality through a traditional way but also using a second
+                        authentication method in order to improve security: facial recognition.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Implementation of the keys management logic.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Implementation of data visualization tab.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        The generated JS code that will be imported in client's websites.
+                    </li>
+                </ul>
+            </p>
+        </blockquote>
+    </section>
+    <section id="dataDealing" role="doc-chapter" property="about">
+        <h2>
+            <span>5. </span>Data
+        </h2>
+        <blockquote>
+            <p>
+                <br>
+                The registration and login system will be by default in a traditional manner, and if the user wants, it
+                will be possible
+                to add to each sign in a second security check using face-recognition (Amazon Rekognition).
+
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../authentication-system/authentication-system-diagram.png">
+                </figure><br>
+
+
+                Clients data (keys, profile etc) will be stored on DynamoDB while the data collected from forms will be
+                stored in S3.
+
+                <br>
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../user-info-storage/user-info-storage-diagram.png">
+                </figure>
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../forms-storage/forms-storage-diagram.png">
+                </figure><br>
+                <br>
+                <br>
+                Before storing forms data in S3, we will use Web Criptography API to encrypt it, as it follows:
+
+                <br>
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../pseudocod.png">
+                </figure><br>
+
+            </p>
+        </blockquote>
+    </section>
+    <section id="clientSide" role="doc-chapter" property="about">
+        <h2>
+            <span>6. </span>Client-side workflow
+        </h2>
+        <blockquote>
+            <p>
+                On the client side we will retrieve data from server, we will decrypt it again using Web Criptography
+                API and then we will display it in different manners.
+                We will also use an external library (D3) in order to display relevant statistics about this data in
+                several bar-charts.
+            </p>
+
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../authentication-system/authentication-system-diagram.png" style="height: 100px; width: auto;">
+            </figure><br>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../user-flow/pre-authentication-user-flow-diagram.png" style="height: 100px; width: auto;">
+            </figure><br>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../user-flow/single-page-app.png" style="height: 100px; width: auto;">
+            </figure><br>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../user-flow/post-authentication-user-flow-diagram.png" style="height: 100px; width: auto;">
+            </figure><br>
+
+        </blockquote>
+    </section>
+    <section id="techAndServices" role="doc-chapter" property="about">
+        <h2>
+            <span>7. </span>Technologies and services used
+        </h2>
+        <blockquote>
+            <p>
+                First and foremost, in order to deliver a modern web application, we used the three main components
+                that are present almost everywhere and these are: <br>
+                <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                    <img class="imagine" src="./../assets/html.png" style="height: 100px; width: auto;">
+                    <img class="imagine" src="./../assets/css.png" style="height: 100px; width: auto;">
+                    <img class="imagine" src="./../assets/es6.svg" style="height: 100px; width: auto; margin-left: 13px;">
+                </figure><br>
+                So, while the Front-End part was an easy task in choosing the correct technologies, for the Back-End
+                and thus Database segment, there are many choices out there, each with a different purpose. <br>
+                Considering this, we have taken the decision to use NodeJS server, backed up by a DynamoDB database,
+                while the encrypted data will be stored in S3.: <br>
+                <figure typeof="sa:Image" style="display:inline-block;">
+                    <img class="imagine" src="./../assets/nodejs.png" style="height: 100px; width: auto;">
+                    <img class="imagine" src="./../assets/dynamo-db.png" style="height: 120px; width: auto; ">
+                    <img class="imagine" src="./../assets/s3.png" style="height: 120px; width: auto; ">
+                </figure><br>
+
+
+
+                The reasoning for choosing these services for storing data are: <br>
+                <ul role="directory">
+                    <li property="itemListElement" typeof="ListItem">
+                        DynamoDB is a database service based on NoSQL, which is fast and flexible
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        The performance of the service will automatically scale with the growth of the application.
+                        Unlike MySQL, where a table can degrade if it goes over 10GB.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Data is stored in flexible, JSON-like documents that can have varied structures
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        In DynamoDB, documents are able to have their own unique structure
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        New fields can be added at any time and contain any type of value.
+                        This type of functionality would require a relational database to be restructured
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        DynamoDB is schema-free, allowing you to create documents without having to define the
+                        structure of the document first
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Easy to integrate and it does not require a DBA (Database Administrator)
+                    </li>
+                </ul> <br>
+            </p>
+        </blockquote>
+    </section>
+
+    <section id="conclusion" role="doc-chapter" property="about">
+        <h2>
+            <span>8. </span>Conclusion
+        </h2>
+        <blockquote>
+            <p>
+                In conclusion, we hope to be able to deliver a top-notch product that will improve the idea of security
+                of data on the internet.<br>
+                We thank you for reading this Scholarly Article and we'll see you soon! <br>
+            </p>
+        </blockquote>
+    </section>
+</body>
+
+</html>

@@ -212,6 +212,7 @@
 
 
 .form__option__input--radio {
+	border-radius: 11px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	-ms-appearance: none;

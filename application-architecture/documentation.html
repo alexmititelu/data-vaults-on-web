@@ -229,7 +229,53 @@
                 <p class="description">In momentul in care serviciul nostru primeste un formular, trebuie sa identificam url-ul de pe care a fost completat acel formular, 
                 utilizatorul pentru care trebuie salvat si cheia cu care a fost criptat. Daca un atacator ar putea trimite o cerere care la server ajunge ca si cum ar fi trimisa
                 de pe acel url whitelisted de catre detinatorul site-ului, atunci atacatorul ar putea cauza multe probleme, una dintre ele fiind umplerea bazei de date cu formulare
-                redundante.</p>
+                redundante.
+                </p>
+        </div>
+
+        <div class="single-page-application">
+            <p class="title">Single Page Application</p>
+            <p class="description">
+                Am ales o arhitectura de tip Single Page Application (SPA) pentru a oferi utilizatorilor o experienta mai placuta, mediul fiind mai asemanator astfel cu cel oferit de o aplicatie desktop.
+                Astfel, tot codul necesar (HTML, JavaScript, CSS) va fi downloadat la prima interactiune a utilizatorului pe site si ulterior, resursele noi / necesare vor fi incarcate dynamic, fiind corespunzatoare
+                actiunilor utilizatorului. 
+            </p>
+            <p class="description">
+                La nivel de server vom aborda metoda "Thin server architecture", iar logica de pe server va fi mutata la client, pe cat posibil, serverul ramanand astfel un API de trimitere si primire a datelor. 
+                Vom incerca sa imbinam metoda anterior mentionata cu un altfel de tip de arhitectura, "Thick stateless server architecture", iar la fiecare noua accesare a site-ului datele vor fi incarcate ca 
+                si cum ar fi prima oara (prima accesare), nerecurgand la cache-uirea unor parti de logica / date intrucat in primul rand este vorba despre date cu continut sensibil, si in al doilea rand,
+                nu este necesara o putere computationala substantial crescuta. Astfel o noua utilizare va fi de fapt o noua stare a utilizatorului in aplicatie.
+            </p>
+            <p class="description">
+                In concluzie, in cadrul interactiunii utilizatorilor cu pagina se va pune accent pe comunicare dinamica intre client si server, fiind rescris continutul paginii si nu incarcata o noua pagina.
+            </p>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Sunt astfel evitate intreruperile experientei utilizatorilor in succesiunea paginilor.</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Doar o incarcare (mai consistenta) a codului la prima accesare a paginii, insa o experienta mai rapida in restul activitatii din pagina.</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-check-circle green-color"></i>
+                <p class="description">Intrucat logica va fi mutata (pe cat posibil) de la server la client, acest lucru, per total, va reduce complexitatea serverului.</p>
+            </div>
+
+            <div class="description-wrapper">
+                <i class="fa fa-times-circle red-color"></i>
+                <p class="description">Memory Leaks la nivel de hardware-ul clientului</p>
+            </div>
+
+
+            <div class="description-wrapper">
+                <i class="fa fa-times-circle red-color"></i>
+                <p class="description">Comportament diferit la apasarea butoanelor de back / forward</p>
+            </div>
+
         </div>
 
 

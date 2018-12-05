@@ -17,8 +17,8 @@
                 <nav>
                     <a href="" class="nav-element">Tehnologii</a>
                     <a href="" class="nav-element">Servicii</a>
-                    <a href="" class="nav-element">Securitatea Datelor</a>
-                    <a href="" class="nav-element">Requesturi Autorizate</a>
+                    <a href="" class="nav-element">Securitatea datelor</a>
+                    <a href="" class="nav-element">Posibile vulnerabilitati de securitate</a>
                 </nav>
             </div>
 </header>
@@ -211,11 +211,25 @@
         </div>
 
         <div class="siguranta-datelor-container">
-                <p class="title">Siguranta datelor</p>
+                <p class="title">Securitatea Datelor</p>
+                <p class="description">Formularul utilizatorului va fi criptat la nivel de client, inainte sa fie trimis in internet, cu ajutorul algoritmului de 
+                criptare AES. Cheia AES, generata random, si vectorul de initializare, de asemenea generat random, vor fi criptate si ele cu ajutorul cheii RSA publice a 
+                detinatorului site-ului. Formularul impreuna cu cheia AES si vectorul de initializare vor calatori prin internet, criptate, catre server prin intermediul protocolului HTTPS, acesta oferind 
+                un nivel de securitate suplimentar. Odata ajunse la server, formularul, cheia AES si vectorul de initializare vor fi trimise din nou prin internet, criptate, prin intermediul
+                protocolului HTTPS catre S3 unde vor fi si stocate. S3 furnizeaza un nivel ridicat de incredere din punctul de vedere a confidentialitatii si a integritatii datelor.</p>
+                <br/>
+                <br/>
+                <p class="description">La procesul de recuperare a formularelor de catre detinatorul site-ului, acestea sunt extrase din S3 impreuna cu cheia AES si vectorul de initializare, 
+                criptate, si trimise catre client, prin internet prin intermediul HTTPS. Decriptarea se face la nivel de client. Cheia RSA calatoreste de la server spre client prin intermediul HTTPS
+                in cazul in care detinatorul site-ului alege optiunea in care cheia privata sa fie salvata si administrata de serviciul nostru. In caz contrat, cheia privata RSA nu paraseste clientul.</p>
         </div>
 
         <div class="cereri-autorizate">
-                <p class="title">Requesturi autorizate</p>
+                <p class="title">Posibile vulnerabilitati de securitate</p>
+                <p class="description">In momentul in care serviciul nostru primeste un formular, trebuie sa identificam url-ul de pe care a fost completat acel formular, 
+                utilizatorul pentru care trebuie salvat si cheia cu care a fost criptat. Daca un atacator ar putea trimite o cerere care la server ajunge ca si cum ar fi trimisa
+                de pe acel url whitelisted de catre detinatorul site-ului, atunci atacatorul ar putea cauza multe probleme, una dintre ele fiind umplerea bazei de date cu formulare
+                redundante.</p>
         </div>
 
 

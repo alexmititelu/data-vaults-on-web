@@ -1,3 +1,5 @@
+import homePageManager from "./HomePageManager.js"
+
 var config = {
     apiKey: "AIzaSyAHmbjjMt8WdwINBF3lY63DroVJgQ3GBcg",
     authDomain: "data-vaults-on-web.firebaseapp.com",
@@ -8,5 +10,6 @@ var config = {
 };
 
 firebase.initializeApp(config);
-
 console.log("Firebase successfully initialized!")
+
+homePageManager.renderer.renderHome();

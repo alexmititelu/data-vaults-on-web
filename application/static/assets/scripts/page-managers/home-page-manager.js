@@ -1,4 +1,4 @@
-import homePageRenderer from "./HomePageRenderer.js"
+import homePageRenderer from "../renderers/home-page-renderer.js"
 
 class HomePageManager {
     constructor() {

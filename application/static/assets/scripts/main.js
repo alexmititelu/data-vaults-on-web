@@ -1,4 +1,4 @@
-import homePageManager from "./HomePageManager.js"
+import homePageManager from "./page-managers/home-page-manager.js"
 
 var config = {
     apiKey: "AIzaSyAHmbjjMt8WdwINBF3lY63DroVJgQ3GBcg",
@@ -10,6 +10,4 @@ var config = {
 };
 
 firebase.initializeApp(config);
-console.log("Firebase successfully initialized!")
-
-homePageManager.renderer.renderHome();
+homePageManager.renderer.render();

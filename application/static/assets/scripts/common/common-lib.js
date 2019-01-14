@@ -15,46 +15,50 @@ function logOutButtonPressedHandler() {
     alert("LOG OUT PRESSED");
 }
 
-async function homeButtonPressedHandler() {
+function homeButtonPressedHandler() {
     var serviceDescriptionGrid = document.getElementsByClassName("service-description-grid")[0];
+    var behavior = "smooth";
 
     if (!serviceDescriptionGrid) {
         homePageManager.renderer.render();
-        await sleep(50);
+        behavior = "instant";
     }
 
     serviceDescriptionGrid = document.getElementsByClassName("service-description-grid")[0];
     serviceDescriptionGrid.scrollIntoView({
-        behavior: "smooth",
+        behavior: behavior,
         block: "start"
     })
 }
 
-async function faqButtonPressedHandler() {
+function faqButtonPressedHandler() {
     var faqGrid = document.getElementsByClassName("faq-grid")[0];
+    var behavior = "smooth";
 
     if (!faqGrid) {
         homePageManager.renderer.render();
-        await sleep(50);
+        behavior = "instant";
     }
 
     faqGrid = document.getElementsByClassName("faq-grid")[0];
     faqGrid.scrollIntoView({
-        behavior: "smooth",
+        behavior: behavior,
         block: "start"
     });
 }
 
-async function contactButtonPressedHandler() {
+function contactButtonPressedHandler() {
     var contactSection = document.getElementsByClassName("contact")[0];
+    var behaviour = "smooth";
+
     if (!contactSection) {
         homePageManager.renderer.render();
-        await sleep(50);
+        behaviour = "instant";
     }
 
     contactSection = document.getElementsByClassName("contact")[0];
     contactSection.scrollIntoView({
-        behavior: 'smooth',
+        behavior: behaviour,
         block: "start"
     });
 }

@@ -42,6 +42,7 @@ body {
     display: inline-block;
     padding: 0 1em;
     height: 3em;
+    cursor: pointer;
 }
 
 .header__main-nav__ul__left-items__li {
@@ -57,13 +58,12 @@ body {
 .header__main-nav__ul__left-items__li__text {
     color: var(--color-3);
     display: inline;
-    cursor: default;
-    position: relative;
     top: 18px;
 }
 
 .header__main-nav__ul__left-items__li__link--logo {
     padding-top: 0.15em;
+    display: inline-block;
 }
 
 .header__main-nav__ul__right-items {

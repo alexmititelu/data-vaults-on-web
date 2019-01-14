@@ -1,6 +1,6 @@
 @font-face {
     font-family: regular-font;
-    src:url("../fonts/Roboto/Roboto-Regular.ttf");
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
 }
 
 @font-face {
@@ -35,7 +35,7 @@ body {
 }
 
 .header__main-nav__ul__li__burger-icon {
-    display: none;   
+    display: none;
 }
 
 .header__main-nav__ul__left-items {
@@ -58,12 +58,12 @@ body {
     color: var(--color-3);
     display: inline;
     cursor: default;
-    position: relative;
     top: 18px;
 }
 
 .header__main-nav__ul__left-items__li__link--logo {
     padding-top: 0.15em;
+    display: inline-block;
 }
 
 .header__main-nav__ul__right-items {
@@ -104,7 +104,9 @@ body {
     display: inline-block;
 }
 
-.header__main-nav__ul__right-items__li--contains-dropdown:hover .header__main-nav__ul__right-items__li__drop-down-button-content {display: block;}
+.header__main-nav__ul__right-items__li--contains-dropdown:hover .header__main-nav__ul__right-items__li__drop-down-button-content {
+    display: block;
+}
 
 .header__main-nav__ul__right-items__li--active {
     background-color: var(--color-3);
@@ -144,7 +146,7 @@ body {
     min-width: 300px;
     max-height: 200px;
     overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     top: 48px;
     left: 0;
@@ -204,7 +206,7 @@ body {
         padding-right: 13px;
     }
 
-    .header__main-nav__ul__li__burger-icon:hover + .header__main-nav__ul__right-items {
+    .header__main-nav__ul__li__burger-icon:hover+.header__main-nav__ul__right-items {
         display: block;
     }
 

@@ -257,7 +257,7 @@ function backToSignInSection() {
 function displayLoginSection() {
     removeAllBodyChildren();
     
-    let body = document.getElementsByTagName("body")[0];
+    let body = document.getElementsByClassName("actual-body")[0];
 
     let signInContainer = document.createElement("div");
     signInContainer.classList.add("sign-in-container");
@@ -274,7 +274,7 @@ function displayRegisterSection() {
 
     removeAllBodyChildren();
     
-    let body = document.getElementsByTagName("body")[0];
+    let body = document.getElementsByClassName("actual-body")[0];
 
     let registerContainer = document.createElement("div");
     registerContainer.classList.add("register-container");

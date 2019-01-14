@@ -1,5 +1,42 @@
 import storageManager from "../storage/storage-manager.js"
 import textContent from "./text-content.js"
+import homePageManager from "../page-managers/home-page-manager.js"
+
+function profileButtonPressedHandler() {
+    alert("PROFILE PRESSED");
+}
+
+function logOutButtonPressedHandler() {
+    alert("LOG OUT PRESSED");
+}
+
+function homeButtonPressedHandler() {
+    homePageManager.renderer.render();
+}
+
+function faqButtonPressedHandler() {
+    var faqGrid = document.getElementsByClassName('faq-grid')[0];
+    if (!faqGrid) {
+        homePageManager.renderer.render();
+    }
+
+    faqGrid = document.getElementsByClassName('faq-grid')[0];
+    faqGrid.scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+function contactButtonPressedHandler() {
+    var contactSection = document.getElementsByClassName('contact')[0];
+    if (!contactSection) {
+        homePageManager.renderer.render();
+    }
+
+    contactSection = document.getElementsByClassName('contact')[0];
+    contactSection.scrollIntoView({
+        behavior: 'smooth'
+    });
+}
 
 function populateDataDropdownMenu(data) {
     var rightItemsDataDiv = document.getElementsByClassName("header__main-nav__ul__right-items__li__drop-down-button-content")[0];
@@ -115,7 +152,7 @@ function renderHeader() {
         // header > nav > div (right-items) > ul > li (HOME) > a
         var rightItemsHomeA = document.createElement("a");
         rightItemsHomeA.classList.add("header__main-nav__ul__right-items__li__link", "header__main-nav__ul__right-items__li__link--active");
-        rightItemsHomeA.href = "#";
+        rightItemsHomeA.addEventListener("click", homeButtonPressedHandler);
         rightItemsHomeA.append(document.createTextNode("HOME"));
 
         rightItemsHomeLi.append(rightItemsHomeA);
@@ -171,7 +208,7 @@ function renderHeader() {
         // header > nav > div (right-items) > ul > li (FAQ) > a
         var rightItemsFaqA = document.createElement("a");
         rightItemsFaqA.classList.add("header__main-nav__ul__right-items__li__link");
-        rightItemsFaqA.href = "#";
+        rightItemsFaqA.addEventListener("click", faqButtonPressedHandler)
         rightItemsFaqA.append(document.createTextNode("FAQ"));
 
         rightItemsFaqLi.append(rightItemsFaqA);
@@ -185,7 +222,7 @@ function renderHeader() {
         // header > nav > div (right-items) > ul > li (CONTACT) > a
         var rightItemsContactA = document.createElement("a");
         rightItemsContactA.classList.add("header__main-nav__ul__right-items__li__link");
-        rightItemsContactA.href = "#";
+        rightItemsContactA.addEventListener("click", contactButtonPressedHandler);
         rightItemsContactA.append(document.createTextNode("CONTACT"));
 
         rightItemsContactLi.append(rightItemsContactA);
@@ -223,18 +260,20 @@ function renderHeader() {
         // header > nav > div (right-items) > ul > li (username) > div (dropdown-content) > a
         var rightItemsUsernameDropdownMenuConfiguration = [{
                 text: "PROFILE",
-                icon: "fa-user-alt"
+                icon: "fa-user-alt",
+                handler: profileButtonPressedHandler
             },
             {
                 text: "LOG OUT",
-                icon: "fa-sign-out-alt"
+                icon: "fa-sign-out-alt",
+                handler: logOutButtonPressedHandler
             }
         ];
 
         for (var i = 0; i < 2; ++i) {
             var rightItemsUsernameA = document.createElement("a");
             rightItemsUsernameA.classList.add("header__main-nav__ul__right-items__li__drop-down-button-content__link");
-            rightItemsUsernameA.href = "#";
+            rightItemsUsernameA.addEventListener("click", rightItemsUsernameDropdownMenuConfiguration[i].handler);
             rightItemsUsernameA.append(document.createTextNode(rightItemsUsernameDropdownMenuConfiguration[i].text))
 
             rightItemsUsernameDiv.append(rightItemsUsernameA);

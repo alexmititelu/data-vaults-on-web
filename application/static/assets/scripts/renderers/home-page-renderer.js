@@ -45,7 +45,7 @@ class HomePageRenderer {
         // div (service description grid) > h1
         var serviceDescriptionGridH1 = document.createElement("h1");
         serviceDescriptionGridH1.classList.add("service-description-grid__title");
-        serviceDescriptionGridH1.append(document.createTextNode("DATA VAULTS ON WEB  "));
+        serviceDescriptionGridH1.append(document.createTextNode(textContent.homePageTitle));
 
         serviceDescriptionGridDiv.append(serviceDescriptionGridH1);
 

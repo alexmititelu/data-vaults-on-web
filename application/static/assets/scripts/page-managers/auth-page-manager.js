@@ -1,5 +1,5 @@
-import authPageRenderer from "./AuthPageRenderer.js"
-import authenticationManager from "./AuthenticationManager.js";
+import authPageRenderer from "../renderers/auth-page-renderer.js"
+import authenticationManager from "./authentication-manager.js";
 
 class AuthPageManager {
     constructor() {

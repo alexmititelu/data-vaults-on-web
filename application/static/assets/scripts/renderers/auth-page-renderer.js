@@ -1,4 +1,4 @@
-import authenticationManager from "./AuthenticationManager.js";
+import authenticationManager from "../page-managers/authentication-manager.js";
 
 class AuthPageRenderer {
     constructor() {
@@ -16,7 +16,7 @@ class AuthPageRenderer {
     renderLoginSection() {
         this._removeAllBodyChildren();
         
-        let body = document.getElementsByClassName("actual-body")[0];
+        let body = document.getElementById("actual-body-block");
     
         let signInContainer = document.createElement("div");
         signInContainer.classList.add("sign-in-container");
@@ -34,7 +34,7 @@ class AuthPageRenderer {
 
         this._removeAllBodyChildren();
         
-        let body = document.getElementsByClassName("actual-body")[0];
+        let body = document.getElementById("actual-body-block");
     
         let registerContainer = document.createElement("div");
         registerContainer.classList.add("register-container");
@@ -48,10 +48,10 @@ class AuthPageRenderer {
     
     }
 
-    renderFaceRekognitionSection() {
+    renderFaceRekognitionSection(actionName) {
         this._removeAllBodyChildren();
 
-        let body = document.getElementsByClassName("actual-body")[0];
+        let body = document.getElementById("actual-body-block");
 
         let faceRekognitionSection = document.createElement("div");
         faceRekognitionSection.classList.add("face-rekognition__container")
@@ -83,8 +83,14 @@ class AuthPageRenderer {
                 
                 console.log("am facut o poza");
 
+                let url = "";
+                if(actionName==="signIn") {
+                    url = "http://127.0.0.1:5555/face-rekognition-test/"+authenticationManager.getUserEmail();
+                } else if(actionName==="createAccount") {
+                    url = "http://127.0.0.1:5555/face-rekognition-create-profile/"+authenticationManager.getUserEmail();
+                }
 
-                Webcam.upload(data_uri,"http://127.0.0.1:5555/face-rekognition-test/"+authenticationManager.getUserEmail(), function(code,text){
+                Webcam.upload(data_uri,url, function(code,text){
                     console.log("uploading");
                 });
 
@@ -233,7 +239,7 @@ class AuthPageRenderer {
     }
 
     _removeAllBodyChildren() {
-        let body = document.getElementsByClassName("actual-body")[0];
+        let body = document.getElementById("actual-body-block");
         while(body.firstChild){
             body.removeChild(body.firstChild);
         }

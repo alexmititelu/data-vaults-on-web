@@ -12,7 +12,7 @@ function profileButtonPressedHandler() {
 }
 
 function logOutButtonPressedHandler() {
-    alert("LOG OUT PRESSED");
+    firebase.auth().signOut();
 }
 
 function homeButtonPressedHandler() {
@@ -290,15 +290,15 @@ function renderHeader() {
 
         // header > nav > div (right-items) > ul > li (username) > div (dropdown-content) > a
         var rightItemsUsernameDropdownMenuConfiguration = [{
-                text: "PROFILE",
-                icon: "fa-user-alt",
-                handler: profileButtonPressedHandler
-            },
-            {
-                text: "LOG OUT",
-                icon: "fa-sign-out-alt",
-                handler: logOutButtonPressedHandler
-            }
+            text: "PROFILE",
+            icon: "fa-user-alt",
+            handler: profileButtonPressedHandler
+        },
+        {
+            text: "LOG OUT",
+            icon: "fa-sign-out-alt",
+            handler: logOutButtonPressedHandler
+        }
         ];
 
         for (var i = 0; i < 2; ++i) {
@@ -343,9 +343,27 @@ function deleteAllExceptHeaderAndFooter() {
     }
 }
 
+function deleteAll() {
+    var header = document.getElementsByClassName("header")[0];
+    if (header) {
+        header.parentElement.removeChild(header);
+    }
+
+    var footer = document.getElementsByClassName("footer")[0];
+    if (footer) {
+        footer.parentElement.removeChild(footer);
+    }
+
+    var actualBodyBlock = document.getElementById("actual-body-block");
+    while (actualBodyBlock.firstChild) {
+        actualBodyBlock.removeChild(actualBodyBlock.firstChild);
+    }
+}
+
 export {
     renderHeader,
     renderFooter,
     deleteAllExceptHeaderAndFooter,
-    sleep
+    sleep,
+    deleteAll
 };

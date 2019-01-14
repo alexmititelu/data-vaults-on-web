@@ -63,6 +63,7 @@ var textContent = {
             description: "Silver, perfectly groomed hair slightly covers a thin, worried face. Bulging amber eyes, set narrowly within their sockets, watch anxiously over the woods they've sworn to protect for so long. Freckles are spread charmingly around his nose and cheekbones and leaves a gracious memory of his reckless luck. This is the face of Alred Lunadancer, a true sentinel among night elves. He stands seductively among others, despite his muscled frame. There's something intriguing about him, perhaps it's his decency or perhaps it's simply his bravery. But nonetheless, people tend to share local gossip with him, while secretly dispising him."
         }
     ],
+    noCurrentFilters: "No filters are currently applied.",
     footer: "Copyright © 2018 by Gabriel-Codrin Cojocaru and Ioan-Alexandru Mititelu. All rights reserved."
 };
 

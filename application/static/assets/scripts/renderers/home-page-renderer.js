@@ -148,6 +148,7 @@ class HomePageRenderer {
         // section (contact) > h2
         var contactH2 = document.createElement("h2");
         contactH2.classList.add("contact__title");
+        contactH2.append(document.createTextNode("Contact us!"))
 
         contactSection.append(contactH2);
 

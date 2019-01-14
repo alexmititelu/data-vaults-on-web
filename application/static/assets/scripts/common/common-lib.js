@@ -2,6 +2,10 @@ import storageManager from "../storage/storage-manager.js"
 import textContent from "./text-content.js"
 import homePageManager from "../page-managers/home-page-manager.js"
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function profileButtonPressedHandler() {
     alert("PROFILE PRESSED");
 }
@@ -14,27 +18,32 @@ function homeButtonPressedHandler() {
     homePageManager.renderer.render();
 }
 
-function faqButtonPressedHandler() {
-    var faqGrid = document.getElementsByClassName('faq-grid')[0];
+async function faqButtonPressedHandler() {
+    var faqGrid = document.getElementsByClassName("faq-grid")[0];
+
     if (!faqGrid) {
         homePageManager.renderer.render();
+        await sleep(50);
     }
 
-    faqGrid = document.getElementsByClassName('faq-grid')[0];
+    faqGrid = document.getElementsByClassName("faq-grid")[0];
     faqGrid.scrollIntoView({
-        behavior: 'smooth'
+        behavior: "smooth",
+        block: "start"
     });
 }
 
-function contactButtonPressedHandler() {
-    var contactSection = document.getElementsByClassName('contact')[0];
+async function contactButtonPressedHandler() {
+    var contactSection = document.getElementsByClassName("contact")[0];
     if (!contactSection) {
         homePageManager.renderer.render();
+        await sleep(50);
     }
 
-    contactSection = document.getElementsByClassName('contact')[0];
+    contactSection = document.getElementsByClassName("contact")[0];
     contactSection.scrollIntoView({
-        behavior: 'smooth'
+        behavior: 'smooth',
+        block: "start"
     });
 }
 
@@ -315,5 +324,6 @@ function deleteAllExceptHeaderAndFooter() {
 export {
     renderHeader,
     renderFooter,
-    deleteAllExceptHeaderAndFooter
+    deleteAllExceptHeaderAndFooter,
+    sleep
 };

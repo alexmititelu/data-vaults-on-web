@@ -8,41 +8,28 @@ class StorageManager {
     }
 
     getKeysShort(callback) {
-        var data = [{
-                keyName: "ACAR FORMS",
-                isPrivate: false
-            },
-            {
-                keyName: "FII PROFESSORS EVALUATION FORMS",
-                isPrivate: true
-            },
-            {
-                keyName: "EESTEC FEEDBACK FORMS",
-                isPrivate: false
-            },
-            {
-                keyName: "GESTION FORMS",
-                isPrivate: true
-            },
-            {
-                keyName: "AMAZON INTERNSHIP FEEDBACK FORMS",
-                isPrivate: false
-            },
-            {
-                keyName: "ADOBE INTERNSHIP FEEDBACK FORMS",
-                isPrivate: false
-            },
-            {
-                keyName: "FII 2ND YEAR OPTIONAL COURSES FORMS",
-                isPrivate: true
-            },
-            {
-                keyName: "FII 3RD YEAR OPTIONAL COURSES FORMS",
-                isPrivate: true
-            }
-        ];
+        var data = [];
+        var uid = firebase.auth().currentUser.uid;
 
-        callback(data);
+        firebase.database().ref('/users/' + uid + '/keys').once('value').then(function (snapshot) {
+            var keys = snapshot.val();
+
+            for (var keyName in keys) {
+                if (keys[keyName].privateKey) {
+                    data.push({
+                        keyName: keyName,
+                        isPrivate: false
+                    })
+                } else {
+                    data.push({
+                        keyName: keyName,
+                        isPrivate: true
+                    });
+                }
+            }
+
+            callback(data);
+        });
     }
 }
 

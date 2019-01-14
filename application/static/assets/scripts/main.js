@@ -10,4 +10,12 @@ var config = {
 };
 
 firebase.initializeApp(config);
-homePageManager.renderer.render();
+
+firebase.auth().signInWithEmailAndPassword("codrincojocaru@yahoo.com", "test123").then(function () {
+    console.log("Successfully signed in with email and password!");
+
+    homePageManager.renderer.render();
+}).catch(function (error) {
+    console.log(error.code);
+    console.log(error.message);
+});

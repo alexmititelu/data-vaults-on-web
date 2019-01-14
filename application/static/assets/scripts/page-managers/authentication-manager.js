@@ -1,4 +1,4 @@
-import homePageManager from "./HomePageManager.js"
+import homePageManager from "./home-page-manager.js"
 class AuthenticationManager {
     constructor() {
         if (!AuthenticationManager.instance) {

@@ -64,8 +64,26 @@ class AuthenticationManager {
 
             callback(response);
         });
+    }
 
-        return response;
+    sendPasswordResetEmail(email,callback) {
+        firebase.auth().sendPasswordResetEmail(email)
+            .then(function () {
+               
+                let response = {};
+                response["isSuccesfull"] = true;
+                response["message"] = "An email message has been sent to this adress.";
+
+                callback(response);
+            })
+            .catch(function (error) {
+                
+                let response = {}
+                response["isSuccesfull"] = false;
+                response["message"] = error.message;
+
+                callback(response);
+            });
     }
 
     getUserEmail() {

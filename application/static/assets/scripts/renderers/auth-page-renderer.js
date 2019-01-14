@@ -35,6 +35,21 @@ class AuthPageRenderer {
         this._addSignInEventListeners();
     }
 
+    renderForgotPasswordSection() {
+        deleteAll();
+
+        let body = document.getElementById("actual-body-block");
+
+        let resetPasswordContainer = document.createElement("div");
+        resetPasswordContainer.classList.add("sign-in-container");
+
+        resetPasswordContainer.append(this._createSignInBannerSection())
+        resetPasswordContainer.append(this._createForgotPasswordFormSection());
+        resetPasswordContainer.append(this._backToSignInSection());
+
+        body.appendChild(resetPasswordContainer);
+    }
+
     renderRegisterSection() {
         deleteAll();
 
@@ -209,6 +224,34 @@ class AuthPageRenderer {
         errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
     }
 
+    _renderForgotPasswordMessage(isSuccesfull,errorMessage) {
+        let errorMessageWrapper = document.querySelector("div.sign-in-container__form-section > form > div.form-field__error-message-wrapper > span");
+
+        while (errorMessageWrapper.firstChild) {
+            errorMessageWrapper.removeChild(errorMessageWrapper.firstChild);
+        }
+
+        errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
+        let color = "";
+        if(isSuccesfull===true) {
+            color = "green";
+        } else {
+            color = "red";
+        }
+        errorMessageWrapper.style.color = color;
+    }
+
+    
+
+    _renderRegisterErrorMessage(errorMessage) {
+        let errorMessageWrapper = document.querySelector("div.register-container__form-section > form > div.form-field__error-message-wrapper > span");
+
+        while (errorMessageWrapper.firstChild) {
+            errorMessageWrapper.removeChild(errorMessageWrapper.firstChild);
+        }
+
+        errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
+    }
     _addCreateAccountEventListeners() {
         let createAccount = document.querySelector("div.register-container__form-section > form > div.register-container__form-section__register-button > input");
 
@@ -218,7 +261,11 @@ class AuthPageRenderer {
             let password = this._getCreateAccountPassword();
 
             this._authenticationManager.createAccount(username, email, password, function (response) {
-                console.log("LALA");
+                if (response["isSuccesfull"] === true) {
+                    homePageManager.renderer.render();
+                } else {
+                    authPageManager.renderer._renderSignInErrorMessage(response["message"]);
+                }
             });
         });
     }
@@ -421,7 +468,7 @@ class AuthPageRenderer {
         let forgotPasswordField = document.createElement("div");
         forgotPasswordField.classList.add("sign-in-container__form-section__forgot-password");
 
-        let forgotPasswordLink = document.createElement("a");
+        let forgotPasswordLink = document.createElement("span");
         // forgotPasswordLink.setAttribute("href") 
         // TODO: de facut o chestie pt forgot password -> cand apesi sa se intample ceva
 
@@ -430,6 +477,12 @@ class AuthPageRenderer {
         forgotPasswordQuestion.innerHTML = "Forgot password?"
 
         forgotPasswordLink.appendChild(forgotPasswordQuestion);
+
+        forgotPasswordLink.addEventListener("click", () => {
+            this.renderForgotPasswordSection();
+        });
+
+
         forgotPasswordField.appendChild(forgotPasswordLink);
 
         form.appendChild(forgotPasswordField);
@@ -442,6 +495,34 @@ class AuthPageRenderer {
 
         return formSection;
 
+    }
+
+    _createForgotPasswordFormSection() {
+        let formSection = document.createElement("div");
+        formSection.classList.add("sign-in-container__form-section");
+
+        let form = document.createElement("form");
+
+        form.append(this._createSignInFormField("Email adress", "text", "john@gmail.com"));
+
+        let resetPasswordButton = this._createSignInButton("Reset password");
+        resetPasswordButton.addEventListener("click", () => {
+            let email = this._getForgotPasswordEmail();
+            this._authenticationManager.sendPasswordResetEmail(email, function (response) {
+                    authPageManager.renderer._renderForgotPasswordMessage(response["isSuccesfull"],response["message"]);
+            });
+        })
+
+        form.appendChild(resetPasswordButton);
+        form.appendChild(this._createErrorMessageSection());
+        formSection.append(form);
+
+        return formSection;
+    }
+
+    _getForgotPasswordEmail() {
+        let inputEmail = document.querySelector("div.sign-in-container__form-section > form > label > span.sign-in-container__form-section__form-field__input-wrapper > input");
+        return inputEmail.value;
     }
 
     _createRegisterFormSection() {
@@ -459,6 +540,8 @@ class AuthPageRenderer {
         form.append(this._createRegisterAgreement("By clicking “Create account” below, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails."));
 
         form.appendChild(this._createRegisterButton("Create account"));
+
+        form.appendChild(this._createErrorMessageSection());
 
         formSection.append(form);
 

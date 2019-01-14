@@ -274,6 +274,7 @@
  .form-field__error-message-wrapper {
      color: red;
      font-style: italic;
+     font-weight: bold;
      margin-bottom: 10px;
  }
 

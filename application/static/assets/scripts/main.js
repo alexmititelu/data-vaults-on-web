@@ -1,5 +1,6 @@
 import homePageManager from "./page-managers/home-page-manager.js";
 import authPageManager from "./page-managers/auth-page-manager.js"
+import cryptoUtils from "./crypto/crypto-utils.js";
 
 var config = {
     apiKey: "AIzaSyAHmbjjMt8WdwINBF3lY63DroVJgQ3GBcg",
@@ -15,6 +16,7 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         homePageManager.renderer.render();
+        cryptoUtils.newRsaPair();
     } else {
         authPageManager.renderer.renderLoginSection();
     }

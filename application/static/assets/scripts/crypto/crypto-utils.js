@@ -16,49 +16,42 @@ class CryptoUtils {
         });
     }
 
-    newRsaPair() {
-        window.crypto.subtle.generateKey(
-            {
-              name: "RSA-OAEP",
-              // Consider using a 4096-bit key for systems that require long-term security
-              modulusLength: 4096,
-              publicExponent: new Uint8Array([1, 0, 1]),
-              hash: "SHA-256",
+    newRsaPair(callback) {
+        window.crypto.subtle.generateKey({
+                name: "RSA-OAEP",
+                // Consider using a 4096-bit key for systems that require long-term security
+                modulusLength: 4096,
+                publicExponent: new Uint8Array([1, 0, 1]),
+                hash: "SHA-256",
             },
             true,
             ["encrypt", "decrypt"]
-          ).then((keyPair) => {
-              console.log(keyPair);
-            // const exportButton = document.querySelector(".spki");
-            
-            cryptoUtils.exportCryptoKey(keyPair.publicKey,function(publicKeyAsString){
-                cryptoUtils.exportCryptoKey(keyPair.privateKey,function(privateKeyAsString){
-                    console.log(publicKeyAsString);
-                    console.log(privateKeyAsString);
-                })
+        ).then((keyPair) => {
+            cryptoUtils.exportCryptoPublicKey(keyPair.publicKey, function (publicKeyBase64) {
+                cryptoUtils.exportCryptoPrivateKey(keyPair.privateKey, function (privateKeyBase64) {
+                    callback(publicKeyBase64, privateKeyBase64);
+                });
             });
-            
-            
-          
-          });
+        });
     }
 
-        exportCryptoKey(key,callback) {
-            const publicKeyExported =  window.crypto.subtle.exportKey(
-            "spki",
-            key
-            );
-            const publicKeyExportedAsString = this.ab2str(publicKeyExported);
-            const publicKeyExportedAsBase64 = window.btoa(publicKeyExportedAsString);
-            // const publicKeyExported = `-----BEGIN PUBLIC KEY-----\n${publicKeyExportedAsBase64}\n-----END PUBLIC KEY-----`;
+    exportCryptoPublicKey(key, callback) {
+        window.crypto.subtle.exportKey("spki", key).then(function (exportedKey) {
+            var keyExportedAsString = String.fromCharCode.apply(null, new Uint8Array(exportedKey));
+            var keyExportedAsBase64 = window.btoa(keyExportedAsString);
 
+            callback(keyExportedAsBase64);
+        });
+    }
 
-            callback(publicKeyExportedAsBase64);
-      }
-      
-       ab2str(buf) {
-        return String.fromCharCode.apply(null, new Uint8Array(buf));
-      }
+    exportCryptoPrivateKey(key, callback) {
+        window.crypto.subtle.exportKey("pkcs8", key).then(function (exportedKey) {
+            var keyExportedAsString = String.fromCharCode.apply(null, new Uint8Array(exportedKey));
+            var keyExportedAsBase64 = window.btoa(keyExportedAsString);
+
+            callback(keyExportedAsBase64);
+        });
+    }
 }
 
 const cryptoUtils = new CryptoUtils();

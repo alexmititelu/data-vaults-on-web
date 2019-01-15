@@ -190,9 +190,11 @@ class AuthPageRenderer {
     }
 
     _addSignInEventListeners() {
-        let signInButton = document.querySelector("div > div.sign-in-container__form-section > form > div:nth-child(4) > input");
+        let signInForm = document.querySelector("div > div.sign-in-container__form-section > form");
 
-        signInButton.addEventListener("click", () => {
+        signInForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
             let username = this._getSignInUsername();
             let password = this._getSignInPassword();
 
@@ -224,7 +226,7 @@ class AuthPageRenderer {
         while (errorMessageWrapper.firstChild) {
             errorMessageWrapper.removeChild(errorMessageWrapper.firstChild);
         }
-        
+
         errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
     }
 
@@ -397,12 +399,11 @@ class AuthPageRenderer {
     }
 
     _createSignInButton(buttonText) {
-
         let signInButton = document.createElement("div");
         signInButton.classList.add("sign-in-container__form-section__sign-in-button");
 
         let signInButtonInput = document.createElement("input");
-        signInButtonInput.setAttribute("type", "button");
+        signInButtonInput.setAttribute("type", "submit");
         signInButtonInput.setAttribute("value", buttonText);
         signInButtonInput.classList.add("sign-in-container__form-section__sign-in-button__button");
 

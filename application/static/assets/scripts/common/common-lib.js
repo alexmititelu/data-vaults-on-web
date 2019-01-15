@@ -468,6 +468,15 @@ function renderHeader() {
     }
 }
 
+function refreshHeader() {
+    var header = document.getElementsByClassName("header")[0];
+    if (header) {
+        header.parentElement.removeChild(header);
+    }
+
+    renderHeader();
+}
+
 function renderFooter() {
     var footers = document.getElementsByTagName("footer");
 
@@ -513,10 +522,11 @@ function deleteAll() {
 
 export {
     renderHeader,
+    refreshHeader,
     renderFooter,
     deleteAllExceptHeaderAndFooter,
-    sleep,
     deleteAll,
+    sleep,
     ab2str,
     str2ab
 };

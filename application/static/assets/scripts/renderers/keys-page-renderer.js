@@ -1,9 +1,9 @@
-
 import storageManager from "./../storage/storage-manager.js";
 import {
     renderHeader,
     renderFooter,
-    deleteAllExceptHeaderAndFooter
+    deleteAllExceptHeaderAndFooter,
+    refreshHeader
 } from "../common/common-lib.js"
 
 
@@ -18,18 +18,17 @@ class KeysPageRenderer {
     }
 
     render() {
-        console.log("Rending keys page");
         deleteAllExceptHeaderAndFooter();
         renderHeader();
         this._renderActualBody();
         renderFooter();
     }
-   
+
     renderCreateKeyResponse(response) {
         let responseMessageSection = document.querySelector("#actual-body-block > div > div.generator-block__wrapper > div > div.generator__key-creator > div.form__response_message__wrapper");
         responseMessageSection.innerHTML = response["message"];
 
-        if(response["isSuccesfull"]===true) {
+        if (response["isSuccesfull"] === true) {
             responseMessageSection.style.color = "green";
         } else {
             responseMessageSection.style.color = "red";
@@ -46,7 +45,7 @@ class KeysPageRenderer {
 
     _addKeyCreatorResetButtonEventListener() {
         let resetButton = document.querySelector("#actual-body-block > div > div.generator-block__wrapper > div > div.generator__key-creator > div.form__buttons > input:nth-child(1)");
-        resetButton.addEventListener("click",function(){
+        resetButton.addEventListener("click", function () {
             let keyCreatorForm = document.querySelector("#actual-body-block > div > div.generator-block__wrapper > div > div.generator__key-creator > form");
             keyCreatorForm.reset();
         })
@@ -57,9 +56,9 @@ class KeysPageRenderer {
 
         hostsInput.addEventListener('keypress', function (e) {
             var key = e.which || e.keyCode;
-            
+
             if (key === 13) { // 13 is enter
-              // code for enter
+                // code for enter
                 let valueFromInput = hostsInput.value
                 let hostRepresentation = this._createWhiteListedHost(valueFromInput);
                 //TODO: append white list representation
@@ -80,7 +79,7 @@ class KeysPageRenderer {
         // activeHost = this._checkHostActivity(host);
         activeHost = true;
 
-        if(activeHost === true) {
+        if (activeHost === true) {
             hostField.classList.add("host__button--valid");
         } else {
             hostField.classList.add("host__button--invalid");
@@ -88,7 +87,7 @@ class KeysPageRenderer {
 
         let textNode = document.createTextNode(host);
         let removeButton = document.createElement("i");
-        removeButton.classList.add("fa","fa-times","host__button--remove");
+        removeButton.classList.add("fa", "fa-times", "host__button--remove");
 
         hostField.appendChild(textNode);
         hostField.appendChild(removeButton);
@@ -100,10 +99,10 @@ class KeysPageRenderer {
         generator.classList.add("generator")
 
         let generatorCreateKeyButton = this._createGeneratorButton();
-        generatorCreateKeyButton.addEventListener("click",function(){
+        generatorCreateKeyButton.addEventListener("click", function () {
             let generatorCreatorWrapper = document.querySelector("#actual-body-block > div > div.generator-block__wrapper");
             console.log(generatorCreatorWrapper.style.display);
-            if(generatorCreatorWrapper.style.display ==="block") {
+            if (generatorCreatorWrapper.style.display === "block") {
                 generatorCreatorWrapper.style.display = "none";
             } else {
                 generatorCreatorWrapper.style.display = "block";
@@ -119,7 +118,7 @@ class KeysPageRenderer {
         generatorButtonWrapper.classList.add("generator__button");
 
         let button = document.createElement("button");
-        button.classList.add("button", "button--slider","button--border-thick","button--text-upper","button--size-s");
+        button.classList.add("button", "button--slider", "button--border-thick", "button--text-upper", "button--size-s");
 
         let keyIcon = document.createElement("i")
         keyIcon.classList.add("fa", "fa-key");
@@ -153,9 +152,9 @@ class KeysPageRenderer {
 
         let form = document.createElement("form");
 
-        form.appendChild(this._createGeneratorKeyCreatorField("Key name","e.g. ADOBE INTERNSHIP FEEDBACK FORMS"));
-        form.appendChild(this._createGeneratorKeyCreatorField("Description","e.g. This key protects data collected from adobe interns."));
-        form.appendChild(this._createGeneratorKeyCreatorField("White listed hosts","e.g. www.adobe.com"));
+        form.appendChild(this._createGeneratorKeyCreatorField("Key name", "e.g. ADOBE INTERNSHIP FEEDBACK FORMS"));
+        form.appendChild(this._createGeneratorKeyCreatorField("Description", "e.g. This key protects data collected from adobe interns."));
+        form.appendChild(this._createGeneratorKeyCreatorField("White listed hosts", "e.g. www.adobe.com"));
 
         keyCreator.appendChild(form);
         keyCreator.appendChild(this._createGeneratorKeyCreatorOptions());
@@ -165,7 +164,7 @@ class KeysPageRenderer {
         return keyCreator;
     }
 
-    _createGeneratorKeyCreatorField(name,placeholder) {
+    _createGeneratorKeyCreatorField(name, placeholder) {
         let field = document.createElement("label");
         field.classList.add("form__field");
 
@@ -176,47 +175,47 @@ class KeysPageRenderer {
         let fieldInputWrapper = document.createElement("span");
         fieldInputWrapper.classList.add("form__field__input__wrapper");
 
-        if(name === "White listed hosts") {
+        if (name === "White listed hosts") {
             fieldInputWrapper.classList.add("form__field__input__white-listed-hosts");
         }
 
         let fieldInput = document.createElement("input");
         fieldInput.classList.add("form__field__input");
-        fieldInput.setAttribute("placeholder",placeholder);
+        fieldInput.setAttribute("placeholder", placeholder);
         fieldInput.required = true;
 
         fieldInputWrapper.appendChild(fieldInput);
 
         field.appendChild(fieldName);
         field.appendChild(fieldInputWrapper)
-        
+
         return field;
     }
 
     _checkHostActivity(host) {
         fetch(host).then(response => response.json())
-        .then(status => status===200)
-        .catch(error => false)
+            .then(status => status === 200)
+            .catch(error => false)
     }
 
     _createGeneratorKeyCreatorOptions() {
         let optionsWrapper = document.createElement("div");
-        optionsWrapper.classList.add("form__field","form__field--centered");
+        optionsWrapper.classList.add("form__field", "form__field--centered");
 
-        optionsWrapper.appendChild(this._createGeneratorKeyCreatorOption("Save my private key",true));
-        optionsWrapper.appendChild(this._createGeneratorKeyCreatorOption("Don't save my private key",false));
+        optionsWrapper.appendChild(this._createGeneratorKeyCreatorOption("Save my private key", true));
+        optionsWrapper.appendChild(this._createGeneratorKeyCreatorOption("Don't save my private key", false));
 
         return optionsWrapper;
     }
-    
-    _createGeneratorKeyCreatorOption(text,checked) {
+
+    _createGeneratorKeyCreatorOption(text, checked) {
         let optionWrapper = document.createElement("label");
         optionWrapper.classList.add("form__field__option");
 
         let option = document.createElement("input");
         option.classList.add("form__option__input--radio");
-        option.setAttribute("type","radio");
-        option.setAttribute("name","option1");
+        option.setAttribute("type", "radio");
+        option.setAttribute("name", "option1");
         option.checked = checked;
 
         let optionText = document.createTextNode(text);
@@ -231,7 +230,7 @@ class KeysPageRenderer {
         let formButtonsWrapper = document.createElement("div");
         formButtonsWrapper.classList.add("form__buttons");
 
-        let resetButton = this._createGeneratorKeyCreatorFormButton("button","Reset");
+        let resetButton = this._createGeneratorKeyCreatorFormButton("button", "Reset");
         // resetButton.addEventListener("click", function() {
         //     // this._resetGeneratorKeyCreatorData();
         //     // let keyCreatorForm = document.querySelector("#actual-body-block > div > div.generator-block__wrapper > div > div.generator__key-creator > form");
@@ -240,24 +239,23 @@ class KeysPageRenderer {
         //     let input = documet.querySelector("#actual-body-block > div > div.generator-block__wrapper > div > div.generator__key-creator > form > label:nth-child(1) > span.form__field__input__wrapper > input");
         //     input.value = "";
         // });
-        
+
 
         formButtonsWrapper.appendChild(resetButton);
         formButtonsWrapper.innerHTML += "&nbsp;";
-        let submitButton = this._createGeneratorKeyCreatorFormButton("submit","Submit");
+        let submitButton = this._createGeneratorKeyCreatorFormButton("submit", "Submit");
 
-        submitButton.addEventListener("click",() => {
-            
+        submitButton.addEventListener("click", () => {
+
             let objKey = this._getGeneratorKeyData();
 
             this.storageManager.storeNewKey(objKey, (response) => {
                 if (response["isSuccesfull"] === true) {
+                    refreshHeader();
                     this.renderCreateKeyResponse(response);
-                    // console.log(response["message"]);
                 } else {
                     //TODO: un loc unde sa afisam erorile, gen un pop up ceva
                     this.renderCreateKeyResponse(response);
-                    // console.log(response["message"]);
                 }
 
             });
@@ -287,10 +285,10 @@ class KeysPageRenderer {
         let savePrivateKey = savePrivateKeyCheckbox.checked
 
         let keyObj = {
-            name : keyName,
-            description : description,
-            hosts : hosts,
-            savePrivateKey : savePrivateKey
+            name: keyName,
+            description: description,
+            hosts: hosts,
+            savePrivateKey: savePrivateKey
         };
 
         return keyObj;
@@ -307,17 +305,17 @@ class KeysPageRenderer {
         return responseContainer;
     }
 
-    _createGeneratorKeyCreatorFormButton(type,value) {
+    _createGeneratorKeyCreatorFormButton(type, value) {
         let button = document.createElement("input");
-        button.classList.add("form__buttons--reset","button--text-upper");
-        button.setAttribute("type",type);
-        button.setAttribute("value",value);
+        button.classList.add("form__buttons--reset", "button--text-upper");
+        button.setAttribute("type", type);
+        button.setAttribute("value", value);
         return button;
     }
     _createGeneratorKeyCreatorInfoList() {
         let keyCreatorInfo = document.createElement("div");
         keyCreatorInfo.classList.add("generator__key-info");
-        
+
         let list = document.createElement("ul");
         list.classList.add("generator__key-info__about");
 
@@ -325,12 +323,12 @@ class KeysPageRenderer {
         list.appendChild(this._createGeneratorKeyCreatorInfoListItem("The description field is a piece of information to help you remember things like what this key is used for et. al."));
         list.appendChild(this._createGeneratorKeyCreatorInfoListItem("The white listed hosts field is used for authentication, place here domain names that contain the forms you want to secure."));
         list.appendChild(this._createGeneratorKeyCreatorInfoListItem("You can let us save and manage your private key, so in order to see your data you only need to log in. Otherwise, your private key will be available to you for a limited ammount of time. After that, in order to see your data you will need to provide the private key."));
-        
+
         keyCreatorInfo.appendChild(list);
 
         return keyCreatorInfo;
     }
-    
+
     _createGeneratorKeyCreatorInfoListItem(text) {
         let listItem = document.createElement("li");
         listItem.classList.add("generator__key-info__about__item");
@@ -339,10 +337,6 @@ class KeysPageRenderer {
 
         return listItem;
     }
-
-
-
-
 }
 
 const keysPageRenderer = new KeysPageRenderer();

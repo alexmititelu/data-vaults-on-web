@@ -51,7 +51,7 @@ class StorageManager {
                 description: keyDescription,
                 whiteListedSites: keyHosts,
                 rsaPrivateKeyHash: ab2str(digest)
-            }).then(function (response) {
+            }).then(function () {
                 let response = {};
                 response["isSuccesfull"] = true;
                 response["message"] = "Key succesfully created";

@@ -1,4 +1,4 @@
-class StorageManager {
+    class StorageManager {
     constructor() {
         if (!StorageManager.instance) {
             StorageManager.instance = this;
@@ -30,6 +30,25 @@ class StorageManager {
 
             callback(data);
         });
+    }
+
+    storeNewKey(keyProperties,callback) {
+        let keyName = keyProperties.name;
+        let keyDescription = keyProperties.description;
+        let keyHosts = keyProperties.hosts
+        let savePrivateKey = keyProperties.savePrivateKey
+
+        let uid = firebase.auth().currentUser.uid;
+
+        firebase.database().ref('/users/' + uid + '/keys/'+keyName).set({
+            description: keyDescription,
+            whiteListedSites: keyHosts
+        });
+
+        let response = {};
+        response["isSuccesfull"] = true;
+        response["message"] = "Key succesfully created";
+        callback(response);
     }
 }
 

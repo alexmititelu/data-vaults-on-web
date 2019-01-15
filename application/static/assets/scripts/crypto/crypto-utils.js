@@ -7,12 +7,13 @@ class CryptoUtils {
         return CryptoUtils.instance;
     }
 
-    async sha256(message) {
+    sha256(message, callback) {
         var encoder = new TextEncoder();
         var data = encoder.encode(message);
-        var digest = await window.crypto.subtle.digest('SHA-256', data);
 
-        return digest;
+        window.crypto.subtle.digest('SHA-256', data).then(function (digest) {
+            callback(digest);
+        });
     }
 }
 

@@ -57,22 +57,23 @@ class StorageManager {
         var uid = firebase.auth().currentUser.uid;
 
         firebase.database().ref("/users/" + uid + "/keys/" + keyName).once('value').then(function (snapshot) {
-            var privateRsaKeyLocalHash = cryptoUtils.sha256(privateRsaKey);
-            var key = snapshot.val();
+            cryptoUtils.sha256(privateRsaKey, function (privateRsaKeyLocalHash) {
+                var key = snapshot.val();
 
-            if (key && key.privateRsaKeyHash === privateRsaKeyLocalHash) {
-                var response = {
-                    isValid: true,
-                    message: "success"
-                };
-            } else {
-                var response = {
-                    isValid: false,
-                    message: "Could not use the provided RSA key for decryption!"
+                if (key && key.privateRsaKeyHash === privateRsaKeyLocalHash) {
+                    var response = {
+                        isValid: true,
+                        message: "success"
+                    };
+                } else {
+                    var response = {
+                        isValid: false,
+                        message: "Could not use the provided RSA key for decryption!"
+                    }
                 }
-            }
 
-            callback(response);
+                callback(response);
+            });
         });
     }
 }

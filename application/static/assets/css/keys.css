@@ -6,6 +6,10 @@
 	padding-bottom: 5em;
 }
 
+.generator {
+	padding-top:5em;
+}
+
 .generator__button {
 	text-align: center;
 }
@@ -97,6 +101,9 @@
 	grid-template-columns: 60% 35%;
 }
 
+.generator-block__wrapper {
+	display:none;
+}
 
 @media only screen and (max-width: 940px) {
 	.generator__wrapper {
@@ -267,6 +274,12 @@
 .keys-library__key-info-container__buttons {
 	text-align: center;
 	padding-top: 1.5em;
+}
+
+.form__response_message__wrapper {
+	text-align: center;
+	padding-top:1em;
+	font-weight: bold;
 }
 
 .form__buttons--submit,

@@ -1,5 +1,5 @@
 import cryptoUtils from "../crypto/crypto-utils.js"
-
+import {ab2str} from "../common/common-lib.js"
 class StorageManager {
     constructor() {
         if (!StorageManager.instance) {
@@ -42,15 +42,24 @@ class StorageManager {
 
         let uid = firebase.auth().currentUser.uid;
 
-        firebase.database().ref('/users/' + uid + '/keys/' + keyName).set({
-            description: keyDescription,
-            whiteListedSites: keyHosts
-        });
+        var rsaPrivateKey = "aaa";
 
-        let response = {};
-        response["isSuccesfull"] = true;
-        response["message"] = "Key succesfully created";
-        callback(response);
+        cryptoUtils.sha256(rsaPrivateKey, function (digest) {
+            firebase.database().ref('/users/' + uid + '/keys/' + keyName).set({
+                description: keyDescription,
+                whiteListedSites: keyHosts,
+                rsaPrivateKeyHash: ab2str(digest)
+            }).catch(function(error){
+                response["isSuccesfull"] = false;
+                response["message"] = error.message;
+                callback(response);
+            });
+    
+            let response = {};
+            response["isSuccesfull"] = true;
+            response["message"] = "Key succesfully created";
+            callback(response);
+        });
     }
 
     isValidPrivateRsaKey(keyName, privateRsaKey, callback) {

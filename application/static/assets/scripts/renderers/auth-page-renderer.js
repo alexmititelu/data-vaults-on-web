@@ -224,7 +224,7 @@ class AuthPageRenderer {
         while (errorMessageWrapper.firstChild) {
             errorMessageWrapper.removeChild(errorMessageWrapper.firstChild);
         }
-
+        
         errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
     }
 
@@ -268,7 +268,7 @@ class AuthPageRenderer {
                 if (response["isSuccesfull"] === true) {
                     homePageManager.renderer.render();
                 } else {
-                    authPageManager.renderer._renderSignInErrorMessage(response["message"]);
+                    authPageManager.renderer._renderRegisterErrorMessage(response["message"]);
                 }
             });
         });

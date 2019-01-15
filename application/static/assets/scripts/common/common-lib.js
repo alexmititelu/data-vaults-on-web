@@ -2,6 +2,7 @@ import storageManager from "../storage/storage-manager.js"
 import textContent from "./text-content.js"
 import homePageManager from "../page-managers/home-page-manager.js"
 import dataPageManager from "../page-managers/data-page-manager.js";
+import keysPageManager from "../page-managers/keys-page-manager.js"
 
 function ab2str(buf) {
     return String.fromCharCode.apply(null, new Uint16Array(buf));
@@ -42,6 +43,10 @@ function homeButtonPressedHandler() {
         behavior: behavior,
         block: "start"
     })
+}
+
+function keysButtonPressedHandler() {
+    keysPageManager.renderer.render();
 }
 
 function faqButtonPressedHandler() {
@@ -118,6 +123,7 @@ function privateKeyModalSubmitHandler(event) {
 
     storageManager.isValidPrivateRsaKey(keyName, rsaPrivateKey, function (response) {
         if (response.isValid) {
+            removeModal();
             dataPageManager.renderer.render(keyName, rsaPrivateKey);
         } else {
             renderModalErrorMessage(response.message);
@@ -355,13 +361,13 @@ function renderHeader() {
         // header > nav > div (right-items) > ul > li (KEYS)
         var rightItemsKeysLi = document.createElement("li");
         rightItemsKeysLi.classList.add("header__main-nav__ul__right-items__li");
+        rightItemsKeysLi.addEventListener("click", keysButtonPressedHandler);
 
         rightItemsUl.append(rightItemsKeysLi);
 
         // header > nav > div (right-items) > ul > li (KEYS) > a
         var rightItemsKeysA = document.createElement("a");
         rightItemsKeysA.classList.add("header__main-nav__ul__right-items__li__link");
-        rightItemsKeysA.href = "#";
         rightItemsKeysA.append(document.createTextNode("KEYS"));
 
         rightItemsKeysLi.append(rightItemsKeysA);

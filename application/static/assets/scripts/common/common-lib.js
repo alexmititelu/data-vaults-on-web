@@ -46,7 +46,16 @@ function homeButtonPressedHandler() {
 }
 
 function keysButtonPressedHandler() {
-    keysPageManager.renderer.render();
+    var generateKeyButton = document.getElementsByClassName("generator")[0];
+
+    if (generateKeyButton) {
+        generateKeyButton.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        })
+    } else {
+        keysPageManager.renderer.render();
+    }
 }
 
 function faqButtonPressedHandler() {

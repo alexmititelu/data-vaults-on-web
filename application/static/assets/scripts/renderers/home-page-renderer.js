@@ -3,15 +3,12 @@ import {
     renderFooter,
     deleteAllExceptHeaderAndFooter
 } from "../common/common-lib.js"
-
 import textContent from "../common/text-content.js"
+import keysPageManager from "../page-managers/keys-page-manager.js"
 
 class HomePageRenderer {
     constructor() {
         if (!HomePageRenderer.instance) {
-            // this._keysPageRenderer = keysPageRenderer;
-            // this._authenticationManager = authenticationManager;
-
             HomePageRenderer.instance = this;
         }
 
@@ -23,6 +20,10 @@ class HomePageRenderer {
         renderHeader();
         this._renderActualBody();
         renderFooter();
+    }
+
+    _goToMyKeysButtonHandler() {
+        keysPageManager.renderer.render();
     }
 
     _renderActualBody() {
@@ -83,6 +84,10 @@ class HomePageRenderer {
             var mainButtonsGridButton = document.createElement("button");
             mainButtonsGridButton.classList.add("main-buttons-grid__button", mainButtonsGridConfuguration[i].particularClass);
             mainButtonsGridButton.append(document.createTextNode(mainButtonsGridConfuguration[i].text));
+
+            if (mainButtonsGridConfuguration[i].particularClass === "main-buttons-grid__button--keys") {
+                mainButtonsGridButton.addEventListener("click", this._goToMyKeysButtonHandler);
+            }
 
             mainButtonsGridDiv.append(mainButtonsGridButton);
 

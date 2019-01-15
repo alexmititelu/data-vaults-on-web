@@ -3,6 +3,19 @@ import textContent from "./text-content.js"
 import homePageManager from "../page-managers/home-page-manager.js"
 import dataPageManager from "../page-managers/data-page-manager.js";
 
+function ab2str(buf) {
+    return String.fromCharCode.apply(null, new Uint16Array(buf));
+}
+
+function str2ab(str) {
+    var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+    var bufView = new Uint16Array(buf);
+    for (var i = 0, strLen = str.length; i < strLen; i++) {
+        bufView[i] = str.charCodeAt(i);
+    }
+    return buf;
+}
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -488,5 +501,7 @@ export {
     renderFooter,
     deleteAllExceptHeaderAndFooter,
     sleep,
-    deleteAll
+    deleteAll,
+    ab2str,
+    str2ab
 };

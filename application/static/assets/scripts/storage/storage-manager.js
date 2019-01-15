@@ -1,4 +1,4 @@
-    class StorageManager {
+class StorageManager {
     constructor() {
         if (!StorageManager.instance) {
             StorageManager.instance = this;
@@ -32,7 +32,7 @@
         });
     }
 
-    storeNewKey(keyProperties,callback) {
+    storeNewKey(keyProperties, callback) {
         let keyName = keyProperties.name;
         let keyDescription = keyProperties.description;
         let keyHosts = keyProperties.hosts
@@ -40,7 +40,7 @@
 
         let uid = firebase.auth().currentUser.uid;
 
-        firebase.database().ref('/users/' + uid + '/keys/'+keyName).set({
+        firebase.database().ref('/users/' + uid + '/keys/' + keyName).set({
             description: keyDescription,
             whiteListedSites: keyHosts
         });
@@ -48,6 +48,16 @@
         let response = {};
         response["isSuccesfull"] = true;
         response["message"] = "Key succesfully created";
+        callback(response);
+    }
+
+
+    isValidPrivateRsaKey(keyName, privateRsaKey, callback) {
+        var response = {
+            isValid: false,
+            message: "Could not decrypt using the provided RSA private key!"
+        };
+
         callback(response);
     }
 }

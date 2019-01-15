@@ -16,12 +16,12 @@ class DataPageRenderer {
         return DataPageRenderer.instance;
     }
 
-    render(keyName) {
+    render(keyName, rsaPrivateKey) {
         this.pageNumber = 1;
 
         deleteAllExceptHeaderAndFooter();
         renderHeader();
-        this._renderActualBody(keyName);
+        this._renderActualBody(keyName, rsaPrivateKey);
         renderFooter();
     }
 
@@ -72,7 +72,7 @@ class DataPageRenderer {
 
     }
 
-    _renderActualBody(keyName) {
+    _renderActualBody(keyName, rsaPrivateKey) {
         var actualBodyBlock = document.getElementById("actual-body-block");
 
         // div (intro)

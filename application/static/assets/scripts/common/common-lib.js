@@ -63,13 +63,135 @@ function contactButtonPressedHandler() {
     });
 }
 
+function removeModal() {
+    var modal = document.getElementsByClassName("private-key-modal")[0];
+
+    if (modal) {
+        while (modal.firstChild) {
+            modal.removeChild(modal.firstChild);
+        }
+
+        modal.parentElement.removeChild(modal);
+    }
+}
+
+window.onclick = function (event) {
+    var modal = document.getElementsByClassName("private-key-modal")[0];
+    if (event.target == modal) {
+        removeModal();
+    }
+}
+
+function renderModalErrorMessage(message) {
+    var p = document.getElementsByClassName("private-key-modal__content__error-message")[0];
+
+    while (p.firstChild) {
+        p.removeChild(p.firstChild);
+    }
+
+    p.append(document.createTextNode(message));
+    p.style.display = "block";
+}
+
+function privateKeyModalSubmitHandler(event) {
+    event.preventDefault();
+
+    var formTitle = document.getElementsByClassName("private-key-modal__content__form-container__title")[0];
+    var keyName = formTitle.firstChild.nodeValue;
+    keyName = keyName.substr(0, keyName.length - 1);
+
+    var form = document.getElementsByClassName("private-key-modal__content__form-container__form")[0];
+    var rsaPrivateKey = form.elements[0].value;
+
+    storageManager.isValidPrivateRsaKey(keyName, rsaPrivateKey, function (response) {
+        if (response.isValid) {
+            dataPageManager.renderer.render(keyName, rsaPrivateKey);
+        } else {
+            renderModalErrorMessage(response.message);
+        }
+    });
+}
+
+function renderModal(keyName) {
+    removeModal();
+
+    // div (private key modal)
+    var privateKeyModal = document.createElement("div");
+    privateKeyModal.classList.add("private-key-modal");
+
+    document.body.append(privateKeyModal);
+
+    // div (private key modal) > div (private key modal content)
+    var privateKeyModalContent = document.createElement("div");
+    privateKeyModalContent.classList.add("private-key-modal__content");
+
+    privateKeyModal.append(privateKeyModalContent);
+
+    // div (private key modal) > div (private key modal content) > span (close button)
+    var privateKeyModalCloseButton = document.createElement("span");
+    privateKeyModalCloseButton.classList.add("private-key-modal__content__close-button");
+    privateKeyModalCloseButton.append(document.createTextNode("×"));
+    privateKeyModalCloseButton.addEventListener("click", removeModal);
+
+    privateKeyModalContent.append(privateKeyModalCloseButton);
+
+    // div (private key modal) > div (private key modal content) > div (form contaier)
+    var privateKeyModalFormContainer = document.createElement("div");
+    privateKeyModalFormContainer.classList.add("private-key-modal__content__form-container");
+
+    privateKeyModalContent.append(privateKeyModalFormContainer);
+
+    // div (private key modal) > div (private key modal content) > div (form contaier) > p
+    var privateKeyModalContentTitle = document.createElement("p");
+    privateKeyModalContentTitle.classList.add("private-key-modal__content__form-container__title");
+    privateKeyModalContentTitle.append(document.createTextNode(keyName + " "));
+
+    privateKeyModalFormContainer.append(privateKeyModalContentTitle);
+
+    // div (private key modal) > div (private key modal content) > div (form contaier) > p > i
+    var privateKeyModalContentIcon = document.createElement("i");
+    privateKeyModalContentIcon.classList.add("fas", "fa-key");
+
+    privateKeyModalContentTitle.append(privateKeyModalContentIcon);
+
+    // div (private key modal) > div (private key modal content) > div (form contaier) > form
+    var privateKeyModalForm = document.createElement("form");
+    privateKeyModalForm.classList.add("private-key-modal__content__form-container__form");
+    privateKeyModalForm.addEventListener("submit", privateKeyModalSubmitHandler);
+
+    privateKeyModalFormContainer.append(privateKeyModalForm);
+
+    // div (private key modal) > div (private key modal content) > div (form contaier) > form > input
+    var privateKeyModalRsaInput = document.createElement("input");
+    privateKeyModalRsaInput.classList.add("private-key-modal__contet__form-container__form__rsa-key");
+    privateKeyModalRsaInput.type = "text";
+    privateKeyModalRsaInput.placeholder = "RSA PRIVATE KEY";
+
+    privateKeyModalForm.append(privateKeyModalRsaInput);
+
+    // div (private key modal) > div (private key modal content) > div (form contaier) > form > input
+    var privateKeyModalSubmitInput = document.createElement("input");
+    privateKeyModalSubmitInput.type = "submit";
+    privateKeyModalSubmitInput.value = "Submit";
+
+    privateKeyModalForm.append(privateKeyModalSubmitInput);
+
+    // div (private key modal) > div (private key modal content) > p
+    var privateKeyModalErrorMessageP = document.createElement("p");
+    privateKeyModalErrorMessageP.classList.add("private-key-modal__content__error-message");
+
+    privateKeyModalContent.append(privateKeyModalErrorMessageP);
+
+    privateKeyModal.style.display = "block";
+}
+
 function privateKeyButtonPressed() {
     var keyName = this.id.substr(0, this.id.length - 10);
     renderModal(keyName);
 }
 
 function publicKeyButtonPressed() {
-    dataPageManager.renderer.render(this.id.substr(0, this.id.length - 10));
+    dataPageManager.renderer.render(this.id.substr(0, this.id.length - 10), null);
 }
 
 function populateDataDropdownMenu(data) {
@@ -291,15 +413,15 @@ function renderHeader() {
 
         // header > nav > div (right-items) > ul > li (username) > div (dropdown-content) > a
         var rightItemsUsernameDropdownMenuConfiguration = [{
-            text: "PROFILE",
-            icon: "fa-user-alt",
-            handler: profileButtonPressedHandler
-        },
-        {
-            text: "LOG OUT",
-            icon: "fa-sign-out-alt",
-            handler: logOutButtonPressedHandler
-        }
+                text: "PROFILE",
+                icon: "fa-user-alt",
+                handler: profileButtonPressedHandler
+            },
+            {
+                text: "LOG OUT",
+                icon: "fa-sign-out-alt",
+                handler: logOutButtonPressedHandler
+            }
         ];
 
         for (var i = 0; i < 2; ++i) {

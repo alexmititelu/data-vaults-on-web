@@ -1,3 +1,5 @@
+import cryptoUtils from "../crypto/crypto-utils.js"
+
 class StorageManager {
     constructor() {
         if (!StorageManager.instance) {
@@ -8,10 +10,10 @@ class StorageManager {
     }
 
     getKeysShort(callback) {
-        var data = [];
         var uid = firebase.auth().currentUser.uid;
 
         firebase.database().ref('/users/' + uid + '/keys').once('value').then(function (snapshot) {
+            var data = [];
             var keys = snapshot.val();
 
             for (var keyName in keys) {
@@ -51,14 +53,27 @@ class StorageManager {
         callback(response);
     }
 
-
     isValidPrivateRsaKey(keyName, privateRsaKey, callback) {
-        var response = {
-            isValid: false,
-            message: "Could not decrypt using the provided RSA private key!"
-        };
+        var uid = firebase.auth().currentUser.uid;
 
-        callback(response);
+        firebase.database().ref("/users/" + uid + "/keys/" + keyName).once('value').then(function (snapshot) {
+            var privateRsaKeyLocalHash = cryptoUtils.sha256(privateRsaKey);
+            var key = snapshot.val();
+
+            if (key && key.privateRsaKeyHash === privateRsaKeyLocalHash) {
+                var response = {
+                    isValid: true,
+                    message: "success"
+                };
+            } else {
+                var response = {
+                    isValid: false,
+                    message: "Could not use the provided RSA key for decryption!"
+                }
+            }
+
+            callback(response);
+        });
     }
 }
 

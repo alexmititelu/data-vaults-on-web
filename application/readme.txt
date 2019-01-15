@@ -1,6 +1,6 @@
-Before running this application you have to configure your local AWS Credentials
+Before running this application you have to configure your local AWS Credentials.
 
-Open ~/.aws/credentials and write in file the next content:
+Open ~/.aws/credentials and append to the file the following lines:
 
 [default]
 aws_access_key_id = AKIAIT6ZCR2RCGFPULBA

@@ -64,10 +64,11 @@ function contactButtonPressedHandler() {
 }
 
 function privateKeyButtonPressed() {
-    alert("PRIVATE KEY " + this.id.substr(0, this.id.length - 10) + " PRESSED!");
+    var keyName = this.id.substr(0, this.id.length - 10);
+    renderModal(keyName);
 }
 
-function publicKeyButtonPressed(keyName) {
+function publicKeyButtonPressed() {
     dataPageManager.renderer.render(this.id.substr(0, this.id.length - 10));
 }
 

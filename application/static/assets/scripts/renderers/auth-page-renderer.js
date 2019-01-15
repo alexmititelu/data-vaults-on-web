@@ -1,7 +1,9 @@
 import authenticationManager from "../authentication/authentication-manager.js";
 import homePageManager from "../page-managers/home-page-manager.js"
 import authPageManager from "../page-managers/auth-page-manager.js"
-import { deleteAll } from "../common/common-lib.js"
+import {
+    deleteAll
+} from "../common/common-lib.js"
 
 class AuthPageRenderer {
     constructor() {
@@ -181,7 +183,9 @@ class AuthPageRenderer {
             byteArrays.push(byteArray);
         }
 
-        var blob = new Blob(byteArrays, { type: contentType });
+        var blob = new Blob(byteArrays, {
+            type: contentType
+        });
         return blob;
     }
 
@@ -224,7 +228,7 @@ class AuthPageRenderer {
         errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
     }
 
-    _renderForgotPasswordMessage(isSuccesfull,errorMessage) {
+    _renderForgotPasswordMessage(isSuccesfull, errorMessage) {
         let errorMessageWrapper = document.querySelector("div.sign-in-container__form-section > form > div.form-field__error-message-wrapper > span");
 
         while (errorMessageWrapper.firstChild) {
@@ -233,7 +237,7 @@ class AuthPageRenderer {
 
         errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
         let color = "";
-        if(isSuccesfull===true) {
+        if (isSuccesfull === true) {
             color = "green";
         } else {
             color = "red";
@@ -241,7 +245,7 @@ class AuthPageRenderer {
         errorMessageWrapper.style.color = color;
     }
 
-    
+
 
     _renderRegisterErrorMessage(errorMessage) {
         let errorMessageWrapper = document.querySelector("div.register-container__form-section > form > div.form-field__error-message-wrapper > span");
@@ -461,9 +465,9 @@ class AuthPageRenderer {
 
         let form = document.createElement("form");
 
-        form.append(this._createSignInFormField("Username or email adress", "text", "john@gmail.com"));
+        form.append(this._createSignInFormField("Email address", "text", "johndoe@dave.com"));
 
-        form.append(this._createSignInFormField("Password", "password", "type here..."));
+        form.append(this._createSignInFormField("Password", "password", ""));
 
         let forgotPasswordField = document.createElement("div");
         forgotPasswordField.classList.add("sign-in-container__form-section__forgot-password");
@@ -509,7 +513,7 @@ class AuthPageRenderer {
         resetPasswordButton.addEventListener("click", () => {
             let email = this._getForgotPasswordEmail();
             this._authenticationManager.sendPasswordResetEmail(email, function (response) {
-                    authPageManager.renderer._renderForgotPasswordMessage(response["isSuccesfull"],response["message"]);
+                authPageManager.renderer._renderForgotPasswordMessage(response["isSuccesfull"], response["message"]);
             });
         })
 

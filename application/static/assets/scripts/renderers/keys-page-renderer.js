@@ -246,7 +246,6 @@ class KeysPageRenderer {
         let submitButton = this._createGeneratorKeyCreatorFormButton("submit", "Submit");
 
         submitButton.addEventListener("click", () => {
-
             let objKey = this._getGeneratorKeyData();
 
             this.storageManager.storeNewKey(objKey, (response) => {

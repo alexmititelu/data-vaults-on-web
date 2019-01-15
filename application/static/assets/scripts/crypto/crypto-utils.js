@@ -26,7 +26,7 @@ class CryptoUtils {
             },
             true,
             ["encrypt", "decrypt"]
-        ).then((keyPair) => {
+        ).then(function (keyPair) {
             cryptoUtils.exportCryptoPublicKey(keyPair.publicKey, function (publicKeyBase64) {
                 cryptoUtils.exportCryptoPrivateKey(keyPair.privateKey, function (privateKeyBase64) {
                     callback(publicKeyBase64, privateKeyBase64);

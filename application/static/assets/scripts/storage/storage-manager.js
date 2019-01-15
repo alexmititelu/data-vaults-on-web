@@ -39,29 +39,58 @@ class StorageManager {
     storeNewKey(keyProperties, callback) {
         let keyName = keyProperties.name;
         let keyDescription = keyProperties.description;
-        let keyHosts = keyProperties.hosts
-        let savePrivateKey = keyProperties.savePrivateKey
+        let keyHosts = keyProperties.hosts;
+        let savePrivateKey = keyProperties.savePrivateKey;
 
         let uid = firebase.auth().currentUser.uid;
 
-        var rsaPrivateKey = "aaa";
+        cryptoUtils.newRsaPair(function (publicRsaKeyBase64, privateRsaKeyBase64) {
+            if (savePrivateKey) {
+                firebase.database().ref("/users/" + uid + "/keys/" + keyName).set({
+                    description: keyDescription,
+                    whiteListedSites: keyHosts,
+                    publicKey: publicRsaKeyBase64,
+                    privateKey: privateRsaKeyBase64
+                }).then(function () {
+                    var response = {};
+                    response["isSuccesfull"] = true;
+                    response["message"] = "Key succesfully created";
 
-        cryptoUtils.sha256(rsaPrivateKey, function (digest) {
-            firebase.database().ref('/users/' + uid + '/keys/' + keyName).set({
-                description: keyDescription,
-                whiteListedSites: keyHosts,
-                rsaPrivateKeyHash: ab2str(digest)
-            }).then(function () {
-                let response = {};
-                response["isSuccesfull"] = true;
-                response["message"] = "Key succesfully created";
-                callback(response);
-            }).catch(function (error) {
-                let response = {};
-                response["isSuccesfull"] = false;
-                response["message"] = error.message;
-                callback(response);
-            });
+                    callback(response);
+                }).catch(function (error) {
+                    var response = {};
+                    response["isSuccesfull"] = false;
+                    response["message"] = error.message;
+
+                    callback(response);
+                });
+            } else {
+                cryptoUtils.sha256(privateRsaKeyBase64, function (digest) {
+                    var digestString = String.fromCharCode.apply(null, new Uint8Array(digest));
+                    var digestStringBase64 = window.btoa(digestString);
+
+                    console.log(privateRsaKeyBase64);
+
+                    firebase.database().ref('/users/' + uid + '/keys/' + keyName).set({
+                        description: keyDescription,
+                        whiteListedSites: keyHosts,
+                        publicKey: publicRsaKeyBase64,
+                        privateKeyHash: digestStringBase64
+                    }).then(function () {
+                        var response = {};
+                        response["isSuccesfull"] = true;
+                        response["message"] = "Key succesfully created";
+
+                        callback(response);
+                    }).catch(function (error) {
+                        var response = {};
+                        response["isSuccesfull"] = false;
+                        response["message"] = error.message;
+
+                        callback(response);
+                    });
+                });
+            }
         });
     }
 
@@ -70,10 +99,11 @@ class StorageManager {
 
         firebase.database().ref("/users/" + uid + "/keys/" + keyName).once('value').then(function (snapshot) {
             cryptoUtils.sha256(privateRsaKey, function (privateRsaKeyLocalHash) {
-                var privateRsaKeyLocalHashString = ab2str(privateRsaKeyLocalHash);
+                var privateRsaKeyLocalHashString = String.fromCharCode.apply(null, new Uint8Array(privateRsaKeyLocalHash));
+                var privateRsaKeyLocalHashStringBase64 = window.btoa(privateRsaKeyLocalHashString);
                 var key = snapshot.val();
 
-                if (key && key.rsaPrivateKeyHash === privateRsaKeyLocalHashString) {
+                if (key && key.privateKeyHash === privateRsaKeyLocalHashStringBase64) {
                     var response = {
                         isValid: true,
                         message: "success"

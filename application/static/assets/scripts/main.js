@@ -16,7 +16,6 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         homePageManager.renderer.render();
-        cryptoUtils.newRsaPair();
     } else {
         authPageManager.renderer.renderLoginSection();
     }

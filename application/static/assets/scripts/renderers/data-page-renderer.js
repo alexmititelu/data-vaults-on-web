@@ -44,30 +44,36 @@ class DataPageRenderer {
 
         var formsGrid = document.getElementsByClassName("forms-grid")[0];
 
-        // div (filters) > div (forms grid) > div (left column)
+        // div (forms grid) > div (loader)
+        var formsLoader = document.createElement("div");
+        formsLoader.classList.add("forms-grid__loader");
+
+        formsGrid.append(formsLoader);
+
+        // div (forms grid) > div (left column)
         var formsGridLeftColumn = document.createElement("div");
         formsGridLeftColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--left");
 
         formsGrid.append(formsGridLeftColumn);
 
-        // div (filters) > div (forms grid) > div (middle column)
+        // div (forms grid) > div (middle column)
         var formsGridMiddleColumn = document.createElement("div");
         formsGridMiddleColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--middle");
 
         formsGrid.append(formsGridMiddleColumn);
 
-        // div (filters) > div (forms grid) > div (left column)
+        // div (forms grid) > div (left column)
         var formsGridRightColumn = document.createElement("div");
         formsGridRightColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--right");
 
         formsGrid.append(formsGridRightColumn);
 
-        // div (filters) > div (forms grid) > forms
+        // div (forms grid) > forms
         this._resolveForms(this.keyName, this.rsaPrivateKey).then(function () {
-            // div (filters) > div (forms grid) > page controls top
+            // div (forms grid) > page controls top
             this._renderPageControls("top");
 
-            // div (filters) > div (forms grid) > page controls bot
+            // div (forms grid) > page controls bot
             this._renderPageControls("bottom");
         }.bind(this));
     }
@@ -136,6 +142,11 @@ class DataPageRenderer {
             var column = "right";
         }
 
+        var formsLoader = document.getElementsByClassName("forms-grid__loader")[0];
+        if (formsLoader) {
+            formsLoader.parentElement.removeChild(formsLoader);
+        }
+
         var formsGridColumn = document.getElementsByClassName("forms-grid__forms-column--" + column)[0];
 
         // div (form div)
@@ -185,6 +196,7 @@ class DataPageRenderer {
         return new Promise(function (resolve, reject) {
             storageManager.getFormsForKey(keyName, this.firstFormKey[this.page]).then(function (encryptedForms) {
                 if (encryptedForms == null || encryptedForms == undefined) {
+                    reject("No forms submitted yet.");
                     return;
                 }
 
@@ -214,6 +226,20 @@ class DataPageRenderer {
                 }.bind(this));
             }.bind(this));
         }.bind(this));
+    }
+
+    _renderNoFormsSubmitedYet(message) {
+        var formsLoader = document.getElementsByClassName("forms-grid__loader")[0];
+        if (formsLoader) {
+            formsLoader.parentElement.removeChild(formsLoader);
+        }
+
+        var noFormsP = document.createElement("p");
+        noFormsP.classList.add("forms-grid__no-current-forms__text");
+        noFormsP.append(document.createTextNode(message));
+
+        var formsGrid = document.getElementsByClassName("forms-grid")[0];
+        formsGrid.append(noFormsP);
     }
 
     _renderActualBody(keyName, rsaPrivateKey) {
@@ -315,37 +341,45 @@ class DataPageRenderer {
 
         currentFiltersDiv.append(currentFiltersDivNoFiltersP);
 
-        // div (filters) > div (forms grid)
+        // div (forms grid)
         var formsGrid = document.createElement("div");
         formsGrid.classList.add("forms-grid");
 
-        filtersDiv.append(formsGrid);
+        actualBodyBlock.append(formsGrid);
 
-        // div (filters) > div (forms grid) > div (left column)
+        // div (forms grid) > div (loader)
+        var formsLoader = document.createElement("div");
+        formsLoader.classList.add("forms-grid__loader");
+
+        formsGrid.append(formsLoader);
+
+        // div (forms grid) > div (left column)
         var formsGridLeftColumn = document.createElement("div");
         formsGridLeftColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--left");
 
         formsGrid.append(formsGridLeftColumn);
 
-        // div (filters) > div (forms grid) > div (middle column)
+        // div (forms grid) > div (middle column)
         var formsGridMiddleColumn = document.createElement("div");
         formsGridMiddleColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--middle");
 
         formsGrid.append(formsGridMiddleColumn);
 
-        // div (filters) > div (forms grid) > div (left column)
+        // div (forms grid) > div (left column)
         var formsGridRightColumn = document.createElement("div");
         formsGridRightColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--right");
 
         formsGrid.append(formsGridRightColumn);
 
-        // div (filters) > div (forms grid) > forms
+        // div (forms grid) > forms
         this._resolveForms(keyName, rsaPrivateKey).then(function () {
-            // div (filters) > div (forms grid) > page controls top
+            // div (forms grid) > page controls top
             this._renderPageControls("top");
 
-            // div (filters) > div (forms grid) > page controls bot
+            // div (forms grid) > page controls bot
             this._renderPageControls("bottom");
+        }.bind(this), function (response) {
+            this._renderNoFormsSubmitedYet(response);
         }.bind(this));
     }
 }

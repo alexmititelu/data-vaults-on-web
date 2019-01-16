@@ -652,7 +652,7 @@ class KeysPageRenderer {
 
         clipboardButton.addEventListener("click",(event)=>{
             let value = document.getElementById("js-code-modal-id__text-value").innerHTML;
-            value = value.replace(/&lt;/g,"<").replace(/&gt;/g,">")
+            value = value.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/<br>/g,"");
             navigator.clipboard.writeText(value).then(function() {
                 console.log('Async: Copying to clipboard was successful!');
               }, function(err) {

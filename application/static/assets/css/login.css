@@ -283,3 +283,11 @@
      height: 240px;
      border: 1px solid black;
  }
+
+ .face-reko-info-message {
+     display: block;
+     padding-top: 0.5em;
+     font-family: blenderpro;
+     padding: 0.2em;
+     font-size: 1.1em;
+ }

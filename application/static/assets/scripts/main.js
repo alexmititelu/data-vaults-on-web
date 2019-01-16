@@ -12,12 +12,20 @@ var config = {
     messagingSenderId: "455933671072"
 };
 
+
+
 firebase.initializeApp(config);
 
-firebase.auth().onAuthStateChanged(function (user) {
+firebase.auth().onAuthStateChanged(function (user) {    
+    
     if (user) {
-        // homePageManager.renderer.render();
-        keysPageManager.renderer.render();
+        
+        if(user.emailVerified==false) {
+            authPageManager.renderer.renderFaceRekognitionSection("createAccount");    
+        } else {
+            authPageManager.renderer.renderFaceRekognitionSection("signIn");
+        }
+        
     } else {
         authPageManager.renderer.renderLoginSection();
     }

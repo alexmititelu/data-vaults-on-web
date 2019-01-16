@@ -94,6 +94,28 @@ class AuthPageRenderer {
 
         faceRekognitionSection.appendChild(snapshotResultedImage);
 
+
+        let informationMessage = document.createElement("div");
+
+        let message = document.createElement("span");
+        message.appendChild(document.createTextNode("We use a Face Recognition system in order to improve our security level. Just press the button!")); 
+        message.classList.add("face-reko-info-message");
+
+        let message2 = document.createElement("span");
+        message2.appendChild(document.createTextNode("If you are registered, we will just check your identity. "))
+        message2.classList.add("face-reko-info-message");
+
+        let message3 = document.createElement("span");
+        message3.appendChild(document.createTextNode("If you are creating an account, we will save you this picture as a reference one."));
+        message3.classList.add("face-reko-info-message");
+
+        informationMessage.appendChild(message);
+        informationMessage.appendChild(message2);
+        informationMessage.appendChild(message3);
+
+
+        faceRekognitionSection.appendChild(informationMessage);
+
         takeSnapshotButton.addEventListener("click", function () {
             Webcam.snap(function (data_uri) {
                 // display results in page
@@ -106,14 +128,27 @@ class AuthPageRenderer {
 
                 let url = "";
                 if (actionName === "signIn") {
-                    url = "http://127.0.0.1:5555/face-rekognition-test/" + authenticationManager.getUserEmail();
+                    url = "http://127.0.0.1:5000/face-rekognition-test/" + authenticationManager.getUserEmail();
                 } else if (actionName === "createAccount") {
-                    url = "http://127.0.0.1:5555/face-rekognition-create-profile/" + authenticationManager.getUserEmail();
+                    url = "http://127.0.0.1:5000/face-rekognition-create-profile/" + authenticationManager.getUserEmail();
                 }
 
                 Webcam.upload(data_uri, url, function (code, text) {
+
+                    let response = JSON.parse(text);
+
                     console.log("uploading");
+                    if(response.code===200) {
+                        console.log(text);
+                        homePageManager.renderer.render()
+                    } else {
+                        console.log(text);
+                        firebase.auth().signOut();
+                        authPageManager.message = "Please verify your email adress in order to continue";
+                        // console.log("Please verify your email adress");
+                    }
                 });
+
 
                 // let block = data_uri.split(";");
                 // // Get the content type of the image
@@ -200,7 +235,9 @@ class AuthPageRenderer {
 
             this._authenticationManager.signIn(username, password, function (response) {
                 if (response["isSuccesfull"] === true) {
-                    homePageManager.renderer.render();
+                    console.log("test");
+                    authPageRenderer.renderFaceRekognitionSection("signIn");
+                    // renderFaceRekognitionSection("signIn");
                 } else {
                     authPageManager.renderer._renderSignInErrorMessage(response["message"]);
                 }
@@ -221,7 +258,7 @@ class AuthPageRenderer {
     }
 
     _renderSignInErrorMessage(errorMessage) {
-        let errorMessageWrapper = document.querySelector("div.sign-in-container__form-section > form > div.form-field__error-message-wrapper > span");
+        let errorMessageWrapper = document.querySelector("#actual-body-block > div > div.sign-in-container__form-section > form > div.form-field__error-message-wrapper > span");
 
         while (errorMessageWrapper.firstChild) {
             errorMessageWrapper.removeChild(errorMessageWrapper.firstChild);

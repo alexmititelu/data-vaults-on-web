@@ -36,6 +36,35 @@ class StorageManager {
         });
     }
 
+    getGeysInfo() {
+        var uid = firebase.auth().currentUser.uid;
+
+        return firebase.database().ref('/users/' + uid + '/keys').once('value').then(function (snapshot) {
+            var data = [];
+            var keys = snapshot.val();
+
+            for (var keyName in keys) {
+
+                let currentPrivateKey = "";
+
+                if(keys[keyName].savePrivateKey) {
+                    currentPrivateKey = keys[keyName].privateKey
+                }
+
+                data.push({
+                    keyName: keyName,
+                    description: keys[keyName].description,
+                    publicKey : keys[keyName].publicKey,
+                    savePrivateKey: keys[keyName].savePrivateKey,
+                    privateKey: currentPrivateKey,
+                    whiteListedSites : keys[keyName].whiteListedSites
+                });
+            }
+            return data;
+            // callback(data);
+        });
+    }
+
     storeNewKey(keyProperties, callback) {
         let keyName = keyProperties.name;
         let keyDescription = keyProperties.description;
@@ -50,7 +79,8 @@ class StorageManager {
                     description: keyDescription,
                     whiteListedSites: keyHosts,
                     publicKey: publicRsaKeyBase64,
-                    privateKey: privateRsaKeyBase64
+                    privateKey: privateRsaKeyBase64,
+                    savePrivateKey:true
                 }).then(function () {
                     var response = {};
                     response["isSuccesfull"] = true;
@@ -75,7 +105,8 @@ class StorageManager {
                         description: keyDescription,
                         whiteListedSites: keyHosts,
                         publicKey: publicRsaKeyBase64,
-                        privateKeyHash: digestStringBase64
+                        privateKeyHash: digestStringBase64,
+                        savePrivateKey:false
                     }).then(function () {
                         var response = {};
                         response["isSuccesfull"] = true;

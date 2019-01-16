@@ -45,7 +45,7 @@ class AuthenticationManager {
             });
     }
 
-    createAccount(username, email, password, callback) {
+    createAccount(email, password, callback) {
         firebase.auth().createUserWithEmailAndPassword(email, password).then(function (firebaseUser) {
             if (firebaseUser.user.emailVerified === false) {
                 firebaseUser.user.sendEmailVerification();
@@ -66,10 +66,10 @@ class AuthenticationManager {
         });
     }
 
-    sendPasswordResetEmail(email,callback) {
+    sendPasswordResetEmail(email, callback) {
         firebase.auth().sendPasswordResetEmail(email)
             .then(function () {
-               
+
                 let response = {};
                 response["isSuccesfull"] = true;
                 response["message"] = "An email message has been sent to this adress.";
@@ -77,7 +77,7 @@ class AuthenticationManager {
                 callback(response);
             })
             .catch(function (error) {
-                
+
                 let response = {}
                 response["isSuccesfull"] = false;
                 response["message"] = error.message;

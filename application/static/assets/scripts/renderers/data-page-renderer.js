@@ -196,6 +196,7 @@ class DataPageRenderer {
         return new Promise(function (resolve, reject) {
             storageManager.getFormsForKey(keyName, this.firstFormKey[this.page]).then(function (encryptedForms) {
                 if (encryptedForms == null || encryptedForms == undefined) {
+                    reject("No forms submitted yet.");
                     return;
                 }
 
@@ -225,6 +226,20 @@ class DataPageRenderer {
                 }.bind(this));
             }.bind(this));
         }.bind(this));
+    }
+
+    _renderNoFormsSubmitedYet(message) {
+        var formsLoader = document.getElementsByClassName("forms-grid__loader")[0];
+        if (formsLoader) {
+            formsLoader.parentElement.removeChild(formsLoader);
+        }
+
+        var noFormsP = document.createElement("p");
+        noFormsP.classList.add("forms-grid__no-current-forms__text");
+        noFormsP.append(document.createTextNode(message));
+
+        var formsGrid = document.getElementsByClassName("forms-grid")[0];
+        formsGrid.append(noFormsP);
     }
 
     _renderActualBody(keyName, rsaPrivateKey) {
@@ -363,6 +378,8 @@ class DataPageRenderer {
 
             // div (forms grid) > page controls bot
             this._renderPageControls("bottom");
+        }.bind(this), function (response) {
+            this._renderNoFormsSubmitedYet(response);
         }.bind(this));
     }
 }

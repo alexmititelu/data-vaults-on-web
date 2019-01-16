@@ -108,6 +108,13 @@
     animation: spin 2s linear infinite;
 }
 
+.forms-grid__no-current-forms__text {
+    color: grey;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
 .forms-grid__page-controls__arrow {
     text-decoration: none;
     color: var(--color-1);

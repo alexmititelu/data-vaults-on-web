@@ -37,6 +37,35 @@ class StorageManager {
         });
     }
 
+    getGeysInfo() {
+        var uid = firebase.auth().currentUser.uid;
+
+        return firebase.database().ref('/users/' + uid + '/keys').once('value').then(function (snapshot) {
+            var data = [];
+            var keys = snapshot.val();
+
+            for (var keyName in keys) {
+
+                let currentPrivateKey = "";
+
+                if(keys[keyName].savePrivateKey) {
+                    currentPrivateKey = keys[keyName].privateKey
+                }
+
+                data.push({
+                    keyName: keyName,
+                    description: keys[keyName].description,
+                    publicKey : keys[keyName].publicKey,
+                    savePrivateKey: keys[keyName].savePrivateKey,
+                    privateKey: currentPrivateKey,
+                    whiteListedSites : keys[keyName].whiteListedSites
+                });
+            }
+            return data;
+            // callback(data);
+        });
+    }
+
     storeNewKey(keyProperties, callback) {
         let keyName = keyProperties.name;
         let keyDescription = keyProperties.description;
@@ -51,7 +80,8 @@ class StorageManager {
                     description: keyDescription,
                     whiteListedSites: keyHosts,
                     publicKey: publicRsaKeyBase64,
-                    privateKey: privateRsaKeyBase64
+                    privateKey: privateRsaKeyBase64,
+                    savePrivateKey:true
                 }).then(function () {
                     var response = {};
                     response["isSuccesfull"] = true;
@@ -61,7 +91,12 @@ class StorageManager {
                 }).catch(function (error) {
                     var response = {};
                     response["isSuccesfull"] = false;
-                    response["message"] = error.message;
+                    if(error.message.startsWith("PERMISSION_DENIED")) {
+                        console.log(error);
+                        response["message"] = "You are not allowed. Make sure your email is activated. If the problem persists, contact the developers";
+                    } else {
+                        response["message"] = error.message;
+                    }
 
                     callback(response);
                 });
@@ -76,7 +111,8 @@ class StorageManager {
                         description: keyDescription,
                         whiteListedSites: keyHosts,
                         publicKey: publicRsaKeyBase64,
-                        privateKeyHash: digestStringBase64
+                        privateKeyHash: digestStringBase64,
+                        savePrivateKey:false
                     }).then(function () {
                         var response = {};
                         response["isSuccesfull"] = true;

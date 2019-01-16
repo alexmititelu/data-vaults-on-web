@@ -198,6 +198,7 @@
      border-radius: 5px;
      height: 3em;
      text-align: center;
+     margin-bottom: 1.5em;
  }
 
  .sign-in-container__become-a-member-section-pointer {
@@ -260,7 +261,7 @@
      display: block;
      font-size: 0.7em;
      padding-top: 1em;
-     text-align: justify;
+     text-align: center;
      margin-left: 2.5em;
      margin-right: 2.5em;
  }

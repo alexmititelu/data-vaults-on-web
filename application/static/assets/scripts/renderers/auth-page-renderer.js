@@ -259,14 +259,15 @@ class AuthPageRenderer {
         errorMessageWrapper.appendChild(document.createTextNode(errorMessage));
     }
     _addCreateAccountEventListeners() {
-        let createAccount = document.querySelector("div.register-container__form-section > form > div.register-container__form-section__register-button > input");
+        let createAccount = document.querySelector("div.register-container__form-section > form");
 
-        createAccount.addEventListener("click", () => {
-            let username = this._getCreateAccountUsername();
+        createAccount.addEventListener("submit", (event) => {
+            event.preventDefault();
+
             let email = this._getCreateAccountEmail();
             let password = this._getCreateAccountPassword();
 
-            this._authenticationManager.createAccount(username, email, password, function (response) {
+            this._authenticationManager.createAccount(email, password, function (response) {
                 if (response["isSuccesfull"] === true) {
                     homePageManager.renderer.render();
                 } else {
@@ -276,18 +277,13 @@ class AuthPageRenderer {
         });
     }
 
-    _getCreateAccountUsername() {
-        let usernameInput = document.querySelector("div.register-container__form-section > form > label:nth-child(1) > span.register-container__form-section__form-field__input-wrapper > input");
-        return usernameInput.value;
-    }
-
     _getCreateAccountPassword() {
-        let passwordInput = document.querySelector("div.register-container__form-section > form > label:nth-child(3) > span.register-container__form-section__form-field__input-wrapper > input");
+        let passwordInput = document.querySelector("div.register-container__form-section > form > label:nth-child(2) > span.register-container__form-section__form-field__input-wrapper > input");
         return passwordInput.value;
     }
 
     _getCreateAccountEmail() {
-        let emailInput = document.querySelector("div.register-container__form-section > form > label:nth-child(2) > span.register-container__form-section__form-field__input-wrapper > input");
+        let emailInput = document.querySelector("div.register-container__form-section > form > label:nth-child(1) > span.register-container__form-section__form-field__input-wrapper > input");
         return emailInput.value;
     }
 
@@ -418,7 +414,7 @@ class AuthPageRenderer {
         registerButton.classList.add("register-container__form-section__register-button");
 
         let registerButtonInput = document.createElement("input");
-        registerButtonInput.setAttribute("type", "button");
+        registerButtonInput.setAttribute("type", "submit");
         registerButtonInput.setAttribute("value", buttonText);
         registerButtonInput.classList.add("register-container__form-section__register-button__button");
 
@@ -511,7 +507,9 @@ class AuthPageRenderer {
         form.append(this._createSignInFormField("Email adress", "text", "john@gmail.com"));
 
         let resetPasswordButton = this._createSignInButton("Reset password");
-        resetPasswordButton.addEventListener("click", () => {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
             let email = this._getForgotPasswordEmail();
             this._authenticationManager.sendPasswordResetEmail(email, function (response) {
                 authPageManager.renderer._renderForgotPasswordMessage(response["isSuccesfull"], response["message"]);
@@ -536,11 +534,9 @@ class AuthPageRenderer {
 
         let form = document.createElement("form");
 
-        form.append(this._createRegisterFormField("Username", "text", "johndoe2", "This will be your username. You won't be able to modify it later."));
-
         form.append(this._createRegisterFormField("Email adress", "email", "john@doe.com", "We’ll occasionally send updates about your account to this inbox. We’ll never share your email address with anyone."));
 
-        form.append(this._createRegisterFormField("Password", "password", "type here...", "Make sure it's more than 15 characters, or at least 7 characters, including a number, and a lowercase letter."));
+        form.append(this._createRegisterFormField("Password", "password", "", "Make sure it's more than 15 characters, or at least 7 characters, including a number, and a lowercase letter."));
 
         form.append(this._createRegisterAgreement("By clicking “Create account” below, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails."));
 

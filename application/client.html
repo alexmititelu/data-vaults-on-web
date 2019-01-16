@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Dave Client Form </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div>
+        <form class="dave-form">
+            <label> What is your first name? </label> <br />
+            <input type="text" name="first name" value="Gabriel-Codrin" style="margin: 3px 0 5px 0;" /> <br />
+            <label> What is your last name? </label> <br />
+            <input type="text" name="last name" value="Cojocaru" style="margin: 3px 0 5px 0;" /> <br />
+
+            <input type="submit">
+        </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-database.js"></script>
+    <script src="http://127.0.0.1:5000/assets/scripts/client/client.js"></script>
+    <script>
+        var daveConfig = {
+            keyName: "AMAZON INTERNSHIP FEEDBACK FORMS", // "${user_key_name}";
+            rsaPublicKeyStringB64: "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAhLvRCnF3BE9XE9skaZR7JEX90ELYd3X3Eb8BZdKo0tzHVFQ4Exo+tZaEUhqtQ171M5TRhsJc18vhBTs3WWKJOClSkWwE0qWq7piE2/X9mSLJ5gE0nKAm3XKhe0BA1oKih9Hb2WBR3PbK1b6aUUp/BQMANB13hSphgytdLQrCek+4FCy63JmxZ6sIOHM24kUScHkHESnTVWLwPZ9LVh2PSCJwRvsCltqemcNuR1EcQnomhQqLrDzIRXPhEgReA5p/xClMj0P1YhwbtKizCnboSbvnsuvbqbojdhUCq1rqhtXGHxu1Tn3p7BryRh+khiGuNMxmxXYpN3MLr8bfDSDeMY46feuiAnEEWg+A1GA//83Dmh/JbtXJS5LH0viFeNAuYc8/gKu0zbdCbZTG32q+HEwGZyF3scJnQiDyfvU8OHAoVs9oLImfkQaBWufLf7cJ3gCYwCLPJMhK3lnKwVQcpc/rFltfbNnFp7ZhkUKL2KAowCHAJog26HXEh9vbisgkOdBrXeZjAMquiXj9yhkyeYeEM88yw9B5/vhdPEcecCZYHwHj1dEIuEId/KpmJqfbjvo8SalOpBNYqaOzAtW/XxnX4I+EGMqJJpTZszLlLL622hZc4jR7mUKI+qfU0Bxqp3cn/rUTGTZfAafPRHnQmtFkFog19Ucn9GQyw1WE8p0CAwEAAQ==", // "${user_rsa_public_key}";
+            uid: "t2uPHYI0fVVB0w41PuLG9xWt7zy1" // ${user_id}
+        };
+
+        dave.secureForms();
+    </script>
+</body>
+
+</html>

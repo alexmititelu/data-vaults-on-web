@@ -312,3 +312,7 @@ body {
         display: block;
     }
 }
+
+#data-button-from-header {
+    color: #2b2822;
+}

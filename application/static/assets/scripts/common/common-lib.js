@@ -348,6 +348,7 @@ function renderHeader() {
         // header > nav > div (right-items) > ul > li (DATA) > button
         var rightItemsDataButton = document.createElement("button");
         rightItemsDataButton.classList.add("header__main-nav__ul__right-items__li__drop-down-button");
+        rightItemsDataButton.setAttribute("id","data-button-from-header");
         rightItemsDataButton.append(document.createTextNode("DATA "));
 
         rightItemsDataLi.append(rightItemsDataButton);

@@ -1,4 +1,5 @@
 import cryptoUtils from "../crypto/crypto-utils.js"
+// import keysPageRenderer from "../renderers/auth-page-renderer.js"
 import {
     ab2str
 } from "../common/common-lib.js"
@@ -92,7 +93,7 @@ class StorageManager {
                     var response = {};
                     response["isSuccesfull"] = false;
                     if(error.message.startsWith("PERMISSION_DENIED")) {
-                        console.log(error);
+                        // console.log(error);
                         response["message"] = "You are not allowed. Make sure your email is activated. If the problem persists, contact the developers";
                     } else {
                         response["message"] = error.message;
@@ -105,7 +106,7 @@ class StorageManager {
                     var digestString = String.fromCharCode.apply(null, new Uint8Array(digest));
                     var digestStringBase64 = window.btoa(digestString);
 
-                    console.log(privateRsaKeyBase64);
+                    // console.log(privateRsaKeyBase64);
 
                     firebase.database().ref('/users/' + uid + '/keys/' + keyName).set({
                         description: keyDescription,
@@ -117,6 +118,17 @@ class StorageManager {
                         var response = {};
                         response["isSuccesfull"] = true;
                         response["message"] = "Key succesfully created";
+                        let privateKeyModalContent = document.getElementById("private-key-modal__text-value");
+
+                        privateKeyModalContent.innerHTML += "This is your private key.</br></br>"
+                        privateKeyModalContent.innerHTML += "Make sure you take care of it.</br></br>";
+                        privateKeyModalContent.innerHTML += "RSA Private Key:</br></br>";
+
+                        privateKeyModalContent.innerHTML += privateRsaKeyBase64;
+
+                        document.getElementById("private-key-modal").style.display = "block";
+
+                        // console.log("privateKey",privateRsaKeyBase64);
 
                         callback(response);
                     }).catch(function (error) {

@@ -20,6 +20,24 @@ class HomePageRenderer {
         renderHeader();
         this._renderActualBody();
         renderFooter();
+
+        let activeElements = document.getElementsByClassName("header__main-nav__ul__right-items__li--active");
+        for(let i=0;i<activeElements.length;i++) {
+            if(activeElements[i].classList.contains("header__main-nav__ul__right-items__li--active")) {
+                activeElements[i].classList.remove("header__main-nav__ul__right-items__li--active");
+            }
+        }
+
+        let activeElementsLinks = document.getElementsByClassName("header__main-nav__ul__right-items__li__link--active");
+        for(let i=0;i<activeElementsLinks.length;i++) {
+            if(activeElementsLinks[i].classList.contains("header__main-nav__ul__right-items__li__link--active")) {
+                activeElementsLinks[i].classList.remove("header__main-nav__ul__right-items__li__link--active");
+            }
+        }
+        
+        document.querySelector("body > header > nav > div.header__main-nav__ul__right-items > ul > li:nth-child(1)").classList.add("header__main-nav__ul__right-items__li--active");
+        document.querySelector("body > header > nav > div.header__main-nav__ul__right-items > ul > li:nth-child(1) > a").classList.add("header__main-nav__ul__right-items__li__link--active");
+        document.getElementById("data-button-from-header").style.color = "#2b2822";
     }
 
     _goToMyKeysButtonHandler() {

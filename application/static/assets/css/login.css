@@ -291,3 +291,20 @@
      padding: 0.2em;
      font-size: 1.1em;
  }
+
+ #global-spinner {
+	text-align: center;
+    display: none;
+    position: fixed;
+    margin: 10px auto;
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    top: 45%;
+    left: 45%;
+    z-index: 10000000;
+    animation: spin 2s linear infinite;
+    opacity: 100%;
+}

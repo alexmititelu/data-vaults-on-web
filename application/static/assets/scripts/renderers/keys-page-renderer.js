@@ -5,6 +5,7 @@ import {
     deleteAllExceptHeaderAndFooter,
     refreshHeader
 } from "../common/common-lib.js"
+import dataPageRenderer from "./data-page-renderer.js";
 
 
 class KeysPageRenderer {
@@ -22,12 +23,31 @@ class KeysPageRenderer {
         renderHeader();
         this._renderActualBody();
         renderFooter();
+        document.querySelector("body > footer").style.display = "none";
+        let activeElements = document.getElementsByClassName("header__main-nav__ul__right-items__li--active");
+        for(let i=0;i<activeElements.length;i++) {
+            if(activeElements[i].classList.contains("header__main-nav__ul__right-items__li--active")) {
+                activeElements[i].classList.remove("header__main-nav__ul__right-items__li--active");
+            }
+        }
+
+        let activeElementsLinks = document.getElementsByClassName("header__main-nav__ul__right-items__li__link--active");
+        for(let i=0;i<activeElementsLinks.length;i++) {
+            if(activeElementsLinks[i].classList.contains("header__main-nav__ul__right-items__li__link--active")) {
+                activeElementsLinks[i].classList.remove("header__main-nav__ul__right-items__li__link--active");
+            }
+        }
+        
+        document.querySelector("body > header > nav > div.header__main-nav__ul__right-items > ul > li:nth-child(3)").classList.add("header__main-nav__ul__right-items__li--active");
+        document.querySelector("body > header > nav > div.header__main-nav__ul__right-items > ul > li:nth-child(3) > a").classList.add("header__main-nav__ul__right-items__li__link--active");
+        document.getElementById("data-button-from-header").style.color = "#2b2822";
+        
     }
 
     renderCreateKeyResponse(response) {
         let responseMessageSection = document.querySelector("#actual-body-block > div > div.generator-block__wrapper > div > div.generator__key-creator > div.form__response_message__wrapper");
         responseMessageSection.innerHTML = response["message"];
-
+        document.getElementsByClassName("key-creator-loading-spinner")[0].style.display = "none";
         if (response["isSuccesfull"] === true) {
             responseMessageSection.style.color = "green";
         } else {
@@ -37,18 +57,24 @@ class KeysPageRenderer {
 
     _renderActualBody() {
         let actualBodyBlock = document.getElementById("actual-body-block");
+        let spinner = document.createElement("div");
+        spinner.setAttribute("id","global-spinner");
+        actualBodyBlock.appendChild(spinner);
+        spinner.style.display = "block";
 
         actualBodyBlock.appendChild(this._createGenerator());
         this._addKeyCreatorResetButtonEventListener();
         this._addKeyCreatorHostsInputEventListener();
 
         actualBodyBlock.appendChild(this._createKeySearchContainer());
+        actualBodyBlock.appendChild(this._createPrivateKeyModal());
         actualBodyBlock.appendChild(this._createJSCodeModal());
 
         storageManager.getGeysInfo().then((keys) => {
             actualBodyBlock.appendChild(this._createKeysLibrary(keys));
-            console.log(keys);
             
+            document.getElementById("global-spinner").style.display = "none";
+            document.querySelector("body > footer").style.display = "block";
         });
     }
 
@@ -72,7 +98,7 @@ class KeysPageRenderer {
                 let hostRepresentation = this._createWhiteListedHost(valueFromInput);
                 //TODO: append white list representation
                 // this._appendNewWhiteListedHost(hostRepresentation);
-                console.log(valueFromInput)
+                
                 hostsInput.value = "";
             }
         });
@@ -110,7 +136,7 @@ class KeysPageRenderer {
         let generatorCreateKeyButton = this._createGeneratorButton();
         generatorCreateKeyButton.addEventListener("click", function () {
             let generatorCreatorWrapper = document.querySelector("#actual-body-block > div > div.generator-block__wrapper");
-            console.log(generatorCreatorWrapper.style.display);
+            
             if (generatorCreatorWrapper.style.display === "block") {
                 generatorCreatorWrapper.style.display = "none";
             } else {
@@ -119,6 +145,7 @@ class KeysPageRenderer {
         });
         generator.appendChild(generatorCreateKeyButton);
         generator.appendChild(this._createGeneratorMenu());
+
         return generator;
     }
 
@@ -168,6 +195,10 @@ class KeysPageRenderer {
         keyCreator.appendChild(form);
         keyCreator.appendChild(this._createGeneratorKeyCreatorOptions());
         keyCreator.appendChild(this._createGeneratorKeyCreatorFormButtons());
+
+        let loadingSpinner = document.createElement("div");
+        loadingSpinner.classList.add("key-creator-loading-spinner");
+        keyCreator.appendChild(loadingSpinner);
 
         keyCreator.appendChild(this._createKeyCreatorResponseMessage())
         return keyCreator;
@@ -255,6 +286,8 @@ class KeysPageRenderer {
         let submitButton = this._createGeneratorKeyCreatorFormButton("submit", "Submit");
 
         submitButton.addEventListener("click", () => {
+            document.getElementsByClassName("key-creator-loading-spinner")[0].style.display = "block";
+            document.querySelector("#actual-body-block > div > div.generator-block__wrapper > div > div.generator__key-creator > div.form__response_message__wrapper").innerHTML = "";
             let objKey = this._getGeneratorKeyData();
 
             this.storageManager.storeNewKey(objKey, (response) => {
@@ -366,7 +399,7 @@ class KeysPageRenderer {
         searchInput.setAttribute("name","search");
         searchInput.setAttribute("placeholder","Search by key name");
 
-        searchContainer.appendChild(searchInput);
+        // searchContainer.appendChild(searchInput);
 
         keysBorder.appendChild(keyIcon);
         keysBorder.innerHTML += "&nbsp;";
@@ -422,6 +455,9 @@ class KeysPageRenderer {
 
         let getJsCodeButton = this._createKeyInfoGetJSButoon();
         let seeDataButton = this._createKeyInfoSeeDataButton();
+        seeDataButton.addEventListener("click",function(event) {
+                dataPageRenderer.render(keyData.keyName,keyData.privateKey);
+        });
 
         getJsCodeButton.addEventListener("click",function(event){
             document.getElementById("js-code-modal-id").style.display = "block";
@@ -662,6 +698,64 @@ class KeysPageRenderer {
 
         let clipboardText = document.createElement("span");
         clipboardText.classList.add("keys-library__key-info-container__item__additional-option__copy-to-clipboard", "keys-library__key-info-container__item__additional-option__copy-to-clipboard__tooltiptext-value");
+        clipboardText.appendChild(document.createTextNode("Copy to clipboard"));
+
+        clipboardButton.appendChild(clipboardText);
+
+        modalContent.appendChild(clipboardButton);
+
+        modal.appendChild(modalContent);
+
+        return modal;
+    }
+
+    _createPrivateKeyModal() {
+        let modal = document.createElement("div");
+        modal.setAttribute("id", "private-key-modal");
+        modal.classList.add("keys-library__key-info-container__js-code-modal");
+        
+
+        let modalContent = document.createElement("div");
+        modalContent.classList.add("keys-library__key-info-container__js-code-modal__content");
+        
+
+        let modalCloseButton = document.createElement("span");
+        modalCloseButton.setAttribute("id", "private-key-modal__close-button");
+        modalCloseButton.classList.add("keys-library__key-info-container__js-code-modal__close-button");
+
+        modalCloseButton.addEventListener("click",function(event) {
+            document.getElementById("private-key-modal").style.display = "none";
+        })
+
+        modalCloseButton.innerHTML += "&times;";
+
+        modalContent.appendChild(modalCloseButton);
+
+        let modalContentText = document.createElement("pre");
+        modalContentText.classList.add("keys-library__key-info-container__js-code-modal__content--code-value");
+        modalContentText.setAttribute("id","private-key-modal__text-value");
+
+        modalContentText.appendChild(document.createTextNode("Text for JS Modal"));
+
+        modalContent.appendChild(modalContentText);
+
+        let clipboardButton = document.createElement("i");
+        clipboardButton.classList.add("fa", "fa-clipboard", "keys-library__key-info-container__item__additional-option", "keys-library__key-info-container__item__additional-option__copy-to-clipboard", "keys-library__key-info-container__js-code-modal__copy-to-clipboard-button");
+        clipboardButton.setAttribute("id","private-key-modal-clipboard");
+
+        clipboardButton.addEventListener("click",(event)=>{
+            let value = document.getElementById("private-key-modal__text-value").innerHTML;
+            value = value.split(":")[1].replace(/<br>/g,"");
+            navigator.clipboard.writeText(value).then(function() {
+                console.log('Async: Copying to clipboard was successful!');
+              }, function(err) {
+                console.error('Async: Could not copy text: ', err);
+              });
+        })
+
+        let clipboardText = document.createElement("span");
+        clipboardText.classList.add("keys-library__key-info-container__item__additional-option__copy-to-clipboard", "keys-library__key-info-container__item__additional-option__copy-to-clipboard__tooltiptext-value");
+        
         clipboardText.appendChild(document.createTextNode("Copy to clipboard"));
 
         clipboardButton.appendChild(clipboardText);

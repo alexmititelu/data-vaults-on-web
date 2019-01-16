@@ -104,7 +104,8 @@ def get_face_comparison_result(email):
         else:
             return create_response(400,"Couldn't recognize user")
 
-    except:
+    except Exception as ex:
+        print(ex)
         return create_response(400,"A aparut o eroare")
     
 

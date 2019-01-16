@@ -24,6 +24,9 @@ class AuthPageRenderer {
         deleteAll();
 
         let body = document.getElementById("actual-body-block");
+        let spinner = document.createElement("div");
+        spinner.setAttribute("id","global-spinner");
+        body.appendChild(spinner);
 
         let signInContainer = document.createElement("div");
         signInContainer.classList.add("sign-in-container");
@@ -41,6 +44,9 @@ class AuthPageRenderer {
         deleteAll();
 
         let body = document.getElementById("actual-body-block");
+        let spinner = document.createElement("div");
+        spinner.setAttribute("id","global-spinner");
+        body.appendChild(spinner);
 
         let resetPasswordContainer = document.createElement("div");
         resetPasswordContainer.classList.add("sign-in-container");
@@ -56,6 +62,9 @@ class AuthPageRenderer {
         deleteAll();
 
         let body = document.getElementById("actual-body-block");
+        let spinner = document.createElement("div");
+        spinner.setAttribute("id","global-spinner");
+        body.appendChild(spinner);
 
         let registerContainer = document.createElement("div");
         registerContainer.classList.add("register-container");
@@ -73,6 +82,9 @@ class AuthPageRenderer {
         deleteAll();
 
         let body = document.getElementById("actual-body-block");
+        let spinner = document.createElement("div");
+        spinner.setAttribute("id","global-spinner");
+        body.appendChild(spinner);
 
         let faceRekognitionSection = document.createElement("div");
         faceRekognitionSection.classList.add("face-rekognition__container")
@@ -117,14 +129,15 @@ class AuthPageRenderer {
         faceRekognitionSection.appendChild(informationMessage);
 
         takeSnapshotButton.addEventListener("click", function () {
+            document.getElementById("global-spinner").style.display = "block";
             Webcam.snap(function (data_uri) {
                 // display results in page
-                console.log("What s data uri?");
-                console.log(data_uri);
+                
+                
                 document.getElementById('snapshot_resulted_image').innerHTML =
                     '<img src="' + data_uri + '"/>';
 
-                console.log("am facut o poza");
+                
 
                 let url = "";
                 if (actionName === "signIn") {
@@ -137,12 +150,14 @@ class AuthPageRenderer {
 
                     let response = JSON.parse(text);
 
-                    console.log("uploading");
+                    
                     if(response.code===200) {
-                        console.log(text);
+                        // console.log(text);
+                        document.getElementById("global-spinner").style.display = "none";
                         homePageManager.renderer.render()
                     } else {
-                        console.log(text);
+                        // console.log(text);
+                        document.getElementById("global-spinner").style.display = "none";
                         firebase.auth().signOut();
                         authPageManager.message = "Please verify your email adress in order to continue";
                         // console.log("Please verify your email adress");
@@ -226,19 +241,21 @@ class AuthPageRenderer {
 
     _addSignInEventListeners() {
         let signInForm = document.querySelector("div > div.sign-in-container__form-section > form");
-
         signInForm.addEventListener("submit", (event) => {
             event.preventDefault();
-
+            document.getElementById("global-spinner").style.display = "block";
+            document.getElementById("actual-body-block").style.opacity = 0.9;
             let username = this._getSignInUsername();
             let password = this._getSignInPassword();
 
             this._authenticationManager.signIn(username, password, function (response) {
                 if (response["isSuccesfull"] === true) {
-                    console.log("test");
+                    
+                    document.getElementById("global-spinner").style.display = "none";
                     authPageRenderer.renderFaceRekognitionSection("signIn");
                     // renderFaceRekognitionSection("signIn");
                 } else {
+                    document.getElementById("global-spinner").style.display = "none";
                     authPageManager.renderer._renderSignInErrorMessage(response["message"]);
                 }
 
@@ -300,11 +317,12 @@ class AuthPageRenderer {
 
         createAccount.addEventListener("submit", (event) => {
             event.preventDefault();
-
+            document.getElementById("global-spinner").style.display = "block";
             let email = this._getCreateAccountEmail();
             let password = this._getCreateAccountPassword();
 
             this._authenticationManager.createAccount(email, password, function (response) {
+                document.getElementById("global-spinner").style.display = "none";
                 if (response["isSuccesfull"] === true) {
                     homePageManager.renderer.render();
                 } else {
@@ -546,9 +564,10 @@ class AuthPageRenderer {
         let resetPasswordButton = this._createSignInButton("Reset password");
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-
+            document.getElementById("global-spinner").style.display = "block";
             let email = this._getForgotPasswordEmail();
             this._authenticationManager.sendPasswordResetEmail(email, function (response) {
+                document.getElementById("global-spinner").style.display = "none";
                 authPageManager.renderer._renderForgotPasswordMessage(response["isSuccesfull"], response["message"]);
             });
         })

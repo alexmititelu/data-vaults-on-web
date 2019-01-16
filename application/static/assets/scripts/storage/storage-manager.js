@@ -91,7 +91,12 @@ class StorageManager {
                 }).catch(function (error) {
                     var response = {};
                     response["isSuccesfull"] = false;
-                    response["message"] = error.message;
+                    if(error.message.startsWith("PERMISSION_DENIED")) {
+                        console.log(error);
+                        response["message"] = "You are not allowed. Make sure your email is activated. If the problem persists, contact the developers";
+                    } else {
+                        response["message"] = error.message;
+                    }
 
                     callback(response);
                 });

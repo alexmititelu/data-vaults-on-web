@@ -437,6 +437,19 @@ class KeysPageRenderer {
         return keyInfoSection;
     }
 
+    _getContentForModal(keyData) {
+        let content = `<script src=\"http://127.0.0.1:5000/assets/scripts/client/client.js\"></script>` +
+                       `<script> ` +
+                       `var daveConfig = { ` +
+                       `    keyName: \"${keyData.keyName}\"` +
+                       `    rsaPublicKeyStringB64: \" ${keyData.publicKey}\"` +
+                       `    uid: \"${firebase.auth().currentuser.uid}\"` + 
+                       `};` +
+                       `dave.secureForms();` +
+                       `</script`;
+
+        return content;
+    }
     _createKeyStatsSection(keyName) {
         //TODO: date reale?
         return this._createUnavailableKeyStatsSection();
@@ -604,6 +617,10 @@ class KeysPageRenderer {
         modalCloseButton.setAttribute("id", "js-code-modal__close-button");
         modalCloseButton.classList.add("keys-library__key-info-container__js-code-modal__close-button");
 
+        modalCloseButton.addEventListener("click",function(event) {
+            document.getElementById("js-code-modal-id").style.display = "none";
+        })
+
         modalCloseButton.innerHTML += "&times;";
 
         modalContent.appendChild(modalCloseButton);
@@ -618,6 +635,15 @@ class KeysPageRenderer {
 
         let clipboardButton = document.createElement("i");
         clipboardButton.classList.add("fa", "fa-clipboard", "keys-library__key-info-container__item__additional-option", "keys-library__key-info-container__item__additional-option__copy-to-clipboard", "keys-library__key-info-container__js-code-modal__copy-to-clipboard-button");
+
+        clipboardButton.addEventListener("click",function(event){
+            let value = document.getElementById("js-code-modal-id__text-value").innerHTML;
+            navigator.clipboard.writeText(value).then(function() {
+                console.log('Async: Copying to clipboard was successful!');
+              }, function(err) {
+                console.error('Async: Could not copy text: ', err);
+              });
+        })
 
         let clipboardText = document.createElement("span");
         clipboardText.classList.add("keys-library__key-info-container__item__additional-option__copy-to-clipboard", "keys-library__key-info-container__item__additional-option__copy-to-clipboard__tooltiptext-value");

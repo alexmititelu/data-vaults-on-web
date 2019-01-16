@@ -20,12 +20,56 @@ class DataPageRenderer {
     render(keyName, rsaPrivateKey) {
         this.page = 1;
         this.firstFormKey = [null, null];
-        this.reachedLastPage = false;
+        this.lastPageReached = false;
+        this.keyName = keyName;
+        this.rsaPrivateKey = rsaPrivateKey;
 
         deleteAllExceptHeaderAndFooter();
         renderHeader();
         this._renderActualBody(keyName, rsaPrivateKey);
         renderFooter();
+    }
+
+    _removeFormsGrid() {
+        var formsGrid = document.getElementsByClassName("forms-grid")[0];
+
+        while (formsGrid.firstChild) {
+            formsGrid.removeChild(formsGrid.firstChild);
+        }
+    }
+
+    _handlePageChanged(ammout) {
+        this.page += ammout;
+        this._removeFormsGrid();
+
+        var formsGrid = document.getElementsByClassName("forms-grid")[0];
+
+        // div (filters) > div (forms grid) > div (left column)
+        var formsGridLeftColumn = document.createElement("div");
+        formsGridLeftColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--left");
+
+        formsGrid.append(formsGridLeftColumn);
+
+        // div (filters) > div (forms grid) > div (middle column)
+        var formsGridMiddleColumn = document.createElement("div");
+        formsGridMiddleColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--middle");
+
+        formsGrid.append(formsGridMiddleColumn);
+
+        // div (filters) > div (forms grid) > div (left column)
+        var formsGridRightColumn = document.createElement("div");
+        formsGridRightColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--right");
+
+        formsGrid.append(formsGridRightColumn);
+
+        // div (filters) > div (forms grid) > forms
+        this._resolveForms(this.keyName, this.rsaPrivateKey).then(function () {
+            // div (filters) > div (forms grid) > page controls top
+            this._renderPageControls("top");
+
+            // div (filters) > div (forms grid) > page controls bot
+            this._renderPageControls("bottom");
+        }.bind(this));
     }
 
     _renderPageControls(positioning) {
@@ -35,68 +79,139 @@ class DataPageRenderer {
         var pageControlsDiv = document.createElement("div");
         pageControlsDiv.classList.add("forms-grid__page-controls", "forms-grid__page-controls--" + positioning);
 
-        formsGrid.append(pageControlsDiv);
+        if (positioning == "top") {
+            formsGrid.prepend(pageControlsDiv);
+        } else {
+            formsGrid.append(pageControlsDiv);
+        }
 
-        // div (forms grid) > div (page controls) > a (left arrow)
-        var leftArrowA = document.createElement("a");
-        leftArrowA.classList.add("forms-grid__page-controls__arrow", "forms-grid__page-controls__arrow--left");
-        leftArrowA.href = "#";
+        if (this.page != 1) {
+            // div (forms grid) > div (page controls) > a (left arrow)
+            var leftArrowA = document.createElement("a");
+            leftArrowA.classList.add("forms-grid__page-controls__arrow", "forms-grid__page-controls__arrow--left");
+            leftArrowA.addEventListener("click", function () {
+                this._handlePageChanged(-1);
+            }.bind(this));
 
-        pageControlsDiv.append(leftArrowA);
+            pageControlsDiv.append(leftArrowA);
 
-        // div (forms grid) > div (page controls) > a (left arrow) > icon
-        var leftArrowIcon = document.createElement("i");
-        leftArrowIcon.classList.add("fas", "fa-caret-left", "fa-2x");
+            // div (forms grid) > div (page controls) > a (left arrow) > icon
+            var leftArrowIcon = document.createElement("i");
+            leftArrowIcon.classList.add("fas", "fa-caret-left", "fa-2x");
 
-        leftArrowA.append(leftArrowIcon);
+            leftArrowA.append(leftArrowIcon);
+        }
 
         // div (forms grid) > div (page controls) > p
         var pageControlsText = document.createElement("p");
         pageControlsText.classList.add("forms-grid__page-controls__text");
-        pageControlsText.append(document.createTextNode("PAGE " + this.pageNumber));
+        pageControlsText.append(document.createTextNode("PAGE " + this.page));
 
         pageControlsDiv.append(pageControlsText);
 
-        // div (forms grid) > div (page controls) > a (right arrow)
-        var rightArrowA = document.createElement("a");
-        rightArrowA.classList.add("forms-grid__page-controls__arrow", "forms-grid__page-controls__arrow--right");
-        rightArrowA.href = "#";
+        if (!this.lastPageReached) {
+            // div (forms grid) > div (page controls) > a (right arrow)
+            var rightArrowA = document.createElement("a");
+            rightArrowA.classList.add("forms-grid__page-controls__arrow", "forms-grid__page-controls__arrow--right");
+            rightArrowA.addEventListener("click", function () {
+                this._handlePageChanged(1);
+            }.bind(this));
 
-        pageControlsDiv.append(rightArrowA);
+            pageControlsDiv.append(rightArrowA);
 
-        // div (forms grid) > div (page controls) > a (right arrow) > icon
-        var rightArrowIcon = document.createElement("i");
-        rightArrowIcon.classList.add("fas", "fa-caret-right", "fa-2x");
+            // div (forms grid) > div (page controls) > a (right arrow) > icon
+            var rightArrowIcon = document.createElement("i");
+            rightArrowIcon.classList.add("fas", "fa-caret-right", "fa-2x");
 
-        rightArrowA.append(rightArrowIcon);
+            rightArrowA.append(rightArrowIcon);
+        }
     }
 
     _renderForm(decryptedForm, screenLocation) {
-        console.log(decryptedForm);
+        if (screenLocation % 3 == 0) {
+            var column = "left";
+        } else if (screenLocation % 3 == 1) {
+            var column = "middle";
+        } else {
+            var column = "right";
+        }
+
+        var formsGridColumn = document.getElementsByClassName("forms-grid__forms-column--" + column)[0];
+
+        // div (form div)
+        var formDiv = document.createElement("div");
+        formDiv.classList.add("forms-grid__forms-column__form");
+
+        formsGridColumn.append(formDiv);
+
+        var fieldsAdded = 0;
+        var numberOfFields = Object.keys(decryptedForm).length;
+
+        for (var question in decryptedForm) {
+            fieldsAdded++;
+
+            // div (form div) > div (block)
+            var formDivBlock = document.createElement("div");
+            formDivBlock.classList.add("forms-grid__forms-column__form__block");
+            if (fieldsAdded == numberOfFields) {
+                formDivBlock.classList.add("forms-grid__forms-column__form__block--last");
+            }
+
+            formDiv.append(formDivBlock);
+
+            // div (form div) > div (block) > p (question)
+            var questionP = document.createElement("p");
+            questionP.classList.add("forms-grid__forms-column__form__block__question");
+
+            formDivBlock.append(questionP);
+
+            // div (form div) > div (block) > p (question) > i
+            var questionIcon = document.createElement("i");
+            questionIcon.classList.add("fas", "fa-question");
+
+            questionP.append(questionIcon);
+            questionP.append(document.createTextNode(" " + question));
+
+            // div (form div) > div (block) > p (answer)
+            var answerP = document.createElement("p");
+            answerP.classList.add("forms-grid__forms-column__form__block__answer");
+            answerP.append(document.createTextNode(decryptedForm[question]));
+
+            formDivBlock.append(answerP);
+        }
     }
 
     _resolveForms(keyName, rsaPrivateKeyStringB64) {
-        storageManager.getFormsForKey(keyName, this.firstFormKey[this.page]).then(function (encryptedForms) {
-            if (encryptedForms == null || encryptedForms == undefined) {
-                return;
-            }
-
-            var formKeys = Object.keys(encryptedForms).sort();
-
-            if (formKeys.length < 10) {
-                this.lastPageReached = true;
-            } else {
-                this.firstFormKey[this.page + 1] = formKeys[9];
-            }
-
-            storageManager.getRsaPrivateKey(keyName, rsaPrivateKeyStringB64).then(function (rsaPrivateKeyStringB64) {
-                var screenLocation = 0;
-
-                for (var formKey in encryptedForms) {
-                    cryptoUtils.decryptForm(encryptedForms[formKey], rsaPrivateKeyStringB64).then(function (decryptedForm) {
-                        this._renderForm(decryptedForm, screenLocation++);
-                    }.bind(this));
+        return new Promise(function (resolve, reject) {
+            storageManager.getFormsForKey(keyName, this.firstFormKey[this.page]).then(function (encryptedForms) {
+                if (encryptedForms == null || encryptedForms == undefined) {
+                    return;
                 }
+
+                var formKeys = Object.keys(encryptedForms).sort();
+
+                if (formKeys.length < 10) {
+                    this.lastPageReached = true;
+                    this.firstFormKey[this.page + 1] = null;
+                } else {
+                    this.lastPageReached = false;
+                    this.firstFormKey[this.page + 1] = formKeys[9];
+                }
+
+                storageManager.getRsaPrivateKey(keyName, rsaPrivateKeyStringB64).then(function (rsaPrivateKeyStringB64) {
+                    var screenLocation = 0;
+
+                    for (var formKey in encryptedForms) {
+                        if (formKey != this.firstFormKey[this.page + 1]) {
+                            cryptoUtils.decryptForm(encryptedForms[formKey], rsaPrivateKeyStringB64).then(function (decryptedForm) {
+                                this._renderForm(decryptedForm, screenLocation++);
+
+                            }.bind(this));
+                        }
+                    }
+
+                    resolve();
+                }.bind(this));
             }.bind(this));
         }.bind(this));
     }
@@ -206,9 +321,6 @@ class DataPageRenderer {
 
         filtersDiv.append(formsGrid);
 
-        // div (filters) > div (forms grid) > page controls top
-        this._renderPageControls("top");
-
         // div (filters) > div (forms grid) > div (left column)
         var formsGridLeftColumn = document.createElement("div");
         formsGridLeftColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--left");
@@ -223,15 +335,18 @@ class DataPageRenderer {
 
         // div (filters) > div (forms grid) > div (left column)
         var formsGridRightColumn = document.createElement("div");
-        formsGridRightColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--left");
+        formsGridRightColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--right");
 
         formsGrid.append(formsGridRightColumn);
 
         // div (filters) > div (forms grid) > forms
-        this._resolveForms(keyName, rsaPrivateKey);
+        this._resolveForms(keyName, rsaPrivateKey).then(function () {
+            // div (filters) > div (forms grid) > page controls top
+            this._renderPageControls("top");
 
-        // div (filters) > div (forms grid) > page controls bot
-        this._renderPageControls("bottom");
+            // div (filters) > div (forms grid) > page controls bot
+            this._renderPageControls("bottom");
+        }.bind(this));
     }
 }
 

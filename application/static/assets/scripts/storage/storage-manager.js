@@ -120,6 +120,41 @@ class StorageManager {
             });
         });
     }
+
+    getFormsForKey(keyName, lastKey) {
+        return new Promise(function (resolve, reject) {
+            if (lastKey == null) {
+                firebase.database().ref("/users/" + firebase.auth().currentUser.uid + "/forms/" + keyName)
+                    .orderByKey()
+                    .limitToFirst(10)
+                    .once("value")
+                    .then(function (snapshot) {
+                        resolve(snapshot.val());
+                    });
+            } else {
+                firebase.database().ref("/users/" + firebase.auth().currentUser.uid + "/forms/" + keyName)
+                    .orderByKey()
+                    .limitToFirst(10)
+                    .startAt(lastKey)
+                    .once("value")
+                    .then(function (snapshot) {
+                        resolve(snapshot.val());
+                    });
+            }
+        });
+    }
+
+    getRsaPrivateKey(keyName, privateRsaKeyBase64) {
+        return new Promise(function (resolve, reject) {
+            if (privateRsaKeyBase64 != null) {
+                resolve(privateRsaKeyBase64);
+            } else {
+                firebase.database().ref("/users/" + firebase.auth().currentUser.uid + "/keys/" + keyName + "/privateKey").once("value").then(function (snapshot) {
+                    resolve(snapshot.val());
+                });
+            }
+        });
+    }
 }
 
 const storageManager = new StorageManager();

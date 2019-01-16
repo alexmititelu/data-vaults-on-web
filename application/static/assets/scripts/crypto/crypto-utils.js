@@ -7,6 +7,21 @@ class CryptoUtils {
         return CryptoUtils.instance;
     }
 
+    str2ab(string) {
+        var buffer = new ArrayBuffer(string.length);
+        var bufferView = new Uint8Array(buffer);
+
+        for (var i = 0; i < string.length; ++i) {
+            bufferView[i] = string.charCodeAt(i);
+        }
+
+        return buffer;
+    }
+
+    ab2str(buffer) {
+        return String.fromCharCode(...new Uint8Array(buffer));
+    }
+
     sha256(message, callback) {
         var encoder = new TextEncoder();
         var data = encoder.encode(message);
@@ -50,6 +65,73 @@ class CryptoUtils {
 
             callback(keyExportedAsBase64);
         });
+    }
+
+    importPrivateRsaKey(rsaPrivateKeyStringB64) {
+        var rsaPrivateKeyString = window.atob(rsaPrivateKeyStringB64);
+        var rsaPrivateKeyBuffer = this.str2ab(rsaPrivateKeyString);
+
+        return window.crypto.subtle.importKey(
+            "pkcs8",
+            rsaPrivateKeyBuffer, {
+                name: "RSA-OAEP",
+                hash: {
+                    name: "SHA-256"
+                }
+            },
+            true,
+            ["decrypt"]
+        );
+    }
+
+    decryptBase64StringWithRsa(base64String, rsaPrivateKey) {
+        var string = window.atob(base64String);
+        var buffer = this.str2ab(string);
+
+        var algorithm = {
+            name: "RSA-OAEP"
+        };
+
+        return window.crypto.subtle.decrypt(algorithm, rsaPrivateKey, buffer);
+    }
+
+    importAesKey(aesKeyBuffer) {
+        var algorithm = {
+            name: "AES-CBC"
+        };
+
+        return window.crypto.subtle.importKey("raw", aesKeyBuffer, algorithm, true, ["decrypt"]);
+    }
+
+    decryptBase64StringWithAes(aesKey, iv, base64String) {
+        var string = window.atob(base64String);
+        var buffer = this.str2ab(string);
+
+        var algorithm = {
+            name: "AES-CBC",
+            iv: iv
+        };
+
+        return window.crypto.subtle.decrypt(algorithm, aesKey, buffer);
+    }
+
+    decryptForm(encryptedFormObj, rsaPrivateKeyStringB64) {
+        return new Promise(function (resolve, reject) {
+            this.importPrivateRsaKey(rsaPrivateKeyStringB64).then(function (rsaPrivateKey) {
+                this.decryptBase64StringWithRsa(encryptedFormObj.encryptedAesKey, rsaPrivateKey).then(function (aesKeyBuffer) {
+                    this.decryptBase64StringWithRsa(encryptedFormObj.encryptedIv, rsaPrivateKey).then(function (iv) {
+                        this.importAesKey(aesKeyBuffer).then(function (aesKey) {
+                            this.decryptBase64StringWithAes(aesKey, iv, encryptedFormObj.encryptedForm).then(function (decryptedFormStringBuffer) {
+                                var decryptedFormString = this.ab2str(decryptedFormStringBuffer);
+                                var decryptedFormObj = JSON.parse(decryptedFormString);
+
+                                resolve(decryptedFormObj);
+                            }.bind(this))
+                        }.bind(this))
+                    }.bind(this))
+                }.bind(this))
+            }.bind(this))
+        }.bind(this));
     }
 }
 

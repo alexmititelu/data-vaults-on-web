@@ -5,11 +5,12 @@ import {
 } from "../common/common-lib.js"
 
 import textContent from "../common/text-content.js"
+import storageManager from "../storage/storage-manager.js";
+import cryptoUtils from "../crypto/crypto-utils.js";
 
 class DataPageRenderer {
     constructor() {
         if (!DataPageRenderer.instance) {
-            this.pageNumber = 1;
             DataPageRenderer.instance = this;
         }
 
@@ -17,7 +18,9 @@ class DataPageRenderer {
     }
 
     render(keyName, rsaPrivateKey) {
-        this.pageNumber = 1;
+        this.page = 1;
+        this.firstFormKey = [null, null];
+        this.reachedLastPage = false;
 
         deleteAllExceptHeaderAndFooter();
         renderHeader();
@@ -68,8 +71,34 @@ class DataPageRenderer {
         rightArrowA.append(rightArrowIcon);
     }
 
-    _renderForms() {
+    _renderForm(decryptedForm, screenLocation) {
+        console.log(decryptedForm);
+    }
 
+    _resolveForms(keyName, rsaPrivateKeyStringB64) {
+        storageManager.getFormsForKey(keyName, this.firstFormKey[this.page]).then(function (encryptedForms) {
+            if (encryptedForms == null || encryptedForms == undefined) {
+                return;
+            }
+
+            var formKeys = Object.keys(encryptedForms).sort();
+
+            if (formKeys.length < 10) {
+                this.lastPageReached = true;
+            } else {
+                this.firstFormKey[this.page + 1] = formKeys[9];
+            }
+
+            storageManager.getRsaPrivateKey(keyName, rsaPrivateKeyStringB64).then(function (rsaPrivateKeyStringB64) {
+                var screenLocation = 0;
+
+                for (var formKey in encryptedForms) {
+                    cryptoUtils.decryptForm(encryptedForms[formKey], rsaPrivateKeyStringB64).then(function (decryptedForm) {
+                        this._renderForm(decryptedForm, screenLocation++);
+                    }.bind(this));
+                }
+            }.bind(this));
+        }.bind(this));
     }
 
     _renderActualBody(keyName, rsaPrivateKey) {
@@ -180,8 +209,26 @@ class DataPageRenderer {
         // div (filters) > div (forms grid) > page controls top
         this._renderPageControls("top");
 
+        // div (filters) > div (forms grid) > div (left column)
+        var formsGridLeftColumn = document.createElement("div");
+        formsGridLeftColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--left");
+
+        formsGrid.append(formsGridLeftColumn);
+
+        // div (filters) > div (forms grid) > div (middle column)
+        var formsGridMiddleColumn = document.createElement("div");
+        formsGridMiddleColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--middle");
+
+        formsGrid.append(formsGridMiddleColumn);
+
+        // div (filters) > div (forms grid) > div (left column)
+        var formsGridRightColumn = document.createElement("div");
+        formsGridRightColumn.classList.add("forms-grid__forms-column", "forms-grid__forms-column--left");
+
+        formsGrid.append(formsGridRightColumn);
+
         // div (filters) > div (forms grid) > forms
-        this._renderForms();
+        this._resolveForms(keyName, rsaPrivateKey);
 
         // div (filters) > div (forms grid) > page controls bot
         this._renderPageControls("bottom");

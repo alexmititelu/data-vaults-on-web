@@ -53,7 +53,7 @@ class DataPageRenderer {
         // div (forms grid) > div (page controls) > p
         var pageControlsText = document.createElement("p");
         pageControlsText.classList.add("forms-grid__page-controls__text");
-        pageControlsText.append(document.createTextNode("PAGE " + this.pageNumber));
+        pageControlsText.append(document.createTextNode("PAGE " + this.page));
 
         pageControlsDiv.append(pageControlsText);
 
@@ -72,7 +72,57 @@ class DataPageRenderer {
     }
 
     _renderForm(decryptedForm, screenLocation) {
-        console.log(decryptedForm);
+        if (screenLocation % 3 == 0) {
+            var column = "left";
+        } else if (screenLocation % 3 == 1) {
+            var column = "middle";
+        } else {
+            var column = "right";
+        }
+
+        var formsGridColumn = document.getElementsByClassName("forms-grid__forms-column--" + column)[0];
+
+        // div (form div)
+        var formDiv = document.createElement("div");
+        formDiv.classList.add("forms-grid__forms-column__form");
+
+        formsGridColumn.append(formDiv);
+
+        var fieldsAdded = 0;
+        var numberOfFields = Object.keys(decryptedForm).length;
+
+        for (var question in decryptedForm) {
+            fieldsAdded++;
+
+            // div (form div) > div (block)
+            var formDivBlock = document.createElement("div");
+            formDivBlock.classList.add("forms-grid__forms-column__form__block");
+            if (fieldsAdded == numberOfFields) {
+                formDivBlock.classList.add("forms-grid__forms-column__form__block--last");
+            }
+
+            formDiv.append(formDivBlock);
+
+            // div (form div) > div (block) > p (question)
+            var questionP = document.createElement("p");
+            questionP.classList.add("forms-grid__forms-column__form__block__question");
+
+            formDivBlock.append(questionP);
+
+            // div (form div) > div (block) > p (question) > i
+            var questionIcon = document.createElement("i");
+            questionIcon.classList.add("fas", "fa-question");
+
+            questionP.append(questionIcon);
+            questionP.append(document.createTextNode(" " + question));
+
+            // div (form div) > div (block) > p (answer)
+            var answerP = document.createElement("p");
+            answerP.classList.add("forms-grid__forms-column__form__block__answer");
+            answerP.append(document.createTextNode(decryptedForm[question]));
+
+            formDivBlock.append(answerP);
+        }
     }
 
     _resolveForms(keyName, rsaPrivateKeyStringB64) {

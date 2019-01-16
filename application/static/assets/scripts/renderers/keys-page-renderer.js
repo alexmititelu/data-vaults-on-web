@@ -425,7 +425,21 @@ class KeysPageRenderer {
 
         getJsCodeButton.addEventListener("click",function(event){
             document.getElementById("js-code-modal-id").style.display = "block";
-            document.getElementById("js-code-modal-id__text-value").innerHTML = this._getContentForModal(keyData);
+            let content = `&lt;script src=\"http://127.0.0.1:5000/assets/scripts/client/client.js\"&gt;&lt;/script&gt;` +
+            `</br>` +
+            `</br>` +
+            `&lt;script&gt; ` +
+            `</br>` +
+            `var daveConfig = { ` +
+            `    keyName: \"${keyData.keyName}\",` +
+            `    rsaPublicKeyStringB64: \"${keyData.publicKey}\",` +
+            `    uid: \"${firebase.auth().currentUser.uid}\"` + 
+            `};` +
+            `</br>` +
+            `dave.secureForms();` +
+            `</br>` +
+            `&lt;/script&gt;`;
+            document.getElementById("js-code-modal-id__text-value").innerHTML = content;
         });
 
         buttonsSection.appendChild(getJsCodeButton);
@@ -625,7 +639,7 @@ class KeysPageRenderer {
 
         modalContent.appendChild(modalCloseButton);
 
-        let modalContentText = document.createElement("pre");
+        let modalContentText = document.createElement("code");
         modalContentText.classList.add("keys-library__key-info-container__js-code-modal__content--code-value");
         modalContentText.setAttribute("id","js-code-modal-id__text-value");
 
@@ -636,8 +650,9 @@ class KeysPageRenderer {
         let clipboardButton = document.createElement("i");
         clipboardButton.classList.add("fa", "fa-clipboard", "keys-library__key-info-container__item__additional-option", "keys-library__key-info-container__item__additional-option__copy-to-clipboard", "keys-library__key-info-container__js-code-modal__copy-to-clipboard-button");
 
-        clipboardButton.addEventListener("click",function(event){
+        clipboardButton.addEventListener("click",(event)=>{
             let value = document.getElementById("js-code-modal-id__text-value").innerHTML;
+            value = value.replace(/&lt;/g,"<").replace(/&gt;/g,">")
             navigator.clipboard.writeText(value).then(function() {
                 console.log('Async: Copying to clipboard was successful!');
               }, function(err) {

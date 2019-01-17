@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ro-RO" vocab="http://schema.org/" typeof="schema:ScholarlyArticle" property="https://github.com/alexmititelu/data-vaults-on-web">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Dave Manual de Utilizare </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+</head>
+
+<body prefix="schema: http://schema.org">
+    <header>
+        <h1 property="http://purl.org/dc/terms/title"> DAVE - Data Vaults On Web - User Manual </h1>
+    </header>
+    <div role="contentinfo">
+        <h3> Cuprins: </h3>
+        <ol role="directory">
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#authentication">
+                    Authentication
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#homepage">
+                    Home
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#keyspage">
+                    Keys
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#datapage">
+                    See my data
+                </a>
+            </li>
+
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#conclusion">
+                    Conclusion
+                </a>
+            </li>
+        </ol>
+        <dl>
+            <dt>Authors:</dt>
+            <dd property="http://purl.org/dc/terms/creator">
+                <a typeof="sa:ContributorRole" property="url" href="https://github.com/alexmititelu">
+                    <span property="familyName">Mititelu</span> <span property="givenName">Ioan-Alexandru</span>
+                </a> &nbsp; & &nbsp;
+                <a typeof="sa:ContributorRole" property="url" href="https://github.com/gabrielxzc">
+                    <span property="familyName">Cojocaru</span> <span property="givenName">Gabriel-Codrin</span>
+                </a>
+
+            </dd>
+            <br>
+            <dt>Project source code:</dt>
+            <dd>
+                <a property="url" href="https://github.com/alexmititelu/data-vaults-on-web">GitHub</a>
+            </dd>
+            <br>
+            <dt>Tags:</dt>
+            <dd>
+                <span>info, project, infoiasi, cliw, web, dave, security, data, forms, data management</span>
+            </dd>
+        </dl>
+    </div>
+    <section id="authentication" typeof="sa:Results" role="doc-introduction" property="about">
+        <h2>
+            <span>1. </span>Authentication
+        </h2>
+        <blockquote>
+            <p>
+                The first time a users comes in contact with DAVE, they see the authentication page. From here, they
+                can create an accout, log in with their current account or recover their password.
+            </p>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/auth-1.png" style="height: 60%; width: 40%;">
+            </figure>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/auth-2.png" style="height: 60%; width: 40%;">
+            </figure>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/auth-3.png" style="height: 60%; width: 40%;">
+            </figure>
+
+            <p>
+                After the user creates an account, he will be taken to the face authentication screen. If it is the
+                first time
+                he is authenticating into our platform, his face will be registered and used for later authentications.
+                If it's not
+                the first time, an already existing face will be compared to the face associated with the user. If the
+                faces match,
+                the user will be redirected to the home page else he will be redirected back to the authentication
+                page.
+            </p>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/auth-4.png" style="height: 60%; width: 40%;">
+            </figure>
+        </blockquote>
+    </section>
+    <section id="homepage" role="doc-introduction" property="about">
+        <h2>
+            <span>2. </span>Home
+        </h2>
+        <blockquote>
+            <p>
+                After the authentication step, the user will find himself on the home page. On the home page, the user
+                can
+                see the F.A.Q. section or the contact section together with a description of the service we provide. He
+                can also
+                use the header, from any page not only from the home page, to navigate to any page available on the
+                platform.
+            </p>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/home-1.png" style="height: 80%; width: 60%;">
+            </figure>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/home-2.png" style="height: 80%; width: 60%;">
+            </figure>
+        </blockquote>
+    </section>
+    <section id="keyspage" role="doc-introduction" property="about">
+        <h2>
+            <span>3. </span> Keys page
+        </h2>
+        <blockquote>
+            <p>
+                The user can navigate to the keys page by using the "GO TO MY KEYS" button from the home page, or by
+                using the
+                "KEYS" button on the header. From here he can create a key that will be used to secure forms from his
+                site. By pressing
+                on "GENERATE NEW KEY" and filling the presented form, a new key will be generated. If the user chooses
+                not to save the private key
+                on our platform then a modal will appear one time only, showing the private key to the user. After
+                that, in order to access forms
+                encrypted with this key, he will need this private key.
+            </p>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/key-1.png" style="height: 80%; width: 80%;">
+            </figure>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/key-2.png" style="height: 80%; width: 80%;">
+            </figure>
+        </blockquote>
+    </section>
+    <section id="#datapage" role="doc-chapter" property="about">
+        <h2>
+            <span>4. </span> Data page
+        </h2>
+        <blockquote>
+            <p>
+                User can also navigate from the header to the data visualization page. If the key he chose is private,
+                then a pop up will
+                appear asking the user for the private key. If the key entered is valid, the data visualization page
+                will be rendered with data
+                submited from the user forms.
+            </p>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/data-1.png" style="height: 80%; width: 80%;">
+            </figure>
+
+            <figure typeof="sa:Image" style="margin-top: -5px; text-align: center;">
+                <img class="imagine" src="./img/data-2.png" style="height: 80%; width: 80%;">
+            </figure>
+        </blockquote>
+    </section>
+</body>
+
+</html>

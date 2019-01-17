@@ -25,7 +25,7 @@ class AuthPageRenderer {
 
         let body = document.getElementById("actual-body-block");
         let spinner = document.createElement("div");
-        spinner.setAttribute("id","global-spinner");
+        spinner.setAttribute("id", "global-spinner");
         body.appendChild(spinner);
 
         let signInContainer = document.createElement("div");
@@ -45,7 +45,7 @@ class AuthPageRenderer {
 
         let body = document.getElementById("actual-body-block");
         let spinner = document.createElement("div");
-        spinner.setAttribute("id","global-spinner");
+        spinner.setAttribute("id", "global-spinner");
         body.appendChild(spinner);
 
         let resetPasswordContainer = document.createElement("div");
@@ -63,7 +63,7 @@ class AuthPageRenderer {
 
         let body = document.getElementById("actual-body-block");
         let spinner = document.createElement("div");
-        spinner.setAttribute("id","global-spinner");
+        spinner.setAttribute("id", "global-spinner");
         body.appendChild(spinner);
 
         let registerContainer = document.createElement("div");
@@ -83,7 +83,7 @@ class AuthPageRenderer {
 
         let body = document.getElementById("actual-body-block");
         let spinner = document.createElement("div");
-        spinner.setAttribute("id","global-spinner");
+        spinner.setAttribute("id", "global-spinner");
         body.appendChild(spinner);
 
         let faceRekognitionSection = document.createElement("div");
@@ -110,7 +110,7 @@ class AuthPageRenderer {
         let informationMessage = document.createElement("div");
 
         let message = document.createElement("span");
-        message.appendChild(document.createTextNode("We use a Face Recognition system in order to improve our security level. Just press the button!")); 
+        message.appendChild(document.createTextNode("We use a Face Recognition system in order to improve our security level. Just press the button!"));
         message.classList.add("face-reko-info-message");
 
         let message2 = document.createElement("span");
@@ -132,12 +132,12 @@ class AuthPageRenderer {
             document.getElementById("global-spinner").style.display = "block";
             Webcam.snap(function (data_uri) {
                 // display results in page
-                
-                
+
+
                 document.getElementById('snapshot_resulted_image').innerHTML =
                     '<img src="' + data_uri + '"/>';
 
-                
+
 
                 let url = "";
                 if (actionName === "signIn") {
@@ -150,16 +150,28 @@ class AuthPageRenderer {
 
                     let response = JSON.parse(text);
 
-                    
-                    if(response.code===200) {
+
+                    if (response.code === 200) {
                         // console.log(text);
                         document.getElementById("global-spinner").style.display = "none";
+                        if (firebase.auth().currentUser.emailVerified === false) {
+                            authPageManager.message = "Email adress not verrified.";
+                            firebase.auth().signOut();
+                        } else {
                         homePageManager.renderer.render()
+                        authPageManager.message = "";
+                        }
                     } else {
                         // console.log(text);
+                        // authPageManager.hasUserEmailActivated = firebase.auth().currentUser.emailVerified
+                        if (response.code === 401) {
+                            authPageManager.message = "Email adress not verrified.";
+                        }
+                        if (response.code === 400) {
+                            authPageManager.message = "Unidentified user.";
+                        }
                         document.getElementById("global-spinner").style.display = "none";
                         firebase.auth().signOut();
-                        authPageManager.message = "Please verify your email adress in order to continue";
                         // console.log("Please verify your email adress");
                     }
                 });
@@ -250,7 +262,7 @@ class AuthPageRenderer {
 
             this._authenticationManager.signIn(username, password, function (response) {
                 if (response["isSuccesfull"] === true) {
-                    
+
                     document.getElementById("global-spinner").style.display = "none";
                     authPageRenderer.renderFaceRekognitionSection("signIn");
                     // renderFaceRekognitionSection("signIn");
@@ -592,7 +604,7 @@ class AuthPageRenderer {
 
         form.append(this._createRegisterFormField("Email adress", "email", "john@doe.com", "We’ll occasionally send updates about your account to this inbox. We’ll never share your email address with anyone."));
 
-        form.append(this._createRegisterFormField("Password", "password", "", "Make sure it's more than 15 characters, or at least 7 characters, including a number, and a lowercase letter."));
+        form.append(this._createRegisterFormField("Password", "password", "", "Make sure it's more than 6 characters."));
 
         form.append(this._createRegisterAgreement("By clicking “Create account” below, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails."));
 

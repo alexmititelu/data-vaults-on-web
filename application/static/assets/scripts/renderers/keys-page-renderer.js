@@ -294,6 +294,12 @@ class KeysPageRenderer {
                 if (response["isSuccesfull"] === true) {
                     refreshHeader();
                     this.renderCreateKeyResponse(response);
+                    setTimeout(250);
+
+                    if(objKey.savePrivateKey===true) {
+                        this.render();
+                    }
+
                 } else {
                     //TODO: un loc unde sa afisam erorile, gen un pop up ceva
                     this.renderCreateKeyResponse(response);
@@ -723,8 +729,9 @@ class KeysPageRenderer {
         modalCloseButton.setAttribute("id", "private-key-modal__close-button");
         modalCloseButton.classList.add("keys-library__key-info-container__js-code-modal__close-button");
 
-        modalCloseButton.addEventListener("click",function(event) {
+        modalCloseButton.addEventListener("click",(event) => {
             document.getElementById("private-key-modal").style.display = "none";
+            this.render();
         })
 
         modalCloseButton.innerHTML += "&times;";

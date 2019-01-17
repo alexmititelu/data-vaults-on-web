@@ -7,6 +7,8 @@ class AuthPageManager {
             this.renderer = authPageRenderer;
             this.authenticationManager = authenticationManager;
             AuthPageManager.instance = this;
+            this.message = "";
+            this.hasUserEmailActivated = false;
         }
 
         return AuthPageManager.instance;
@@ -14,6 +16,6 @@ class AuthPageManager {
 }
 
 const authPageManager = new AuthPageManager();
-Object.freeze(authPageManager);
+// Object.freeze(authPageManager);
 
 export default authPageManager;

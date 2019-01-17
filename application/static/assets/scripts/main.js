@@ -20,7 +20,7 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function (user) {    
     
     if (user) {
-        
+        authPageManager.hasUserEmailActivated = user.emailVerified;    
         if(user.emailVerified==false) {
             authPageManager.renderer.renderFaceRekognitionSection("createAccount");
             // console.log("Creating Account");    
@@ -31,5 +31,11 @@ firebase.auth().onAuthStateChanged(function (user) {
         
     } else {
         authPageManager.renderer.renderLoginSection();
+        let errorMessage = authPageManager.message;
+        if(authPageManager.hasUserEmailActivated === false) {
+            errorMessage += " You have to activate your account in order to get acces to DAVE.";
+        }
+
+        authPageManager.renderer._renderSignInErrorMessage(authPageManager.message);
     }
 });

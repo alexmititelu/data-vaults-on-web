@@ -48,7 +48,7 @@ def create_user_origins_file(email):
 
         existing = check_user_existing_file(key_name)
         if existing == True:
-            return create_response(400,"Origin file already exists")
+            return create_response(401,"Origin file already exists")
         
         file_to_upload_path = os.path.join(APPLICATION_DIRECTORY,"temporary_files",hashed_email+"_origin.jpg")
         file_to_upload = open(file_to_upload_path, "rb")

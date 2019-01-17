@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ro-RO" vocab="http://schema.org/" typeof="schema:ScholarlyArticle" property="https://github.com/alexmititelu/data-vaults-on-web">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DAVE Scholarly Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+</head>
+
+<body prefix="schema: http://schema.org">
+    <header>
+        <h1 property="http://purl.org/dc/terms/title">DAVE - Data Vaults On Web</h1>
+    </header>
+    <div role="contentinfo">
+        <h3>Cuprins:</h3>
+        <ol role="directory">
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#abstract">
+                    Abstract
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#introduction">
+                    Introduction
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#summary">
+                    Summary
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#intermediate-stages">
+                    Intermediate stages
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#dataDealing">
+                    Data
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#clientSide">
+                    Client-side workflow
+                </a>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#testing">
+                    Testing
+                </a>
+            </li>
+
+            <li property="itemListElement" typeof="ListItem">
+                <a href="#conclusion">
+                    Conclusion
+                </a>
+            </li>
+        </ol>
+        <dl>
+            <dt>Authors:</dt>
+            <dd property="http://purl.org/dc/terms/creator">
+                <a typeof="sa:ContributorRole" property="url" href="https://github.com/alexmititelu">
+                    <span property="familyName">Mititelu</span> <span property="givenName">Ioan-Alexandru</span>
+                </a> &nbsp; & &nbsp;
+                <a typeof="sa:ContributorRole" property="url" href="https://github.com/gabrielxzc">
+                    <span property="familyName">Cojocaru</span> <span property="givenName">Gabriel-Codrin</span>
+                </a>
+
+            </dd>
+            <br>
+            <dt>Project source code:</dt>
+            <dd>
+                <a property="url" href="https://github.com/alexmititelu/data-vaults-on-web">GitHub</a>
+            </dd>
+            <br>
+            <dt>Tags:</dt>
+            <dd>
+                <span>info, project, infoiasi, cliw, web, dave, security, data, forms, data management</span>
+            </dd>
+        </dl>
+    </div>
+    <section id="abstract" typeof="sa:Results" role="doc-introduction" property="about">
+        <h2>
+            <span>1. </span>Abstract
+        </h2>
+        <blockquote>
+            <p>
+                DAVE is a web application developed by students. The purpose of this project is to improve the security
+                of data transferred and stored in on-line environment.
+            </p>
+            <p>
+                This report will present the details behind the development of this project and its progress.
+            </p>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../../interface-prototype/assets/img/logo.svg" style="height: 100px; width: auto;">
+            </figure><br>
+
+        </blockquote>
+    </section>
+    <section id="introduction" role="doc-introduction" property="about">
+        <h2>
+            <span>2. </span>Introduction
+        </h2>
+        <blockquote>
+            <p>
+                Nowadays every web-site process its user's data, no matter if it's about transfering or storing it and
+                inevitable the security of this data is one of the current issues that people are dealing with.
+                DAVE is projected for every website owner who wants his users data to be stored in a secured way.
+                Also, he will be able to visualize this data both in a raw format and also in a processed one
+                (displaying different relevant statistics).
+            </p>
+        </blockquote>
+    </section>
+    <section id="summary" role="doc-introduction" property="about">
+        <h2>
+            <span>3. </span>Summary
+        </h2>
+        <blockquote>
+            <p>
+                We want to design and develop a web platform and a web service to improve the data transfer security.
+                The application is related to all data submitted through forms, at a general level, and to all
+                owners of websites where forms are involved. We want to help them by storing their data in an encrypted
+                way (the data will be encrypted from the moment of form submisson and decrypted only when the
+                client wants to acces it).
+                So the platform will offer the possibility to manage the keys, the white-listed sites, to visualize
+                data from the submitted forms and to get relevant statistics about these forms.
+            </p>
+
+        </blockquote>
+    </section>
+    <section id="intermediate-stages" role="doc-chapter" property="about">
+        <h2>
+            <span>4. </span>Intermediate stages
+        </h2>
+        <blockquote>
+            <p>
+                <link property="itemListUnorder" href="https://schema.org/ItemListUnordered" />
+                <ul role="directory">
+                    <li property="itemListElement" typeof="ListItem">
+                        Established what external services the platform requires (Firebase,S3, Amazon Rekognition, Web
+                        Criptography API), etc.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Implementation of login functionality through a traditional way but also using a second
+                        authentication method in order to improve security: facial recognition.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Implementation of the keys management logic.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        Implementation of data visualization tab.
+                    </li>
+                    <li property="itemListElement" typeof="ListItem">
+                        The generated JS code that will be imported in client's websites.
+                    </li>
+
+                    <li property="itemListElement" typeof="ListItem">
+                        Integrated 2nd auth step - Face Recognition, using Amazon Rekognition Service from AWS.
+                    </li>
+                </ul>
+            </p>
+        </blockquote>
+    </section>
+    <section id="dataDealing" role="doc-chapter" property="about">
+        <h2>
+            <span>5. </span>Data
+        </h2>
+        <blockquote>
+            <p>
+                <br>
+                The registration and login system will be by default in a traditional manner, and as a 2nd factor authentication it
+                will be via face recognition using Amazon Rekognition.
+
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../authentication-system/authentication-system-diagram.png">
+                </figure><br>
+
+
+                Clients data (keys, profile etc) will be stored in Firebase (project database) with specific rules for read / write while the data collected from forms will be
+                stored in the same place but with different rules (everyone can write, only users can read).
+
+                <br>
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../user-info-storage/user-info-storage-diagram.png">
+                </figure>
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../forms-storage/forms-storage-diagram.png">
+                </figure><br>
+                <br>
+                <br>
+                Before storing forms data in Firebase, we will use Web Criptography API to encrypt it, as it follows:
+                <br>
+                <figure typeof="sa:Image">
+                    <img class="imagine" src="../documentation/pseudocod.png" style="height:600px;width:auto;">
+                </figure><br>
+
+            </p>
+        </blockquote>
+    </section>
+    <section id="clientSide" role="doc-chapter" property="about">
+        <h2>
+            <span>6. </span>Client-side workflow
+        </h2>
+        <blockquote>
+            <p>
+                On the client side we will retrieve data from server, we will decrypt it again using Web Criptography
+                API and then we will display it in different manners.
+                We will also use an external library (Firebase) in order to display relevant statistics about this data in
+                several bar-charts.
+            </p>
+
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;" >
+                <img class="imagine" src="./../authentication-system/authentication-system-diagram.png" style="height: 400px; width: auto;">
+            </figure><br>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../user-flow/pre-authentication-user-flow-diagram.png" style="height: 400px; width: auto;">
+            </figure><br>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../user-flow/single-page-app.png" style="height: 400px; width: auto;">
+            </figure><br>
+
+            <figure typeof="sa:Image" style="display:inline-block; margin-top: -5px;">
+                <img class="imagine" src="./../user-flow/post-authentication-user-flow-diagram.png" style="height: 400px; width: auto;">
+            </figure><br>
+
+        </blockquote>
+    </section>
+    <section id="testing" role="doc-chapter" property="about">
+        <h2>
+            <span>7. </span>Test
+        </h2>
+        <blockquote>
+            <p>
+                In general, for testing, we wrote some code and after that we re-iterated through application with
+                each workflow possible. So the testing part was only manually, each time reiterating and trying to find 
+                sneaky situations.
+            </p>
+        </blockquote>
+    </section>
+
+    <section id="practice" role="doc-chapter" property="about">
+        <h2>
+            <span>9. </span>DAVE in practice
+        </h2>
+        <blockquote>
+            <p>
+               From a practical perspective, this application can be really useful because it would work like a black box storage, especially 
+               if the customer doesn't choose his private RSA key to be saved.
+
+               Also, the necessary of resources isn't too high and that can permit us to maintain this application with a low budget.
+
+               Although, the idea of permitting to everyone to write in our forms database is pretty risky because a lot of data can be written, not only from our customers.
+               This can be fixed by storing other kind of information about our customers and about their forms / websites.
+               
+            </p>
+        </blockquote>
+    </section>
+
+    <section id="conclusion" role="doc-chapter" property="about">
+        <h2>
+            <span>9. </span>Conclusion
+        </h2>
+        <blockquote>
+            <p>
+                In conclusion, we hope to be able to deliver a top-notch product that will improve the idea of security
+                of data on the internet.<br>
+                We thank you for reading this Scholarly Article and we'll see you soon! <br>
+            </p>
+        </blockquote>
+    </section>
+</body>
+
+</html>

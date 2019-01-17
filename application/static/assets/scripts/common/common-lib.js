@@ -327,14 +327,14 @@ function renderHeader() {
 
         // header > nav > div (right-items) > ul > li (HOME)
         var rightItemsHomeLi = document.createElement("li");
-        rightItemsHomeLi.classList.add("header__main-nav__ul__right-items__li", "header__main-nav__ul__right-items__li--active");
+        rightItemsHomeLi.classList.add("header__main-nav__ul__right-items__li");
         rightItemsHomeLi.addEventListener("click", homeButtonPressedHandler);
 
         rightItemsUl.append(rightItemsHomeLi);
 
         // header > nav > div (right-items) > ul > li (HOME) > a
         var rightItemsHomeA = document.createElement("a");
-        rightItemsHomeA.classList.add("header__main-nav__ul__right-items__li__link", "header__main-nav__ul__right-items__li__link--active");
+        rightItemsHomeA.classList.add("header__main-nav__ul__right-items__li__link");
         rightItemsHomeA.append(document.createTextNode("HOME"));
 
         rightItemsHomeLi.append(rightItemsHomeA);
@@ -348,7 +348,7 @@ function renderHeader() {
         // header > nav > div (right-items) > ul > li (DATA) > button
         var rightItemsDataButton = document.createElement("button");
         rightItemsDataButton.classList.add("header__main-nav__ul__right-items__li__drop-down-button");
-        rightItemsDataButton.setAttribute("id","data-button-from-header");
+        rightItemsDataButton.setAttribute("id", "data-button-from-header");
         rightItemsDataButton.append(document.createTextNode("DATA "));
 
         rightItemsDataLi.append(rightItemsDataButton);

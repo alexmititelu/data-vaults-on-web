@@ -422,8 +422,6 @@ class KeyAssistant {
         let modalContentText = document.createElement("pre");
         modalContentText.classList.add("keys-library__key-info-container__js-code-modal__content--code-value");
 
-        modalContentText.appendChild(document.createTextNode("Text for JS Modal"));
-
         modalContent.appendChild(modalContentText);
 
         let clipboardButton = document.createElement("i");

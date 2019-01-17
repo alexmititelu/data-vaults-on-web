@@ -28,25 +28,6 @@ class DataPageRenderer {
         renderHeader();
         this._renderActualBody(keyName, rsaPrivateKey);
         renderFooter();
-
-        let activeElements = document.getElementsByClassName("header__main-nav__ul__right-items__li--active");
-        for(let i=0;i<activeElements.length;i++) {
-            if(activeElements[i].classList.contains("header__main-nav__ul__right-items__li--active")) {
-                activeElements[i].classList.remove("header__main-nav__ul__right-items__li--active");
-            }
-        }
-
-        let activeElementsLinks = document.getElementsByClassName("header__main-nav__ul__right-items__li__link--active");
-        for(let i=0;i<activeElementsLinks.length;i++) {
-            if(activeElementsLinks[i].classList.contains("header__main-nav__ul__right-items__li__link--active")) {
-                activeElementsLinks[i].classList.remove("header__main-nav__ul__right-items__li__link--active");
-            }
-        }
-
-        document.querySelector("body > header > nav > div.header__main-nav__ul__right-items > ul > li:nth-child(2)").classList.add("header__main-nav__ul__right-items__li--active");
-        document.querySelector("body > header > nav > div.header__main-nav__ul__right-items > ul > li.header__main-nav__ul__right-items__li.header__main-nav__ul__right-items__li--contains-dropdown.header__main-nav__ul__right-items__li--active > button").style.color = "#08090a";
-        
-        // document.querySelector("body > header > nav > div.header__main-nav__ul__right-items > ul > li:nth-child(2) > button").classList.add("header__main-nav__ul__right-items__li__link--active");
     }
 
     _removeFormsGrid() {

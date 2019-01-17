@@ -147,28 +147,26 @@ class AuthPageRenderer {
                 }
 
                 Webcam.upload(data_uri, url, function (code, text) {
-
                     let response = JSON.parse(text);
-
-
+                    
                     if (response.code === 200) {
                         // console.log(text);
                         document.getElementById("global-spinner").style.display = "none";
                         if (firebase.auth().currentUser.emailVerified === false) {
-                            authPageManager.message = "Email adress not verrified.";
+                            authPageManager.message = "Please verify your email address before proceeding to log in.";
                             firebase.auth().signOut();
                         } else {
-                        homePageManager.renderer.render()
-                        authPageManager.message = "";
+                            homePageManager.renderer.render()
+                            authPageManager.message = "";
                         }
                     } else {
                         // console.log(text);
                         // authPageManager.hasUserEmailActivated = firebase.auth().currentUser.emailVerified
                         if (response.code === 401) {
-                            authPageManager.message = "Email adress not verrified.";
+                            authPageManager.message = "Please verify your email address before proceeding to log in.";
                         }
                         if (response.code === 400) {
-                            authPageManager.message = "Unidentified user.";
+                            authPageManager.message = "Could not recognize user's face.";
                         }
                         document.getElementById("global-spinner").style.display = "none";
                         firebase.auth().signOut();
